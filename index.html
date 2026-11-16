@@ -9,6 +9,12 @@
     content="Explora nuestros proyectos reales de software, envía imágenes de referencia y cuéntanos qué quieres que haga tu sistema. Atención directa por WhatsApp."
   />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1324'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='%2360a5fa' font-family='monospace' font-weight='bold' font-size='26'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="web/styles.css" />
 </head>
 <body>
@@ -40,49 +46,105 @@
   </header>
 
   <main id="inicio">
-    <!-- HERO -->
+    <!-- HERO CON VITRINA INTERACTIVA DE PROYECTOS REALES -->
     <section class="hero">
+      <div class="hero__grid-bg" aria-hidden="true"></div>
       <div class="container hero__grid">
         <div class="hero__copy">
-          <span class="eyebrow">Empresa de software · Soluciones para negocios</span>
-          <h1>Mira nuestros proyectos reales y cuéntanos qué sistema necesitas</h1>
+          <span class="eyebrow">
+            <span class="eyebrow__dot" aria-hidden="true"></span>
+            Empresa de software · Soluciones digitales a medida
+          </span>
+          <h1>
+            Creamos sistemas y páginas <span class="text-gradient">pensados para tu negocio</span>
+          </h1>
           <p class="hero__lead">
-            Revisa sistemas ya publicados, adjunta imágenes de referencia o bocetos y escribe qué
-            quieres que haga tu página o aplicación. Tu requerimiento queda listo para enviarse
-            directamente a nuestro WhatsApp.
+            Explora nuestros proyectos ya publicados, adjunta imágenes de referencia o bocetos y
+            cuéntanos exactamente qué necesitas que haga tu sistema. Preparamos tu solicitud y la
+            enviamos directo a nuestro WhatsApp.
           </p>
+
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#solicitud">Enviar mensaje e imágenes</a>
-            <a class="btn btn--ghost" href="#proyectos">Ver proyectos realizados</a>
+            <a class="btn btn--primary btn--lg" href="#solicitud">
+              Enviar mi idea e imágenes
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn--ghost btn--lg" href="#proyectos">Explorar proyectos</a>
           </div>
+
+          <ul class="hero__highlights" aria-label="Características del servicio">
+            <li>✓ Adaptado a celular y escritorio</li>
+            <li>✓ Capturas y flujos reales</li>
+            <li>✓ Coordinación directa por WhatsApp</li>
+          </ul>
         </div>
 
-        <aside class="hero-card" aria-label="Pasos para cotizar">
-          <h2>¿Cómo enviarnos tu idea?</h2>
-          <ol class="steps-list">
-            <li>
-              <span class="steps-num">1</span>
-              <div>
-                <strong>Revisa los proyectos</strong>
-                <p>Explora las capturas reales para tomar ideas o elegir un estilo similar.</p>
+        <!-- VITRINA INTERACTIVA DE CAPTURAS REALES -->
+        <div class="hero-showcase" aria-label="Vista previa interactiva de proyectos reales">
+          <div class="hero-showcase__tabs" role="tablist" aria-label="Cambiar vista previa">
+            <button type="button" class="showcase-tab is-active" data-hero-tab="0" role="tab" aria-selected="true">
+              Sitio Web
+            </button>
+            <button type="button" class="showcase-tab" data-hero-tab="2" role="tab" aria-selected="false">
+              POS e Inventario
+            </button>
+            <button type="button" class="showcase-tab" data-hero-tab="4" role="tab" aria-selected="false">
+              Panel de Control
+            </button>
+          </div>
+
+          <div class="browser-frame">
+            <div class="browser-frame__bar">
+              <div class="browser-frame__dots" aria-hidden="true">
+                <span></span><span></span><span></span>
               </div>
-            </li>
-            <li>
-              <span class="steps-num">2</span>
-              <div>
-                <strong>Sube imágenes y describe qué hará</strong>
-                <p>Adjunta capturas, bocetos o fotos de tus productos y escribe tus requerimientos.</p>
-              </div>
-            </li>
-            <li>
-              <span class="steps-num">3</span>
-              <div>
-                <strong>Registro y redirección directa</strong>
-                <p>Prepara tu mensaje estructurado con tus referencias y ábrelo en WhatsApp en un clic.</p>
-              </div>
-            </li>
-          </ol>
-        </aside>
+              <span id="hero-showcase-label" class="browser-frame__url">Pelitos Veterinaria · Web comercial</span>
+            </div>
+            <div class="browser-frame__viewport">
+              <img
+                id="hero-showcase-img"
+                src="web/assets/portafolio/01_Pelitos_Web/capturas_limpias/01_inicio_escritorio.png"
+                alt="Vista previa de proyecto real"
+              />
+            </div>
+          </div>
+
+          <div class="phone-float" aria-hidden="true">
+            <div class="phone-float__notch"></div>
+            <img
+              id="hero-phone-img"
+              src="web/assets/portafolio/01_Pelitos_Web/capturas_limpias/04_vista_movil.png"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- FRANJA DE PROCESO EN 3 PASOS -->
+      <div class="container">
+        <div class="process-strip" aria-label="Pasos para solicitar tu proyecto">
+          <div class="process-item">
+            <span class="process-item__num">01</span>
+            <div>
+              <strong>Elige tu referencia</strong>
+              <p>Mira nuestros sistemas reales y toma las ideas que mejor se adapten a tu negocio.</p>
+            </div>
+          </div>
+          <div class="process-item">
+            <span class="process-item__num">02</span>
+            <div>
+              <strong>Explica qué hará y sube imágenes</strong>
+              <p>Adjunta capturas, bocetos o fotos de tus productos y detalla las funciones clave.</p>
+            </div>
+          </div>
+          <div class="process-item">
+            <span class="process-item__num">03</span>
+            <div>
+              <strong>Envía directo a WhatsApp</strong>
+              <p>Guardamos tu ficha con tus imágenes y abrimos el chat listo para empezar.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -97,7 +159,12 @@
               Capturas reales de sistemas y páginas web desarrolladas para distintos rubros.
             </p>
           </div>
-          <a class="btn btn--secondary btn--sm" href="#solicitud">Cotizar un proyecto similar</a>
+          <div class="filter-pills" id="portfolio-filters" role="group" aria-label="Filtrar proyectos">
+            <button type="button" class="filter-pill is-active" data-filter="all">Todos</button>
+            <button type="button" class="filter-pill" data-filter="web">Sitios Web</button>
+            <button type="button" class="filter-pill" data-filter="ventas">Ventas y Stock</button>
+            <button type="button" class="filter-pill" data-filter="gestion">Paneles y Acceso</button>
+          </div>
         </div>
 
         <div id="portfolio-grid" class="portfolio-grid" aria-live="polite">
@@ -111,46 +178,73 @@
       <div class="container">
         <div class="section__head">
           <div>
-            <span class="section__eyebrow">Qué hacemos</span>
-            <h2>Soluciones de software para tu negocio</h2>
+            <span class="section__eyebrow">Qué construimos</span>
+            <h2>Soluciones de software para tu empresa</h2>
             <p class="section__sub">
-              Diseñamos e implementamos herramientas prácticas adaptadas a cómo trabaja tu empresa.
+              Elige cualquiera de estas categorías para precargarla en tu solicitud y describirnos tu caso.
             </p>
           </div>
         </div>
 
         <div class="solutions-grid">
           <article class="solution-card">
-            <div class="solution-card__ico" aria-hidden="true">🌐</div>
+            <div class="solution-card__top">
+              <div class="solution-card__ico" aria-hidden="true">🌐</div>
+              <span class="solution-card__tag">Presencia digital</span>
+            </div>
             <h3>Páginas web comerciales</h3>
             <p>
               Presentación de servicios, reserva de citas, horarios, ubicación y contacto directo
               para atraer clientes desde celular y computadora.
             </p>
+            <button type="button" class="solution-card__cta" data-preset-type="Sitio Web / Portafolio">
+              Solicitar algo similar →
+            </button>
           </article>
+
           <article class="solution-card">
-            <div class="solution-card__ico" aria-hidden="true">🛍️</div>
+            <div class="solution-card__top">
+              <div class="solution-card__ico" aria-hidden="true">🛍️</div>
+              <span class="solution-card__tag">Comercio</span>
+            </div>
             <h3>Catálogos y pedidos por WhatsApp</h3>
             <p>
               Fichas de productos con buscador, filtros por categoría o marca y envío rápido de
               pedidos a tu WhatsApp comercial.
             </p>
+            <button type="button" class="solution-card__cta" data-preset-type="Catálogo o Tienda Online">
+              Solicitar algo similar →
+            </button>
           </article>
+
           <article class="solution-card">
-            <div class="solution-card__ico" aria-hidden="true">📦</div>
+            <div class="solution-card__top">
+              <div class="solution-card__ico" aria-hidden="true">📦</div>
+              <span class="solution-card__tag">Operación diaria</span>
+            </div>
             <h3>Puntos de venta e inventario</h3>
             <p>
               Control de stock, alertas de reposición, importación/exportación en Excel y resumen
               comercial de ingresos y ventas.
             </p>
+            <button type="button" class="solution-card__cta" data-preset-type="Sistema de Ventas / Inventario">
+              Solicitar algo similar →
+            </button>
           </article>
+
           <article class="solution-card">
-            <div class="solution-card__ico" aria-hidden="true">📊</div>
+            <div class="solution-card__top">
+              <div class="solution-card__ico" aria-hidden="true">📊</div>
+              <span class="solution-card__tag">Control interno</span>
+            </div>
             <h3>Paneles administrativos a medida</h3>
             <p>
               Registro de clientes, pagos, comprobantes, archivos documentales, control por zonas y
               acceso por perfiles o PIN.
             </p>
+            <button type="button" class="solution-card__cta" data-preset-type="Panel Administrativo">
+              Solicitar algo similar →
+            </button>
           </article>
         </div>
       </div>
@@ -383,20 +477,26 @@
             </div>
           </form>
 
-          <!-- RESUMEN Y ACCION WHATSAPP -->
+          <!-- RESUMEN CON ESTILO DE CHAT WHATSAPP -->
           <aside class="summary-column" aria-label="Resumen de solicitud">
             <div class="card summary-card">
-              <span class="wa-badge">Envío directo a WhatsApp</span>
-              <h3>Mensaje listo para enviar</h3>
+              <div class="wa-chat-header">
+                <div class="wa-chat-header__avatar" aria-hidden="true">
+                  <svg class="wa-ico" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.78 14.07c-.24.68-1.39 1.29-1.93 1.37-.5.08-1.14.11-1.84-.12-.43-.14-.98-.32-1.69-.63-2.97-1.28-4.91-4.27-5.06-4.47-.15-.2-1.21-1.61-1.21-3.07 0-1.46.76-2.18 1.03-2.48.27-.3.59-.38.79-.38.2 0 .39.01.56.01.18 0 .42-.07.66.5.24.58.83 2.02.9 2.17.07.15.12.33.02.53-.1.2-.15.33-.3.5-.15.18-.32.4-.45.54-.15.15-.31.31-.13.61.18.3.78 1.29 1.68 2.09 1.15 1.03 2.12 1.35 2.42 1.5.3.15.48.13.66-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.13.08.73-.16 1.41Z"/></svg>
+                </div>
+                <div>
+                  <strong>Mensaje para WhatsApp</strong>
+                  <small>Vista previa en tiempo real</small>
+                </div>
+                <button type="button" class="wa-copy-pill" id="btn-copy-text">Copiar</button>
+              </div>
 
               <div id="form-feedback" class="feedback" role="status" aria-live="polite" hidden></div>
 
-              <div class="preview-box">
-                <div class="preview-box__head">
-                  <span>Vista previa del mensaje</span>
-                  <button type="button" class="text-btn" id="btn-copy-text">Copiar</button>
+              <div class="wa-chat-canvas">
+                <div class="wa-bubble">
+                  <pre id="message-preview" class="preview-box__body"></pre>
                 </div>
-                <pre id="message-preview" class="preview-box__body"></pre>
               </div>
 
               <div id="saved-result-box" class="saved-box" hidden>
@@ -421,7 +521,7 @@
                   Compartir imágenes + mensaje (Móvil)
                 </button>
                 <button type="button" class="btn btn--secondary btn--full" id="btn-download-sheet">
-                  Descargar ficha visual (PNG)
+                  Descargar ficha visual con imágenes (PNG)
                 </button>
               </div>
             </div>

@@ -128,9 +128,24 @@ const FALLBACK_PROJECTS = [
 
 const state = {
   projects: FALLBACK_PROJECTS,
+  activeFilter: "all",
   backendOnline: false,
   images: [], // { id, file, previewUrl, note }
   activeModalProject: null,
+};
+
+const PROJECT_CATEGORY = {
+  "01_Pelitos_Web": "web",
+  "02_Pelitos_Administracion": "gestion",
+  "03_Ferreteria_Sullcairi": "ventas",
+  "04_Sullcairi": "gestion",
+  "05_Leyder": "gestion",
+};
+
+const HERO_SHOWCASE_MOBILE = {
+  0: "assets/portafolio/01_Pelitos_Web/capturas_limpias/04_vista_movil.png",
+  2: "assets/portafolio/03_Ferreteria_Sullcairi/capturas_limpias/02_resumen_de_ventas.png",
+  4: "assets/portafolio/05_Leyder/capturas_limpias/04_vista_movil.png",
 };
 
 const el = {
@@ -193,7 +208,7 @@ function buildPreviewMessage() {
   const timeline = el.timeline.value;
   const types = getCheckedValues("projectType");
   const features = getCheckedValues("features");
-  const desc = el.description.value.trim() || "[Describe aqui que necesitas que haga tu software]";
+  const desc = el.description.value.trim() || "[Describe aquí qué necesitas que haga tu software]";
 
   const lines = [
     "Hola, quiero solicitar el desarrollo de un software.",
@@ -202,13 +217,13 @@ function buildPreviewMessage() {
   ];
   if (sector) lines.push(`*Rubro:* ${sector}`);
   if (contact) lines.push(`*Contacto:* ${contact}`);
-  lines.push(`*Tipo de solucion:* ${types.length ? types.join(", ") : "Por definir"}`);
+  lines.push(`*Tipo de solución:* ${types.length ? types.join(", ") : "Por definir"}`);
   if (features.length) lines.push(`*Funciones:* ${features.join(", ")}`);
   lines.push(`*Plazo:* ${timeline}`);
-  lines.push("", "*Que necesito que haga:*", desc);
+  lines.push("", "*Qué necesito que haga:*", desc);
 
   if (state.images.length) {
-    lines.push("", `*Imagenes de referencia adjuntas (${state.images.length}):*`);
+    lines.push("", `*Imágenes de referencia adjuntas (${state.images.length}):*`);
     state.images.forEach((img, idx) => {
       const notePart = img.note.trim() ? ` - ${img.note.trim()}` : "";
       lines.push(`${idx + 1}) ${img.file.name}${notePart}`);
@@ -246,20 +261,30 @@ function clearFeedback() {
 }
 
 function renderPortfolio(projects) {
-  if (!projects.length) {
-    el.portfolioGrid.innerHTML = "<p>No hay proyectos disponibles por el momento.</p>";
+  const filtered =
+    state.activeFilter === "all"
+      ? projects
+      : projects.filter((p) => (PROJECT_CATEGORY[p.slug] || "web") === state.activeFilter);
+
+  if (!filtered.length) {
+    el.portfolioGrid.innerHTML = "<p>No hay proyectos disponibles en esta categoría.</p>";
     return;
   }
-  el.portfolioGrid.innerHTML = projects
-    .map((p, index) => {
+  el.portfolioGrid.innerHTML = filtered
+    .map((p) => {
+      const realIndex = state.projects.indexOf(p);
       const bullets = (p.aspectos || [])
         .map((item) => `<li>${escapeHtml(item)}</li>`)
         .join("");
       const count = (p.galeria || []).length;
       return `
         <article class="project-card">
-          <div class="project-card__thumb" data-open-project="${index}" role="button" tabindex="0" aria-label="Ampliar capturas de ${escapeHtml(p.nombre)}">
-            <img src="${escapeHtml(resolveAssetUrl(p.imagenPrincipal))}" alt="Captura real de ${escapeHtml(p.nombre)}" loading="lazy" />
+          <div class="project-card__chrome" aria-hidden="true">
+            <div class="project-card__dots"><span></span><span></span><span></span></div>
+            <span>${escapeHtml(p.nombre)}</span>
+          </div>
+          <div class="project-card__thumb" data-open-project="${realIndex}" role="button" tabindex="0" aria-label="Ampliar capturas de ${escapeHtml(p.nombre)}">
+            <img src="${escapeHtml(resolveAssetUrl(p.imagenPrincipal))}" alt="Captura real de ${escapeHtml(p.nombre)}" />
             <span class="project-card__badge">${count} capturas reales</span>
           </div>
           <div class="project-card__body">
@@ -268,8 +293,8 @@ function renderPortfolio(projects) {
             <p class="project-card__desc">${escapeHtml(p.descripcion)}</p>
             <ul class="project-card__list">${bullets}</ul>
             <div class="project-card__actions">
-              <button type="button" class="btn btn--primary btn--sm" data-open-project="${index}">Ver capturas</button>
-              <a class="btn btn--secondary btn--sm" href="${escapeHtml(p.urlPublica)}" target="_blank" rel="noopener noreferrer">Visitar pagina</a>
+              <button type="button" class="btn btn--primary btn--sm" data-open-project="${realIndex}">Ver capturas</button>
+              <a class="btn btn--secondary btn--sm" href="${escapeHtml(p.urlPublica)}" target="_blank" rel="noopener noreferrer">Visitar página</a>
             </div>
           </div>
         </article>
@@ -743,6 +768,53 @@ function bindEvents() {
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !el.modal.hidden) closeModal();
+  });
+
+  // Tabs de vitrina interactiva en portada
+  document.querySelectorAll("[data-hero-tab]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const idx = Number(btn.getAttribute("data-hero-tab"));
+      const proj = state.projects[idx];
+      if (!proj) return;
+      document.querySelectorAll("[data-hero-tab]").forEach((b) => {
+        b.classList.remove("is-active");
+        b.setAttribute("aria-selected", "false");
+      });
+      btn.classList.add("is-active");
+      btn.setAttribute("aria-selected", "true");
+
+      const heroImg = document.getElementById("hero-showcase-img");
+      const heroLabel = document.getElementById("hero-showcase-label");
+      const phoneImg = document.getElementById("hero-phone-img");
+      if (heroImg) heroImg.src = resolveAssetUrl(proj.imagenPrincipal);
+      if (heroLabel) heroLabel.textContent = `${proj.nombre} · ${proj.tipo}`;
+      if (phoneImg) {
+        phoneImg.src = resolveAssetUrl(HERO_SHOWCASE_MOBILE[idx] || proj.imagenPrincipal);
+      }
+    });
+  });
+
+  // Filtros del portafolio
+  document.querySelectorAll("[data-filter]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.activeFilter = btn.getAttribute("data-filter") || "all";
+      document.querySelectorAll("[data-filter]").forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      renderPortfolio(state.projects);
+    });
+  });
+
+  // Botones de soluciones que preseleccionan el tipo de proyecto en el formulario
+  document.querySelectorAll("[data-preset-type]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const val = btn.getAttribute("data-preset-type");
+      const box = el.form.querySelector(`input[name="projectType"][value="${val}"]`);
+      if (box) {
+        box.checked = true;
+        updatePreview();
+      }
+      document.getElementById("solicitud").scrollIntoView({ behavior: "smooth" });
+    });
   });
 }
 
