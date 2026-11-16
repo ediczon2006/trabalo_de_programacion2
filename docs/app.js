@@ -470,7 +470,7 @@ async function submitRequest() {
       el.savedViewLink.hidden = true;
       el.savedBox.hidden = false;
 
-      showFeedback("Redirigiendo a WhatsApp (914 662 798)...", "ok");
+      showFeedback("Redirigiendo a WhatsApp...", "ok");
       window.open(waUrl, "_blank", "noopener,noreferrer");
     }
   } catch (err) {
@@ -538,7 +538,7 @@ async function downloadVisualSheet() {
 
   ctx.fillStyle = "#93c5fd";
   ctx.font = "bold 20px Segoe UI, sans-serif";
-  ctx.fillText("SOLICITUD DE SOFTWARE · WHATSAPP 914 662 798", pad, 64);
+  ctx.fillText("SOLICITUD DE PROYECTO DE SOFTWARE", pad, 64);
 
   ctx.fillStyle = "#ffffff";
   ctx.font = "bold 36px Segoe UI, sans-serif";
@@ -621,8 +621,8 @@ async function initBackendConnection() {
       const h = await healthRes.json();
       state.backendOnline = Boolean(h.ok);
       el.serverStatusPill.textContent = h.cppAnalyzerReady
-        ? "Java + C++ + SQLite activos"
-        : "Servidor Java + SQLite activo";
+        ? "Sistema activo · Java + C++ + SQLite"
+        : "Servidor activo · Java + SQLite";
       el.serverStatusPill.className = "status-pill status-pill--ok";
     } else {
       throw new Error("offline");
@@ -635,7 +635,7 @@ async function initBackendConnection() {
     }
   } catch {
     state.backendOnline = false;
-    el.serverStatusPill.textContent = "Modo estatico (WhatsApp directo)";
+    el.serverStatusPill.textContent = "Listo para enviar a WhatsApp";
     el.serverStatusPill.className = "status-pill status-pill--static";
   }
   renderPortfolio(state.projects);
