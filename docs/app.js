@@ -11,6 +11,21 @@ const CONFIG = {
   apiBaseUrl: "", // Vacio = mismo origen; configurable si se publica frontend estatico aparte
 };
 
+// Permite servir desde web/, docs/ o raiz de GitHub Pages resolviendo assets respecto al script
+const SCRIPT_BASE_URL =
+  document.currentScript && document.currentScript.src
+    ? new URL(".", document.currentScript.src).href
+    : window.location.href;
+
+function resolveAssetUrl(relPath) {
+  if (!relPath || /^https?:\/\//i.test(relPath)) return relPath;
+  try {
+    return new URL(relPath, SCRIPT_BASE_URL).href;
+  } catch {
+    return relPath;
+  }
+}
+
 // Solo los 5 proyectos reales verificados (sin agregar C++ ni Java dentro del portafolio).
 const FALLBACK_PROJECTS = [
   {
@@ -244,7 +259,7 @@ function renderPortfolio(projects) {
       return `
         <article class="project-card">
           <div class="project-card__thumb" data-open-project="${index}" role="button" tabindex="0" aria-label="Ampliar capturas de ${escapeHtml(p.nombre)}">
-            <img src="${escapeHtml(p.imagenPrincipal)}" alt="Captura real de ${escapeHtml(p.nombre)}" loading="lazy" />
+            <img src="${escapeHtml(resolveAssetUrl(p.imagenPrincipal))}" alt="Captura real de ${escapeHtml(p.nombre)}" loading="lazy" />
             <span class="project-card__badge">${count} capturas reales</span>
           </div>
           <div class="project-card__body">
@@ -273,7 +288,7 @@ function openProjectModal(index) {
   el.modalDesc.textContent = proj.descripcion;
   el.modalBtnVisit.href = proj.urlPublica;
 
-  const imgs = proj.galeria && proj.galeria.length ? proj.galeria : [proj.imagenPrincipal];
+  const imgs = (proj.galeria && proj.galeria.length ? proj.galeria : [proj.imagenPrincipal]).map(resolveAssetUrl);
   setModalImage(imgs[0], proj.nombre);
 
   el.modalThumbs.innerHTML = imgs
