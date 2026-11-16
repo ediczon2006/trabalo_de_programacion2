@@ -337,15 +337,59 @@ const PROJECT_CATEGORY = {
 
 const state = {
   projects: FALLBACK_PROJECTS,
+  activePage: "inicio",
   activeFilter: "all",
   activeSolFilter: "all",
   activeSolSort: "demand",
+  activeScreenProjIndex: 0,
   backendOnline: false,
   images: [],
   activeModalProject: null,
   activeSpecId: null,
   cmdkItems: [],
   cmdkIndex: 0,
+};
+
+const PAGE_TITLES = {
+  inicio: "EVM Software Studio | Ingeniería de software empresarial",
+  soluciones: "Soluciones | EVM Software Studio",
+  stack: "Stack Técnico | EVM Software Studio",
+  arquitectura: "Arquitectura | EVM Software Studio",
+  casos: "Casos en Producción | EVM Software Studio",
+  contacto: "Contacto e Iniciar Proyecto | EVM Software Studio",
+};
+
+const ARCH_LAYERS = {
+  clientes: {
+    eyebrow: "CAPA 01 · CLIENTES",
+    title: "Web Semántica, Apps Móviles Nativas y Canales WhatsApp",
+    desc: "Interfaces rápidas optimizadas para Core Web Vitals, accesibilidad WCAG 2.1 AA, modo offline-first y capturas o pedidos directos por WhatsApp.",
+    meta: "LCP < 1.2 s · WCAG 2.1 AA · Responsive",
+  },
+  edge: {
+    eyebrow: "CAPA 02 · EDGE & WAF",
+    title: "CDN Global, TLS 1.3 y Protección Anti-Abuso en el Borde",
+    desc: "Terminación cifrada TLS 1.3, cabeceras de seguridad estrictas, rate limiting adaptativo y entrega en caché perimetral de activos estáticos.",
+    meta: "TLS 1.3 · HTTP/3 · DDoS Mitigation",
+  },
+  gateway: {
+    eyebrow: "CAPA 03 · API GATEWAY",
+    title: "Java 21 con Hilos Virtuales y Contratos REST Versionados",
+    desc: "Enrutamiento concurrente sin bloqueo, validación estricta multipart/form-data, control de cuota por IP y trazabilidad OpenTelemetry.",
+    meta: "SLA 99.99% · p95 38 ms · Zero Downtime",
+  },
+  servicios: {
+    eyebrow: "CAPA 04 · SERVICIOS & IA",
+    title: "Módulos Nativos C++17, Agentes IA y Lógica de Negocio",
+    desc: "Validación binaria real de imágenes en C++17 (FNV-1a + firmas mágicas), pipelines RAG con Gemini y microservicios desacoplados.",
+    meta: "C++17 Nativo · LangGraph · Contenedores",
+  },
+  datos: {
+    eyebrow: "CAPA 05 · PERSISTENCIA",
+    title: "PostgreSQL, SQLite Transaccional y Almacenamiento de Objetos",
+    desc: "Esquemas normalizados con claves foráneas, respaldos automáticos cifrados y almacenamiento seguro de adjuntos y comprobantes.",
+    meta: "ACID · Cifrado AES-256 · Backups Diarios",
+  },
 };
 
 const el = {
@@ -367,6 +411,9 @@ const el = {
   screenShot: document.getElementById("screen-shot"),
   heroShowcaseImg: document.getElementById("hero-showcase-img"),
   heroShowcaseLabel: document.getElementById("hero-showcase-label"),
+  heroScreenOpen: document.getElementById("hero-screen-open"),
+  heroScreenVisit: document.getElementById("hero-screen-visit"),
+  toast: document.getElementById("evm-toast"),
   btnWhitepaper: document.getElementById("btn-whitepaper"),
   solFilters: document.getElementById("sol-filters"),
   solSort: document.getElementById("sol-sort"),
@@ -492,7 +539,76 @@ function initPreloader() {
   requestAnimationFrame(tick);
 }
 
-/* === NAVBAR, SCROLL SPY, THEME CONSOLE & REVEAL === */
+let toastTimer = 0;
+function showToast(msg) {
+  if (!el.toast) return;
+  el.toast.textContent = msg;
+  el.toast.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    el.toast.hidden = true;
+  }, 2600);
+}
+
+/* === MULTIPAGE ROUTER (PÁGINAS INDIVIDUALES) === */
+function navigateToPage(rawId, updateHash = true) {
+  const cleanId = String(rawId || "inicio").replace(/^#\/?/, "").toLowerCase();
+  const pageId = Object.prototype.hasOwnProperty.call(PAGE_TITLES, cleanId) ? cleanId : "inicio";
+  state.activePage = pageId;
+
+  document.querySelectorAll("[data-page]").forEach((section) => {
+    const isTarget = section.getAttribute("data-page") === pageId;
+    section.hidden = !isTarget;
+    section.classList.toggle("is-page-active", isTarget);
+    if (isTarget) {
+      section.querySelectorAll("[data-reveal]").forEach((node) => node.classList.add("is-visible"));
+    }
+  });
+
+  document.querySelectorAll(".nav__link[data-page-link]").forEach((link) => {
+    const active = link.getAttribute("data-page-link") === pageId;
+    link.classList.toggle("is-active", active);
+    if (active) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+
+  if (el.navLinks && el.navToggle) {
+    el.navLinks.classList.remove("is-open");
+    el.navToggle.setAttribute("aria-expanded", "false");
+  }
+
+  document.title = PAGE_TITLES[pageId];
+
+  if (updateHash && window.location.hash !== `#${pageId}`) {
+    try {
+      history.pushState({ pageId }, "", `#${pageId}`);
+    } catch {
+      window.location.hash = pageId;
+    }
+  }
+
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function initPageRouter() {
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("[data-page-link]");
+    if (!link) return;
+    e.preventDefault();
+    navigateToPage(link.getAttribute("data-page-link"), true);
+  });
+
+  const syncFromHash = () => {
+    const hash = window.location.hash || "#inicio";
+    navigateToPage(hash, false);
+  };
+
+  window.addEventListener("hashchange", syncFromHash);
+  window.addEventListener("popstate", syncFromHash);
+  syncFromHash();
+}
+
+/* === NAVBAR, THEME CONSOLE & REVEAL === */
 function initNavigationAndTheme() {
   const isMac = /Mac|iPhone|iPad/i.test(navigator.platform || "");
   document.querySelectorAll("[data-kbd-mod]").forEach((k) => {
@@ -514,6 +630,7 @@ function initNavigationAndTheme() {
         localStorage.setItem("evm-theme", next);
       } catch {}
       syncThemeBtn();
+      showToast(next === "console" ? "Modo Consola activado" : "Modo Studio activado");
     });
   }
 
@@ -521,12 +638,6 @@ function initNavigationAndTheme() {
     el.navToggle.addEventListener("click", () => {
       const open = el.navLinks.classList.toggle("is-open");
       el.navToggle.setAttribute("aria-expanded", String(open));
-    });
-    el.navLinks.addEventListener("click", (e) => {
-      if (e.target.closest("a")) {
-        el.navLinks.classList.remove("is-open");
-        el.navToggle.setAttribute("aria-expanded", "false");
-      }
     });
   }
 
@@ -536,27 +647,7 @@ function initNavigationAndTheme() {
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // Scroll Spy de secciones
-  const spyLinks = new Map();
-  document.querySelectorAll("[data-spy]").forEach((a) => spyLinks.set(a.getAttribute("data-spy"), a));
-
   if ("IntersectionObserver" in window) {
-    const spyObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            spyLinks.forEach((link, key) => link.classList.toggle("is-active", key === id));
-          }
-        });
-      },
-      { rootMargin: "-38% 0px -52% 0px" }
-    );
-    spyLinks.forEach((_, id) => {
-      const sec = document.getElementById(id);
-      if (sec) spyObserver.observe(sec);
-    });
-
     const revealObserver = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
@@ -638,29 +729,73 @@ function initHeroInteractions() {
   }
 
   // Selector de vistas del Workstation en Hero
-  document.querySelectorAll("[data-screen]").forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const target = tab.getAttribute("data-screen");
-      document.querySelectorAll("[data-screen]").forEach((b) => {
-        const active = b === tab;
-        b.classList.toggle("is-active", active);
-        b.setAttribute("aria-selected", String(active));
-        b.tabIndex = active ? 0 : -1;
-      });
+  const screenTabs = Array.from(document.querySelectorAll("[data-screen]"));
+  const activateScreenTab = (tab) => {
+    const target = tab.getAttribute("data-screen");
+    screenTabs.forEach((b) => {
+      const active = b === tab;
+      b.classList.toggle("is-active", active);
+      b.setAttribute("aria-selected", String(active));
+      b.tabIndex = active ? 0 : -1;
+    });
 
-      if (target === "dashboard") {
-        if (el.dash) el.dash.hidden = false;
-        if (el.screenShot) el.screenShot.hidden = true;
-      } else {
-        const proj = state.projects.find((p) => p.slug === target) || state.projects[0];
-        if (proj && el.heroShowcaseImg && el.heroShowcaseLabel) {
-          el.heroShowcaseImg.src = resolveAssetUrl(proj.imagenPrincipal);
-          el.heroShowcaseImg.alt = `Vista de ${proj.nombre}`;
-          el.heroShowcaseLabel.textContent = `${proj.nombre} · ${proj.tipo}`;
-          if (el.dash) el.dash.hidden = true;
-          if (el.screenShot) el.screenShot.hidden = false;
-        }
+    if (target === "dashboard") {
+      if (el.dash) el.dash.hidden = false;
+      if (el.screenShot) el.screenShot.hidden = true;
+    } else {
+      const idx = state.projects.findIndex((p) => p.slug === target);
+      const safeIdx = idx >= 0 ? idx : 0;
+      const proj = state.projects[safeIdx];
+      state.activeScreenProjIndex = safeIdx;
+      if (proj && el.heroShowcaseImg && el.heroShowcaseLabel) {
+        el.heroShowcaseImg.src = resolveAssetUrl(proj.imagenPrincipal);
+        el.heroShowcaseImg.alt = `Vista de ${proj.nombre}`;
+        el.heroShowcaseLabel.textContent = `${proj.nombre} · ${proj.tipo}`;
+        if (el.heroScreenVisit) el.heroScreenVisit.href = proj.urlPublica;
+        if (el.dash) el.dash.hidden = true;
+        if (el.screenShot) el.screenShot.hidden = false;
       }
+    }
+  };
+
+  screenTabs.forEach((tab, idx) => {
+    tab.addEventListener("click", () => activateScreenTab(tab));
+    tab.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      e.preventDefault();
+      const nextIdx = (idx + (e.key === "ArrowRight" ? 1 : -1) + screenTabs.length) % screenTabs.length;
+      screenTabs[nextIdx].focus();
+      activateScreenTab(screenTabs[nextIdx]);
+    });
+  });
+
+  if (el.heroScreenOpen) {
+    el.heroScreenOpen.addEventListener("click", () => {
+      openProjectModal(state.activeScreenProjIndex);
+    });
+  }
+
+  // Inspector interactivo de capas en Arquitectura
+  const archButtons = Array.from(document.querySelectorAll("[data-arch-layer]"));
+  const archEyebrow = document.getElementById("arch-layer-eyebrow");
+  const archTitle = document.getElementById("arch-layer-title");
+  const archDesc = document.getElementById("arch-layer-desc");
+  const archMeta = document.getElementById("arch-layer-meta");
+
+  archButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const key = btn.getAttribute("data-arch-layer");
+      const info = ARCH_LAYERS[key];
+      if (!info) return;
+      archButtons.forEach((b) => {
+        const active = b === btn;
+        b.classList.toggle("is-active", active);
+        b.setAttribute("aria-pressed", String(active));
+      });
+      if (archEyebrow) archEyebrow.textContent = info.eyebrow;
+      if (archTitle) archTitle.textContent = info.title;
+      if (archDesc) archDesc.textContent = info.desc;
+      if (archMeta) archMeta.textContent = info.meta;
     });
   });
 
@@ -708,6 +843,7 @@ function initHeroInteractions() {
       a.download = "EVM_Software_Studio_Whitepaper_2026.txt";
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast("Whitepaper técnico descargado");
     });
   }
 }
@@ -810,7 +946,8 @@ function initSolutionsCatalog() {
         updatePreview();
       }
       closeDialog(el.specModal);
-      document.getElementById("contacto").scrollIntoView({ behavior: "smooth" });
+      navigateToPage("contacto");
+      showToast(`Módulo "${spec ? spec.title : ""}" agregado al brief`);
     });
   }
 }
@@ -820,12 +957,12 @@ function initCommandPalette() {
   if (!el.cmdkDialog || !el.cmdkInput || !el.cmdkList) return;
 
   const baseCommands = [
-    { label: "Ir a Inicio (Hero)", meta: "Sección", action: () => location.assign("#inicio") },
-    { label: "Ir a Catálogo de Soluciones", meta: "Sección", action: () => location.assign("#soluciones") },
-    { label: "Ir a Stack Técnico", meta: "Sección", action: () => location.assign("#stack") },
-    { label: "Ir a Arquitectura de Referencia", meta: "Sección", action: () => location.assign("#arquitectura") },
-    { label: "Ir a Casos en Producción", meta: "Sección", action: () => location.assign("#casos") },
-    { label: "Iniciar Proyecto / Enviar Brief", meta: "Acción", action: () => location.assign("#contacto") },
+    { label: "Ir a página: Inicio", meta: "Página", action: () => navigateToPage("inicio") },
+    { label: "Ir a página: Catálogo de Soluciones", meta: "Página", action: () => navigateToPage("soluciones") },
+    { label: "Ir a página: Stack Técnico", meta: "Página", action: () => navigateToPage("stack") },
+    { label: "Ir a página: Arquitectura", meta: "Página", action: () => navigateToPage("arquitectura") },
+    { label: "Ir a página: Casos en Producción", meta: "Página", action: () => navigateToPage("casos") },
+    { label: "Ir a página: Contacto / Iniciar Proyecto", meta: "Página", action: () => navigateToPage("contacto") },
     {
       label: "Alternar Tema (Studio / Modo Consola)",
       meta: "Tema",
@@ -1448,6 +1585,7 @@ function bindEvents() {
       await navigator.clipboard.writeText(buildPreviewMessage());
       const prev = el.btnCopyText.textContent;
       el.btnCopyText.textContent = "Copiado";
+      showToast("Mensaje copiado al portapapeles");
       setTimeout(() => {
         el.btnCopyText.textContent = prev;
       }, 1600);
@@ -1497,7 +1635,8 @@ function bindEvents() {
         updatePreview();
       }
       closeDialog(el.modal);
-      document.getElementById("contacto").scrollIntoView({ behavior: "smooth" });
+      navigateToPage("contacto");
+      showToast("Referencia cargada en tu brief");
     });
   }
 
@@ -1516,6 +1655,7 @@ function bindEvents() {
 }
 
 /* === BOOTSTRAP === */
+initPageRouter();
 initPreloader();
 initNavigationAndTheme();
 initHeroInteractions();

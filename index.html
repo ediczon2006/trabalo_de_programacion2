@@ -21,8 +21,19 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="web/styles.css" />
-  <!-- === BOOT FLAGS (antes del primer paint: evita FOUC y aplica tema persistido) === -->
+  <!-- === CRITICAL SHELL CSS (evita FOUC / desorden si la hoja externa tarda o hay caché) === -->
+  <style id="critical-shell">
+    html, body { margin: 0; background: #07090e; color: #f0f4f8; font-family: system-ui, -apple-system, sans-serif; }
+    .sprite, [hidden] { display: none !important; }
+    .skip-link { position: fixed; top: -120px; left: 16px; }
+    .preloader { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: #07090e; color: #f0f4f8; }
+    .preloader.is-complete { opacity: 0; visibility: hidden; pointer-events: none; }
+    .preloader__core { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; text-align: center; }
+    .preloader__logo { width: min(320px, 78vw); height: auto; }
+    .preloader__rail { position: relative; width: min(280px, 80vw); height: 2px; background: rgba(138, 148, 166, 0.24); }
+  </style>
+  <link rel="stylesheet" href="web/styles.css?v=20261116-4" />
+  <!-- === BOOT FLAGS (antes del primer paint: evita FOUC, aplica tema y activa fallback de preloader) === -->
   <script>
     (function () {
       var d = document.documentElement;
@@ -31,6 +42,14 @@
         var t = localStorage.getItem("evm-theme");
         if (t === "console") d.setAttribute("data-theme", "console");
       } catch (e) {}
+      setTimeout(function () {
+        if (!d.classList.contains("is-ready")) {
+          var p = document.getElementById("preloader");
+          if (p) p.classList.add("is-complete");
+          d.classList.remove("is-loading");
+          d.classList.add("is-ready");
+        }
+      }, 2600);
     })();
   </script>
 </head>
@@ -131,7 +150,7 @@
   <!-- === NAVBAR CORPORATIVO FLOTANTE (STICKY CAPSULE) === -->
   <header class="nav" id="nav">
     <div class="nav__capsule">
-      <a class="nav__brand" href="#inicio" aria-label="EVM Software Studio, ir al inicio">
+      <a class="nav__brand" href="#inicio" data-page-link="inicio" aria-label="EVM Software Studio, ir al inicio">
         <svg class="wordmark" viewBox="0 0 104 32" aria-hidden="true">
           <defs>
             <linearGradient id="wm-blue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00d2ff" /><stop offset="1" stop-color="#0066ff" /></linearGradient>
@@ -152,14 +171,14 @@
 
       <nav class="nav__links" id="nav-links" aria-label="Navegación principal">
         <ul role="list">
-          <li><a class="nav__link" href="#inicio" data-spy="inicio">Inicio</a></li>
-          <li><a class="nav__link" href="#soluciones" data-spy="soluciones">Soluciones</a></li>
-          <li><a class="nav__link" href="#stack" data-spy="stack">Stack Técnico</a></li>
-          <li><a class="nav__link" href="#arquitectura" data-spy="arquitectura">Arquitectura</a></li>
-          <li><a class="nav__link" href="#casos" data-spy="casos">Casos</a></li>
-          <li><a class="nav__link" href="#contacto" data-spy="contacto">Contacto</a></li>
+          <li><a class="nav__link is-active" href="#inicio" data-page-link="inicio" aria-current="page">Inicio</a></li>
+          <li><a class="nav__link" href="#soluciones" data-page-link="soluciones">Soluciones</a></li>
+          <li><a class="nav__link" href="#stack" data-page-link="stack">Stack Técnico</a></li>
+          <li><a class="nav__link" href="#arquitectura" data-page-link="arquitectura">Arquitectura</a></li>
+          <li><a class="nav__link" href="#casos" data-page-link="casos">Casos</a></li>
+          <li><a class="nav__link" href="#contacto" data-page-link="contacto">Contacto</a></li>
         </ul>
-        <a class="btn btn--glow nav__panel-cta" href="#contacto"><span>Iniciar Proyecto</span></a>
+        <a class="btn btn--glow nav__panel-cta" href="#contacto" data-page-link="contacto"><span>Iniciar Proyecto</span></a>
       </nav>
 
       <div class="nav__actions">
@@ -171,7 +190,7 @@
         <button type="button" class="icon-btn" id="theme-toggle" aria-pressed="false" aria-label="Activar modo consola" title="Modo consola">
           <svg class="ico" aria-hidden="true"><use href="#i-terminal" /></svg>
         </button>
-        <a class="btn btn--glow nav__cta" href="#contacto"><span>Iniciar Proyecto</span></a>
+        <a class="btn btn--glow nav__cta" href="#contacto" data-page-link="contacto"><span>Iniciar Proyecto</span></a>
         <button type="button" class="icon-btn nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú">
           <svg class="ico" aria-hidden="true"><use href="#i-menu" /></svg>
         </button>
@@ -180,8 +199,8 @@
   </header>
 
   <main id="contenido" tabindex="-1">
-    <!-- === HERO SECTION INTERACTIVO === -->
-    <section class="hero" id="inicio" aria-labelledby="hero-title">
+    <!-- === PÁGINA 1: INICIO (HERO INTERACTIVO + HUB DE MÓDULOS) === -->
+    <section class="hero page-view is-page-active" id="inicio" data-page="inicio" aria-labelledby="hero-title">
       <div class="hero__glow" aria-hidden="true"></div>
 
       <div class="container hero__grid">
@@ -197,11 +216,11 @@
           </p>
 
           <div class="hero__actions" data-enter style="--i:3">
-            <a class="btn btn--primary btn--lg magnetic" href="#contacto">
+            <a class="btn btn--primary btn--lg magnetic" href="#contacto" data-page-link="contacto">
               <span>Iniciar Proyecto</span>
               <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
             </a>
-            <a class="btn btn--ghost btn--lg" href="#soluciones">Explorar soluciones</a>
+            <a class="btn btn--ghost btn--lg" href="#soluciones" data-page-link="soluciones">Explorar soluciones</a>
           </div>
 
           <div class="trust" data-enter style="--i:4">
@@ -294,7 +313,13 @@
                   <!-- Vista de capturas reales (casos de producción) -->
                   <figure class="screen-shot" id="screen-shot" hidden>
                     <img id="hero-showcase-img" src="" alt="" width="1600" height="1000" decoding="async" />
-                    <figcaption id="hero-showcase-label" class="screen-shot__cap"></figcaption>
+                    <figcaption class="screen-shot__bar">
+                      <span id="hero-showcase-label" class="screen-shot__cap"></span>
+                      <div class="screen-shot__btns">
+                        <button type="button" class="screen-shot__btn" id="hero-screen-open">Ampliar</button>
+                        <a class="screen-shot__btn screen-shot__btn--link" id="hero-screen-visit" href="#" target="_blank" rel="noopener noreferrer">Sitio ↗</a>
+                      </div>
+                    </figcaption>
                   </figure>
                 </div>
               </div>
@@ -370,14 +395,45 @@
         <span class="rail__label" aria-hidden="true">EVM · 2026</span>
       </aside>
 
-      <a class="scroll-cue" href="#soluciones" aria-label="Desplazarse a soluciones" data-enter style="--i:6">
-        <span>SCROLL</span><span class="scroll-cue__line" aria-hidden="true"></span>
-      </a>
+      <!-- Hub de acceso directo a cada página del estudio -->
+      <div class="container">
+        <nav class="home-hub" aria-label="Explorar páginas del estudio" data-enter style="--i:6">
+          <a class="home-hub__card glass" href="#soluciones" data-page-link="soluciones">
+            <span class="home-hub__num">01</span>
+            <div><strong>Soluciones</strong><small>12 módulos listos para escalar</small></div>
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </a>
+          <a class="home-hub__card glass" href="#stack" data-page-link="stack">
+            <span class="home-hub__num">02</span>
+            <div><strong>Stack Técnico</strong><small>Lenguajes, nube y observabilidad</small></div>
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </a>
+          <a class="home-hub__card glass" href="#arquitectura" data-page-link="arquitectura">
+            <span class="home-hub__num">03</span>
+            <div><strong>Arquitectura</strong><small>Capas, seguridad y pipeline CI/CD</small></div>
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </a>
+          <a class="home-hub__card glass" href="#casos" data-page-link="casos">
+            <span class="home-hub__num">04</span>
+            <div><strong>Casos</strong><small>5 plataformas en producción</small></div>
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </a>
+          <a class="home-hub__card glass home-hub__card--accent" href="#contacto" data-page-link="contacto">
+            <span class="home-hub__num">05</span>
+            <div><strong>Contacto</strong><small>Brief y envío a WhatsApp</small></div>
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </a>
+        </nav>
+      </div>
     </section>
 
-    <!-- === CATÁLOGO DE SOLUCIONES (GLASS GRID) === -->
-    <section class="section" id="soluciones" aria-labelledby="sol-title">
+    <!-- === PÁGINA 2: CATÁLOGO DE SOLUCIONES (GLASS GRID) === -->
+    <section class="section page-view" id="soluciones" data-page="soluciones" aria-labelledby="sol-title">
       <div class="container container--wide">
+        <div class="page-bar">
+          <a class="page-back" href="#inicio" data-page-link="inicio">← Volver a Inicio</a>
+          <span class="page-crumb">EVM Studio / <strong>Soluciones</strong></span>
+        </div>
         <div class="section__head section__head--split">
           <div data-reveal>
             <p class="eyebrow-mono">// 01 · CATÁLOGO DE MÓDULOS</p>
@@ -590,12 +646,20 @@
             <button type="button" class="sol-card__cta" data-spec="devsecops">Ver Especificaciones <span aria-hidden="true">→</span></button>
           </li>
         </ul>
+        <div class="page-pager">
+          <a class="btn btn--ghost btn--sm" href="#inicio" data-page-link="inicio">← Inicio</a>
+          <a class="btn btn--primary btn--sm" href="#stack" data-page-link="stack">Siguiente: Stack Técnico →</a>
+        </div>
       </div>
     </section>
 
-    <!-- === STACK TÉCNICO === -->
-    <section class="section section--band" id="stack" aria-labelledby="stack-title">
+    <!-- === PÁGINA 3: STACK TÉCNICO === -->
+    <section class="section section--band page-view" id="stack" data-page="stack" aria-labelledby="stack-title">
       <div class="container">
+        <div class="page-bar">
+          <a class="page-back" href="#inicio" data-page-link="inicio">← Volver a Inicio</a>
+          <span class="page-crumb">EVM Studio / <strong>Stack Técnico</strong></span>
+        </div>
         <div class="section__head section__head--center" data-reveal>
           <p class="eyebrow-mono">// 02 · STACK TÉCNICO</p>
           <h2 class="section__title" id="stack-title">Tecnología de grado <em>producción</em></h2>
@@ -647,46 +711,73 @@
             <p class="code-tag">Docker • K8s • Terraform</p>
           </li>
         </ul>
+        <div class="page-pager">
+          <a class="btn btn--ghost btn--sm" href="#soluciones" data-page-link="soluciones">← Soluciones</a>
+          <a class="btn btn--primary btn--sm" href="#arquitectura" data-page-link="arquitectura">Siguiente: Arquitectura →</a>
+        </div>
       </div>
     </section>
 
-    <!-- === ARQUITECTURA DE REFERENCIA === -->
-    <section class="section" id="arquitectura" aria-labelledby="arch-title">
+    <!-- === PÁGINA 4: ARQUITECTURA DE REFERENCIA === -->
+    <section class="section page-view" id="arquitectura" data-page="arquitectura" aria-labelledby="arch-title">
       <div class="container">
+        <div class="page-bar">
+          <a class="page-back" href="#inicio" data-page-link="inicio">← Volver a Inicio</a>
+          <span class="page-crumb">EVM Studio / <strong>Arquitectura</strong></span>
+        </div>
         <div class="section__head section__head--split">
           <div data-reveal>
             <p class="eyebrow-mono">// 03 · ARQUITECTURA</p>
             <h2 class="section__title" id="arch-title">Arquitectura de referencia <em>EVM</em></h2>
-            <p class="section__sub">Cada capa es independiente, observable y reemplazable. Así escalamos de un MVP a millones de transacciones sin reescribir.</p>
+            <p class="section__sub">Selecciona cualquier capa del diagrama para inspeccionar su protocolo, seguridad y SLA en tiempo real.</p>
           </div>
         </div>
 
         <ol class="arch" role="list" data-reveal>
-          <li class="arch__node glass">
-            <svg class="ico" aria-hidden="true"><use href="#i-mobile" /></svg>
-            <strong>Clientes</strong><span>Web · Apps · WhatsApp</span>
+          <li>
+            <button type="button" class="arch__node glass" data-arch-layer="clientes" aria-pressed="false">
+              <svg class="ico" aria-hidden="true"><use href="#i-mobile" /></svg>
+              <strong>Clientes</strong><span>Web · Apps · WhatsApp</span>
+            </button>
           </li>
           <li class="arch__link" aria-hidden="true"><span class="arch__packet"></span></li>
-          <li class="arch__node glass">
-            <svg class="ico" aria-hidden="true"><use href="#i-shield" /></svg>
-            <strong>Edge &amp; WAF</strong><span>CDN · TLS 1.3 · Rate limit</span>
+          <li>
+            <button type="button" class="arch__node glass" data-arch-layer="edge" aria-pressed="false">
+              <svg class="ico" aria-hidden="true"><use href="#i-shield" /></svg>
+              <strong>Edge &amp; WAF</strong><span>CDN · TLS 1.3 · Rate limit</span>
+            </button>
           </li>
           <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:.4s"></span></li>
-          <li class="arch__node glass arch__node--core">
-            <svg class="ico" aria-hidden="true"><use href="#i-server" /></svg>
-            <strong>API Gateway</strong><span>Java 21 · Hilos virtuales</span>
+          <li>
+            <button type="button" class="arch__node glass arch__node--core is-active" data-arch-layer="gateway" aria-pressed="true">
+              <svg class="ico" aria-hidden="true"><use href="#i-server" /></svg>
+              <strong>API Gateway</strong><span>Java 21 · Hilos virtuales</span>
+            </button>
           </li>
           <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:.8s"></span></li>
-          <li class="arch__node glass">
-            <svg class="ico" aria-hidden="true"><use href="#i-hex" /></svg>
-            <strong>Servicios</strong><span>C++17 nativo · Agentes IA</span>
+          <li>
+            <button type="button" class="arch__node glass" data-arch-layer="servicios" aria-pressed="false">
+              <svg class="ico" aria-hidden="true"><use href="#i-hex" /></svg>
+              <strong>Servicios</strong><span>C++17 nativo · Agentes IA</span>
+            </button>
           </li>
           <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:1.2s"></span></li>
-          <li class="arch__node glass">
-            <svg class="ico" aria-hidden="true"><use href="#i-database" /></svg>
-            <strong>Datos</strong><span>PostgreSQL · SQLite · Objetos</span>
+          <li>
+            <button type="button" class="arch__node glass" data-arch-layer="datos" aria-pressed="false">
+              <svg class="ico" aria-hidden="true"><use href="#i-database" /></svg>
+              <strong>Datos</strong><span>PostgreSQL · SQLite · Objetos</span>
+            </button>
           </li>
         </ol>
+
+        <div class="glass arch-inspector" id="arch-inspector" aria-live="polite">
+          <div>
+            <span class="eyebrow-mono" id="arch-layer-eyebrow">CAPA ACTIVA · API GATEWAY</span>
+            <h3 id="arch-layer-title">Java 21 con Hilos Virtuales y Contratos REST Versionados</h3>
+            <p id="arch-layer-desc">Enrutamiento concurrente sin bloqueo, validación estricta multipart/form-data, control de cuota por IP y trazabilidad OpenTelemetry.</p>
+          </div>
+          <p class="code-tag" id="arch-layer-meta">SLA 99.99% · p95 38 ms · Zero Downtime</p>
+        </div>
 
         <div class="arch-detail">
           <div class="terminal glass" data-reveal>
@@ -714,12 +805,20 @@
             </li>
           </ul>
         </div>
+        <div class="page-pager">
+          <a class="btn btn--ghost btn--sm" href="#stack" data-page-link="stack">← Stack Técnico</a>
+          <a class="btn btn--primary btn--sm" href="#casos" data-page-link="casos">Siguiente: Casos →</a>
+        </div>
       </div>
     </section>
 
-    <!-- === CASOS EN PRODUCCIÓN (PORTAFOLIO VERIFICADO) === -->
-    <section class="section section--band" id="casos" aria-labelledby="casos-title">
+    <!-- === PÁGINA 5: CASOS EN PRODUCCIÓN (PORTAFOLIO VERIFICADO) === -->
+    <section class="section section--band page-view" id="casos" data-page="casos" aria-labelledby="casos-title">
       <div class="container">
+        <div class="page-bar">
+          <a class="page-back" href="#inicio" data-page-link="inicio">← Volver a Inicio</a>
+          <span class="page-crumb">EVM Studio / <strong>Casos</strong></span>
+        </div>
         <div class="section__head section__head--split">
           <div data-reveal>
             <p class="eyebrow-mono">// 04 · CASOS</p>
@@ -737,12 +836,20 @@
         <div id="portfolio-grid" class="portfolio-grid" aria-live="polite">
           <p class="loading-msg">Cargando casos…</p>
         </div>
+        <div class="page-pager">
+          <a class="btn btn--ghost btn--sm" href="#arquitectura" data-page-link="arquitectura">← Arquitectura</a>
+          <a class="btn btn--primary btn--sm" href="#contacto" data-page-link="contacto">Siguiente: Iniciar Proyecto →</a>
+        </div>
       </div>
     </section>
 
-    <!-- === CONTACTO: SOLICITUD + IMÁGENES + WHATSAPP === -->
-    <section class="section" id="contacto" aria-labelledby="contacto-title">
+    <!-- === PÁGINA 6: CONTACTO (SOLICITUD + IMÁGENES + WHATSAPP) === -->
+    <section class="section page-view" id="contacto" data-page="contacto" aria-labelledby="contacto-title">
       <div class="container">
+        <div class="page-bar">
+          <a class="page-back" href="#inicio" data-page-link="inicio">← Volver a Inicio</a>
+          <span class="page-crumb">EVM Studio / <strong>Contacto</strong></span>
+        </div>
         <div class="section__head section__head--split">
           <div data-reveal>
             <p class="eyebrow-mono">// 05 · INICIAR PROYECTO</p>
@@ -950,6 +1057,10 @@
             </div>
           </aside>
         </div>
+        <div class="page-pager">
+          <a class="btn btn--ghost btn--sm" href="#casos" data-page-link="casos">← Casos</a>
+          <a class="btn btn--ghost btn--sm" href="#inicio" data-page-link="inicio">Volver al Inicio ↑</a>
+        </div>
       </div>
     </section>
   </main>
@@ -984,12 +1095,13 @@
           <p>Ingeniería de software empresarial. Diseñamos, construimos y operamos plataformas que sostienen negocios reales.</p>
         </div>
         <nav class="footer__col" aria-label="Secciones">
-          <h2 class="footer__heading">Navegación</h2>
+          <h2 class="footer__heading">Páginas</h2>
           <ul role="list">
-            <li><a href="#soluciones">Soluciones</a></li>
-            <li><a href="#stack">Stack Técnico</a></li>
-            <li><a href="#arquitectura">Arquitectura</a></li>
-            <li><a href="#casos">Casos</a></li>
+            <li><a href="#inicio" data-page-link="inicio">Inicio</a></li>
+            <li><a href="#soluciones" data-page-link="soluciones">Soluciones</a></li>
+            <li><a href="#stack" data-page-link="stack">Stack Técnico</a></li>
+            <li><a href="#arquitectura" data-page-link="arquitectura">Arquitectura</a></li>
+            <li><a href="#casos" data-page-link="casos">Casos</a></li>
           </ul>
         </nav>
         <div class="footer__col">
@@ -997,7 +1109,7 @@
           <ul role="list">
             <li><a href="https://wa.me/51914662798" target="_blank" rel="noopener noreferrer">WhatsApp directo</a></li>
             <li><a href="https://github.com/ediczon2006" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="#contacto">Iniciar proyecto</a></li>
+            <li><a href="#contacto" data-page-link="contacto">Iniciar proyecto</a></li>
           </ul>
         </div>
       </div>
@@ -1088,6 +1200,7 @@
     </div>
   </dialog>
 
-  <script src="web/app.js" defer></script>
+  <div class="toast" id="evm-toast" role="status" aria-live="polite" hidden></div>
+  <script src="web/app.js?v=20261116-4" defer></script>
 </body>
 </html>

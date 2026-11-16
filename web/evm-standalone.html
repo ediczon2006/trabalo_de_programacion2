@@ -21,6 +21,17 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
     rel="stylesheet"
   />
+  <!-- === CRITICAL SHELL CSS (evita FOUC / desorden si la hoja externa tarda o hay caché) === -->
+  <style id="critical-shell">
+    html, body { margin: 0; background: #07090e; color: #f0f4f8; font-family: system-ui, -apple-system, sans-serif; }
+    .sprite, [hidden] { display: none !important; }
+    .skip-link { position: fixed; top: -120px; left: 16px; }
+    .preloader { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: #07090e; color: #f0f4f8; }
+    .preloader.is-complete { opacity: 0; visibility: hidden; pointer-events: none; }
+    .preloader__core { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; text-align: center; }
+    .preloader__logo { width: min(320px, 78vw); height: auto; }
+    .preloader__rail { position: relative; width: min(280px, 80vw); height: 2px; background: rgba(138, 148, 166, 0.24); }
+  </style>
   <style>
 /* ==========================================================================
    EVM SOFTWARE STUDIO — DESIGN SYSTEM & TECH LUXURY STYLESHEET
@@ -919,7 +930,7 @@ html.js.is-ready [data-enter] {
 /* === HERO STAGE: WORKSTATION MOCKUP + PARALLAX SATELLITES === */
 .hero-stage {
   position: relative;
-  padding: 28px 18px 20px;
+  padding: 44px 26px 20px;
   perspective: 1200px;
 }
 
@@ -1135,26 +1146,59 @@ html.js.is-ready [data-enter] {
   object-position: top center;
 }
 
-.screen-shot__cap {
+.screen-shot__bar {
   position: absolute;
   left: 10px;
+  right: 10px;
   bottom: 10px;
-  padding: 4px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.screen-shot__cap {
+  padding: 5px 11px;
   border-radius: var(--radius-pill);
-  background: rgba(7, 9, 14, 0.85);
+  background: rgba(7, 9, 14, 0.88);
   border: 1px solid var(--glass-border);
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-titanium);
 }
 
+.screen-shot__btns {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.screen-shot__btn {
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(0, 210, 255, 0.45);
+  background: rgba(7, 9, 14, 0.9);
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.screen-shot__btn:hover {
+  background: var(--accent-cyan);
+  color: #04101f;
+}
+
 /* Pestañas del workstation */
 .screen-tabs {
-  margin-top: 16px;
+  margin-top: 22px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .screen-tab {
@@ -1220,16 +1264,16 @@ html.js.is-ready [data-enter] {
   border-color: rgba(16, 185, 129, 0.35);
 }
 
-.sat--chip { top: -8px; left: 0; }
-.sat--code { top: 29%; right: -12px; }
+.sat--chip { top: -2px; left: 4%; }
+.sat--code { top: 26%; right: -14px; }
 .sat--code .sat__body { animation-delay: -1.4s; }
-.sat--lock { bottom: 25%; left: -12px; }
+.sat--lock { top: 50%; left: -14px; }
 .sat--lock .sat__body { animation-delay: -2.6s; }
-.sat--cloud { bottom: 32%; right: -12px; }
+.sat--cloud { bottom: 138px; right: -14px; }
 .sat--cloud .sat__body { animation-delay: -0.9s; }
-.sat--micro { bottom: 56px; left: 3%; }
+.sat--micro { bottom: 78px; left: 2%; }
 .sat--micro .sat__body { animation-delay: -3.2s; }
-.sat--cicd { top: -10px; left: 36%; }
+.sat--cicd { top: -2px; left: 38%; }
 .sat--cicd .sat__body { animation-delay: -2.1s; }
 
 @keyframes float {
@@ -1244,13 +1288,13 @@ html.js.is-ready [data-enter] {
 
 /* Rotating Badges circulares */
 .sat--badge {
-  top: -18px;
-  right: -8px;
+  top: -12px;
+  right: 0;
 }
 
 .sat--badge-sm {
-  bottom: 46px;
-  right: 1%;
+  bottom: 72px;
+  right: 6px;
 }
 
 .rot-badge {
@@ -1783,29 +1827,70 @@ html.js [data-reveal].is-visible {
   font-size: 19px;
 }
 
-.stack-col p {
+.stack-col p:not(.code-tag) {
   margin: 0;
   font-size: 14px;
   color: var(--text-silver);
   flex: 1;
 }
 
+.stack-col .code-tag {
+  align-self: flex-start;
+}
+
 /* === ARQUITECTURA DE REFERENCIA === */
 .arch {
   display: grid;
-  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 10px;
-  margin-bottom: 34px;
+  margin-bottom: 24px;
 }
 
 .arch__node {
+  width: 100%;
   padding: 18px 14px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  color: var(--text-titanium);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-out-expo), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.arch__node:hover,
+.arch__node.is-active {
+  transform: translateY(-4px);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 26px rgba(0, 210, 255, 0.28);
+}
+
+.arch-inspector {
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-color: rgba(0, 210, 255, 0.28);
+}
+
+.arch-inspector h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--text-titanium);
+}
+
+.arch-inspector p {
+  margin: 0;
+  color: var(--text-silver);
+  font-size: 14px;
+  max-width: 68ch;
 }
 
 .arch__node .ico {
@@ -3029,6 +3114,159 @@ textarea:focus,
   }
 }
 
+/* === MULTIPAGE VIEW ROUTING, HUB, BREADCRUMB & TOAST === */
+.page-view[hidden] {
+  display: none !important;
+}
+
+.page-view {
+  min-height: calc(100vh - 210px);
+}
+
+.page-view.is-page-active {
+  animation: page-enter 0.36s var(--ease-out-expo) both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.page-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--glass-border);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.page-back {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.page-back:hover {
+  text-decoration: underline;
+}
+
+.page-crumb {
+  color: var(--text-metallic);
+}
+
+.page-crumb strong {
+  color: var(--text-titanium);
+}
+
+.page-pager {
+  margin-top: 44px;
+  padding-top: 24px;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.home-hub {
+  margin-top: 42px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.home-hub__card {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-titanium);
+  transition: transform 0.22s var(--ease-out-expo), border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.home-hub__card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 12px 28px -10px rgba(0, 210, 255, 0.35);
+}
+
+.home-hub__card--accent {
+  border-color: rgba(0, 210, 255, 0.36);
+  background: rgba(0, 102, 255, 0.14);
+}
+
+.home-hub__num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  padding: 4px 8px;
+  border-radius: 7px;
+  background: var(--accent-tag-bg);
+  border: 1px solid var(--accent-tag-border);
+}
+
+.home-hub__card strong {
+  display: block;
+  font-size: 14px;
+}
+
+.home-hub__card small {
+  display: block;
+  font-size: 12px;
+  color: var(--text-silver);
+}
+
+.home-hub__card .ico {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  color: var(--accent-cyan);
+}
+
+@media (max-width: 1210px) {
+  .home-hub {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .home-hub {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 250;
+  max-width: calc(100vw - 32px);
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--accent-cyan);
+  color: var(--text-titanium);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  text-align: center;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.75);
+}
+
 /* === ACCESIBILIDAD: PREFERS-REDUCED-MOTION === */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -3050,7 +3288,7 @@ textarea:focus,
 }
 
 </style>
-  <!-- === BOOT FLAGS (antes del primer paint: evita FOUC y aplica tema persistido) === -->
+  <!-- === BOOT FLAGS (antes del primer paint: evita FOUC, aplica tema y activa fallback de preloader) === -->
   <script>
     (function () {
       var d = document.documentElement;
@@ -3059,6 +3297,14 @@ textarea:focus,
         var t = localStorage.getItem("evm-theme");
         if (t === "console") d.setAttribute("data-theme", "console");
       } catch (e) {}
+      setTimeout(function () {
+        if (!d.classList.contains("is-ready")) {
+          var p = document.getElementById("preloader");
+          if (p) p.classList.add("is-complete");
+          d.classList.remove("is-loading");
+          d.classList.add("is-ready");
+        }
+      }, 2600);
     })();
   </script>
 </head>
@@ -3159,7 +3405,7 @@ textarea:focus,
   <!-- === NAVBAR CORPORATIVO FLOTANTE (STICKY CAPSULE) === -->
   <header class="nav" id="nav">
     <div class="nav__capsule">
-      <a class="nav__brand" href="#inicio" aria-label="EVM Software Studio, ir al inicio">
+      <a class="nav__brand" href="#inicio" data-page-link="inicio" aria-label="EVM Software Studio, ir al inicio">
         <svg class="wordmark" viewBox="0 0 104 32" aria-hidden="true">
           <defs>
             <linearGradient id="wm-blue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00d2ff" /><stop offset="1" stop-color="#0066ff" /></linearGradient>
@@ -3180,14 +3426,14 @@ textarea:focus,
 
       <nav class="nav__links" id="nav-links" aria-label="Navegación principal">
         <ul role="list">
-          <li><a class="nav__link" href="#inicio" data-spy="inicio">Inicio</a></li>
-          <li><a class="nav__link" href="#soluciones" data-spy="soluciones">Soluciones</a></li>
-          <li><a class="nav__link" href="#stack" data-spy="stack">Stack Técnico</a></li>
-          <li><a class="nav__link" href="#arquitectura" data-spy="arquitectura">Arquitectura</a></li>
-          <li><a class="nav__link" href="#casos" data-spy="casos">Casos</a></li>
-          <li><a class="nav__link" href="#contacto" data-spy="contacto">Contacto</a></li>
+          <li><a class="nav__link is-active" href="#inicio" data-page-link="inicio" aria-current="page">Inicio</a></li>
+          <li><a class="nav__link" href="#soluciones" data-page-link="soluciones">Soluciones</a></li>
+          <li><a class="nav__link" href="#stack" data-page-link="stack">Stack Técnico</a></li>
+          <li><a class="nav__link" href="#arquitectura" data-page-link="arquitectura">Arquitectura</a></li>
+          <li><a class="nav__link" href="#casos" data-page-link="casos">Casos</a></li>
+          <li><a class="nav__link" href="#contacto" data-page-link="contacto">Contacto</a></li>
         </ul>
-        <a class="btn btn--glow nav__panel-cta" href="#contacto"><span>Iniciar Proyecto</span></a>
+        <a class="btn btn--glow nav__panel-cta" href="#contacto" data-page-link="contacto"><span>Iniciar Proyecto</span></a>
       </nav>
 
       <div class="nav__actions">
@@ -3199,7 +3445,7 @@ textarea:focus,
         <button type="button" class="icon-btn" id="theme-toggle" aria-pressed="false" aria-label="Activar modo consola" title="Modo consola">
           <svg class="ico" aria-hidden="true"><use href="#i-terminal" /></svg>
         </button>
-        <a class="btn btn--glow nav__cta" href="#contacto"><span>Iniciar Proyecto</span></a>
+        <a class="btn btn--glow nav__cta" href="#contacto" data-page-link="contacto"><span>Iniciar Proyecto</span></a>
         <button type="button" class="icon-btn nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú">
           <svg class="ico" aria-hidden="true"><use href="#i-menu" /></svg>
         </button>
@@ -3208,8 +3454,8 @@ textarea:focus,
   </header>
 
   <main id="contenido" tabindex="-1">
-    <!-- === HERO SECTION INTERACTIVO === -->
-    <section class="hero" id="inicio" aria-labelledby="hero-title">
+    <!-- === PÁGINA 1: INICIO (HERO INTERACTIVO + HUB DE MÓDULOS) === -->
+    <section class="hero page-view is-page-active" id="inicio" data-page="inicio" aria-labelledby="hero-title">
       <div class="hero__glow" aria-hidden="true"></div>
 
       <div class="container hero__grid">
@@ -3225,11 +3471,11 @@ textarea:focus,
           </p>
 
           <div class="hero__actions" data-enter style="--i:3">
-            <a class="btn btn--primary btn--lg magnetic" href="#contacto">
+            <a class="btn btn--primary btn--lg magnetic" href="#contacto" data-page-link="contacto">
               <span>Iniciar Proyecto</span>
               <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
             </a>
-            <a class="btn btn--ghost btn--lg" href="#soluciones">Explorar soluciones</a>
+            <a class="btn btn--ghost btn--lg" href="#soluciones" data-page-link="soluciones">Explorar soluciones</a>
           </div>
 
           <div class="trust" data-enter style="--i:4">
@@ -3322,7 +3568,13 @@ textarea:focus,
                   <!-- Vista de capturas reales (casos de producción) -->
                   <figure class="screen-shot" id="screen-shot" hidden>
                     <img id="hero-showcase-img" src="" alt="" width="1600" height="1000" decoding="async" />
-                    <figcaption id="hero-showcase-label" class="screen-shot__cap"></figcaption>
+                    <figcaption class="screen-shot__bar">
+                      <span id="hero-showcase-label" class="screen-shot__cap"></span>
+                      <div class="screen-shot__btns">
+                        <button type="button" class="screen-shot__btn" id="hero-screen-open">Ampliar</button>
+                        <a class="screen-shot__btn screen-shot__btn--link" id="hero-screen-visit" href="#" target="_blank" rel="noopener noreferrer">Sitio ↗</a>
+                      </div>
+                    </figcaption>
                   </figure>
                 </div>
               </div>
@@ -3398,14 +3650,45 @@ textarea:focus,
         <span class="rail__label" aria-hidden="true">EVM · 2026</span>
       </aside>
 
-      <a class="scroll-cue" href="#soluciones" aria-label="Desplazarse a soluciones" data-enter style="--i:6">
-        <span>SCROLL</span><span class="scroll-cue__line" aria-hidden="true"></span>
-      </a>
+      <!-- Hub de acceso directo a cada página del estudio -->
+      <div class="container">
+        <nav class="home-hub" aria-label="Explorar páginas del estudio" data-enter style="--i:6">
+          <a class="home-hub__card glass" href="#soluciones" data-page-link="soluciones">
+            <span class="home-hub__num">01</span>
+            <div><strong>Soluciones</strong><small>12 módulos listos para escalar</small></div>
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </a>
+          <a class="home-hub__card glass" href="#stack" data-page-link="stack">
+            <span class="home-hub__num">02</span>
+            <div><strong>Stack Técnico</strong><small>Lenguajes, nube y observabilidad</small></div>
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </a>
+          <a class="home-hub__card glass" href="#arquitectura" data-page-link="arquitectura">
+            <span class="home-hub__num">03</span>
+            <div><strong>Arquitectura</strong><small>Capas, seguridad y pipeline CI/CD</small></div>
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </a>
+          <a class="home-hub__card glass" href="#casos" data-page-link="casos">
+            <span class="home-hub__num">04</span>
+            <div><strong>Casos</strong><small>5 plataformas en producción</small></div>
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </a>
+          <a class="home-hub__card glass home-hub__card--accent" href="#contacto" data-page-link="contacto">
+            <span class="home-hub__num">05</span>
+            <div><strong>Contacto</strong><small>Brief y envío a WhatsApp</small></div>
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </a>
+        </nav>
+      </div>
     </section>
 
-    <!-- === CATÁLOGO DE SOLUCIONES (GLASS GRID) === -->
-    <section class="section" id="soluciones" aria-labelledby="sol-title">
+    <!-- === PÁGINA 2: CATÁLOGO DE SOLUCIONES (GLASS GRID) === -->
+    <section class="section page-view" id="soluciones" data-page="soluciones" aria-labelledby="sol-title">
       <div class="container container--wide">
+        <div class="page-bar">
+          <a class="page-back" href="#inicio" data-page-link="inicio">← Volver a Inicio</a>
+          <span class="page-crumb">EVM Studio / <strong>Soluciones</strong></span>
+        </div>
         <div class="section__head section__head--split">
           <div data-reveal>
             <p class="eyebrow-mono">// 01 · CATÁLOGO DE MÓDULOS</p>
@@ -3618,12 +3901,20 @@ textarea:focus,
             <button type="button" class="sol-card__cta" data-spec="devsecops">Ver Especificaciones <span aria-hidden="true">→</span></button>
           </li>
         </ul>
+        <div class="page-pager">
+          <a class="btn btn--ghost btn--sm" href="#inicio" data-page-link="inicio">← Inicio</a>
+          <a class="btn btn--primary btn--sm" href="#stack" data-page-link="stack">Siguiente: Stack Técnico →</a>
+        </div>
       </div>
     </section>
 
-    <!-- === STACK TÉCNICO === -->
-    <section class="section section--band" id="stack" aria-labelledby="stack-title">
+    <!-- === PÁGINA 3: STACK TÉCNICO === -->
+    <section class="section section--band page-view" id="stack" data-page="stack" aria-labelledby="stack-title">
       <div class="container">
+        <div class="page-bar">
+          <a class="page-back" href="#inicio" data-page-link="inicio">← Volver a Inicio</a>
+          <span class="page-crumb">EVM Studio / <strong>Stack Técnico</strong></span>
+        </div>
         <div class="section__head section__head--center" data-reveal>
           <p class="eyebrow-mono">// 02 · STACK TÉCNICO</p>
           <h2 class="section__title" id="stack-title">Tecnología de grado <em>producción</em></h2>
@@ -3675,46 +3966,73 @@ textarea:focus,
             <p class="code-tag">Docker • K8s • Terraform</p>
           </li>
         </ul>
+        <div class="page-pager">
+          <a class="btn btn--ghost btn--sm" href="#soluciones" data-page-link="soluciones">← Soluciones</a>
+          <a class="btn btn--primary btn--sm" href="#arquitectura" data-page-link="arquitectura">Siguiente: Arquitectura →</a>
+        </div>
       </div>
     </section>
 
-    <!-- === ARQUITECTURA DE REFERENCIA === -->
-    <section class="section" id="arquitectura" aria-labelledby="arch-title">
+    <!-- === PÁGINA 4: ARQUITECTURA DE REFERENCIA === -->
+    <section class="section page-view" id="arquitectura" data-page="arquitectura" aria-labelledby="arch-title">
       <div class="container">
+        <div class="page-bar">
+          <a class="page-back" href="#inicio" data-page-link="inicio">← Volver a Inicio</a>
+          <span class="page-crumb">EVM Studio / <strong>Arquitectura</strong></span>
+        </div>
         <div class="section__head section__head--split">
           <div data-reveal>
             <p class="eyebrow-mono">// 03 · ARQUITECTURA</p>
             <h2 class="section__title" id="arch-title">Arquitectura de referencia <em>EVM</em></h2>
-            <p class="section__sub">Cada capa es independiente, observable y reemplazable. Así escalamos de un MVP a millones de transacciones sin reescribir.</p>
+            <p class="section__sub">Selecciona cualquier capa del diagrama para inspeccionar su protocolo, seguridad y SLA en tiempo real.</p>
           </div>
         </div>
 
         <ol class="arch" role="list" data-reveal>
-          <li class="arch__node glass">
-            <svg class="ico" aria-hidden="true"><use href="#i-mobile" /></svg>
-            <strong>Clientes</strong><span>Web · Apps · WhatsApp</span>
+          <li>
+            <button type="button" class="arch__node glass" data-arch-layer="clientes" aria-pressed="false">
+              <svg class="ico" aria-hidden="true"><use href="#i-mobile" /></svg>
+              <strong>Clientes</strong><span>Web · Apps · WhatsApp</span>
+            </button>
           </li>
           <li class="arch__link" aria-hidden="true"><span class="arch__packet"></span></li>
-          <li class="arch__node glass">
-            <svg class="ico" aria-hidden="true"><use href="#i-shield" /></svg>
-            <strong>Edge &amp; WAF</strong><span>CDN · TLS 1.3 · Rate limit</span>
+          <li>
+            <button type="button" class="arch__node glass" data-arch-layer="edge" aria-pressed="false">
+              <svg class="ico" aria-hidden="true"><use href="#i-shield" /></svg>
+              <strong>Edge &amp; WAF</strong><span>CDN · TLS 1.3 · Rate limit</span>
+            </button>
           </li>
           <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:.4s"></span></li>
-          <li class="arch__node glass arch__node--core">
-            <svg class="ico" aria-hidden="true"><use href="#i-server" /></svg>
-            <strong>API Gateway</strong><span>Java 21 · Hilos virtuales</span>
+          <li>
+            <button type="button" class="arch__node glass arch__node--core is-active" data-arch-layer="gateway" aria-pressed="true">
+              <svg class="ico" aria-hidden="true"><use href="#i-server" /></svg>
+              <strong>API Gateway</strong><span>Java 21 · Hilos virtuales</span>
+            </button>
           </li>
           <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:.8s"></span></li>
-          <li class="arch__node glass">
-            <svg class="ico" aria-hidden="true"><use href="#i-hex" /></svg>
-            <strong>Servicios</strong><span>C++17 nativo · Agentes IA</span>
+          <li>
+            <button type="button" class="arch__node glass" data-arch-layer="servicios" aria-pressed="false">
+              <svg class="ico" aria-hidden="true"><use href="#i-hex" /></svg>
+              <strong>Servicios</strong><span>C++17 nativo · Agentes IA</span>
+            </button>
           </li>
           <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:1.2s"></span></li>
-          <li class="arch__node glass">
-            <svg class="ico" aria-hidden="true"><use href="#i-database" /></svg>
-            <strong>Datos</strong><span>PostgreSQL · SQLite · Objetos</span>
+          <li>
+            <button type="button" class="arch__node glass" data-arch-layer="datos" aria-pressed="false">
+              <svg class="ico" aria-hidden="true"><use href="#i-database" /></svg>
+              <strong>Datos</strong><span>PostgreSQL · SQLite · Objetos</span>
+            </button>
           </li>
         </ol>
+
+        <div class="glass arch-inspector" id="arch-inspector" aria-live="polite">
+          <div>
+            <span class="eyebrow-mono" id="arch-layer-eyebrow">CAPA ACTIVA · API GATEWAY</span>
+            <h3 id="arch-layer-title">Java 21 con Hilos Virtuales y Contratos REST Versionados</h3>
+            <p id="arch-layer-desc">Enrutamiento concurrente sin bloqueo, validación estricta multipart/form-data, control de cuota por IP y trazabilidad OpenTelemetry.</p>
+          </div>
+          <p class="code-tag" id="arch-layer-meta">SLA 99.99% · p95 38 ms · Zero Downtime</p>
+        </div>
 
         <div class="arch-detail">
           <div class="terminal glass" data-reveal>
@@ -3742,12 +4060,20 @@ textarea:focus,
             </li>
           </ul>
         </div>
+        <div class="page-pager">
+          <a class="btn btn--ghost btn--sm" href="#stack" data-page-link="stack">← Stack Técnico</a>
+          <a class="btn btn--primary btn--sm" href="#casos" data-page-link="casos">Siguiente: Casos →</a>
+        </div>
       </div>
     </section>
 
-    <!-- === CASOS EN PRODUCCIÓN (PORTAFOLIO VERIFICADO) === -->
-    <section class="section section--band" id="casos" aria-labelledby="casos-title">
+    <!-- === PÁGINA 5: CASOS EN PRODUCCIÓN (PORTAFOLIO VERIFICADO) === -->
+    <section class="section section--band page-view" id="casos" data-page="casos" aria-labelledby="casos-title">
       <div class="container">
+        <div class="page-bar">
+          <a class="page-back" href="#inicio" data-page-link="inicio">← Volver a Inicio</a>
+          <span class="page-crumb">EVM Studio / <strong>Casos</strong></span>
+        </div>
         <div class="section__head section__head--split">
           <div data-reveal>
             <p class="eyebrow-mono">// 04 · CASOS</p>
@@ -3765,12 +4091,20 @@ textarea:focus,
         <div id="portfolio-grid" class="portfolio-grid" aria-live="polite">
           <p class="loading-msg">Cargando casos…</p>
         </div>
+        <div class="page-pager">
+          <a class="btn btn--ghost btn--sm" href="#arquitectura" data-page-link="arquitectura">← Arquitectura</a>
+          <a class="btn btn--primary btn--sm" href="#contacto" data-page-link="contacto">Siguiente: Iniciar Proyecto →</a>
+        </div>
       </div>
     </section>
 
-    <!-- === CONTACTO: SOLICITUD + IMÁGENES + WHATSAPP === -->
-    <section class="section" id="contacto" aria-labelledby="contacto-title">
+    <!-- === PÁGINA 6: CONTACTO (SOLICITUD + IMÁGENES + WHATSAPP) === -->
+    <section class="section page-view" id="contacto" data-page="contacto" aria-labelledby="contacto-title">
       <div class="container">
+        <div class="page-bar">
+          <a class="page-back" href="#inicio" data-page-link="inicio">← Volver a Inicio</a>
+          <span class="page-crumb">EVM Studio / <strong>Contacto</strong></span>
+        </div>
         <div class="section__head section__head--split">
           <div data-reveal>
             <p class="eyebrow-mono">// 05 · INICIAR PROYECTO</p>
@@ -3978,6 +4312,10 @@ textarea:focus,
             </div>
           </aside>
         </div>
+        <div class="page-pager">
+          <a class="btn btn--ghost btn--sm" href="#casos" data-page-link="casos">← Casos</a>
+          <a class="btn btn--ghost btn--sm" href="#inicio" data-page-link="inicio">Volver al Inicio ↑</a>
+        </div>
       </div>
     </section>
   </main>
@@ -4012,12 +4350,13 @@ textarea:focus,
           <p>Ingeniería de software empresarial. Diseñamos, construimos y operamos plataformas que sostienen negocios reales.</p>
         </div>
         <nav class="footer__col" aria-label="Secciones">
-          <h2 class="footer__heading">Navegación</h2>
+          <h2 class="footer__heading">Páginas</h2>
           <ul role="list">
-            <li><a href="#soluciones">Soluciones</a></li>
-            <li><a href="#stack">Stack Técnico</a></li>
-            <li><a href="#arquitectura">Arquitectura</a></li>
-            <li><a href="#casos">Casos</a></li>
+            <li><a href="#inicio" data-page-link="inicio">Inicio</a></li>
+            <li><a href="#soluciones" data-page-link="soluciones">Soluciones</a></li>
+            <li><a href="#stack" data-page-link="stack">Stack Técnico</a></li>
+            <li><a href="#arquitectura" data-page-link="arquitectura">Arquitectura</a></li>
+            <li><a href="#casos" data-page-link="casos">Casos</a></li>
           </ul>
         </nav>
         <div class="footer__col">
@@ -4025,7 +4364,7 @@ textarea:focus,
           <ul role="list">
             <li><a href="https://wa.me/51914662798" target="_blank" rel="noopener noreferrer">WhatsApp directo</a></li>
             <li><a href="https://github.com/ediczon2006" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="#contacto">Iniciar proyecto</a></li>
+            <li><a href="#contacto" data-page-link="contacto">Iniciar proyecto</a></li>
           </ul>
         </div>
       </div>
@@ -4116,6 +4455,7 @@ textarea:focus,
     </div>
   </dialog>
 
+  <div class="toast" id="evm-toast" role="status" aria-live="polite" hidden></div>
   <script>
 /**
  * ==========================================================================
@@ -4456,15 +4796,59 @@ const PROJECT_CATEGORY = {
 
 const state = {
   projects: FALLBACK_PROJECTS,
+  activePage: "inicio",
   activeFilter: "all",
   activeSolFilter: "all",
   activeSolSort: "demand",
+  activeScreenProjIndex: 0,
   backendOnline: false,
   images: [],
   activeModalProject: null,
   activeSpecId: null,
   cmdkItems: [],
   cmdkIndex: 0,
+};
+
+const PAGE_TITLES = {
+  inicio: "EVM Software Studio | Ingeniería de software empresarial",
+  soluciones: "Soluciones | EVM Software Studio",
+  stack: "Stack Técnico | EVM Software Studio",
+  arquitectura: "Arquitectura | EVM Software Studio",
+  casos: "Casos en Producción | EVM Software Studio",
+  contacto: "Contacto e Iniciar Proyecto | EVM Software Studio",
+};
+
+const ARCH_LAYERS = {
+  clientes: {
+    eyebrow: "CAPA 01 · CLIENTES",
+    title: "Web Semántica, Apps Móviles Nativas y Canales WhatsApp",
+    desc: "Interfaces rápidas optimizadas para Core Web Vitals, accesibilidad WCAG 2.1 AA, modo offline-first y capturas o pedidos directos por WhatsApp.",
+    meta: "LCP < 1.2 s · WCAG 2.1 AA · Responsive",
+  },
+  edge: {
+    eyebrow: "CAPA 02 · EDGE & WAF",
+    title: "CDN Global, TLS 1.3 y Protección Anti-Abuso en el Borde",
+    desc: "Terminación cifrada TLS 1.3, cabeceras de seguridad estrictas, rate limiting adaptativo y entrega en caché perimetral de activos estáticos.",
+    meta: "TLS 1.3 · HTTP/3 · DDoS Mitigation",
+  },
+  gateway: {
+    eyebrow: "CAPA 03 · API GATEWAY",
+    title: "Java 21 con Hilos Virtuales y Contratos REST Versionados",
+    desc: "Enrutamiento concurrente sin bloqueo, validación estricta multipart/form-data, control de cuota por IP y trazabilidad OpenTelemetry.",
+    meta: "SLA 99.99% · p95 38 ms · Zero Downtime",
+  },
+  servicios: {
+    eyebrow: "CAPA 04 · SERVICIOS & IA",
+    title: "Módulos Nativos C++17, Agentes IA y Lógica de Negocio",
+    desc: "Validación binaria real de imágenes en C++17 (FNV-1a + firmas mágicas), pipelines RAG con Gemini y microservicios desacoplados.",
+    meta: "C++17 Nativo · LangGraph · Contenedores",
+  },
+  datos: {
+    eyebrow: "CAPA 05 · PERSISTENCIA",
+    title: "PostgreSQL, SQLite Transaccional y Almacenamiento de Objetos",
+    desc: "Esquemas normalizados con claves foráneas, respaldos automáticos cifrados y almacenamiento seguro de adjuntos y comprobantes.",
+    meta: "ACID · Cifrado AES-256 · Backups Diarios",
+  },
 };
 
 const el = {
@@ -4486,6 +4870,9 @@ const el = {
   screenShot: document.getElementById("screen-shot"),
   heroShowcaseImg: document.getElementById("hero-showcase-img"),
   heroShowcaseLabel: document.getElementById("hero-showcase-label"),
+  heroScreenOpen: document.getElementById("hero-screen-open"),
+  heroScreenVisit: document.getElementById("hero-screen-visit"),
+  toast: document.getElementById("evm-toast"),
   btnWhitepaper: document.getElementById("btn-whitepaper"),
   solFilters: document.getElementById("sol-filters"),
   solSort: document.getElementById("sol-sort"),
@@ -4611,7 +4998,76 @@ function initPreloader() {
   requestAnimationFrame(tick);
 }
 
-/* === NAVBAR, SCROLL SPY, THEME CONSOLE & REVEAL === */
+let toastTimer = 0;
+function showToast(msg) {
+  if (!el.toast) return;
+  el.toast.textContent = msg;
+  el.toast.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    el.toast.hidden = true;
+  }, 2600);
+}
+
+/* === MULTIPAGE ROUTER (PÁGINAS INDIVIDUALES) === */
+function navigateToPage(rawId, updateHash = true) {
+  const cleanId = String(rawId || "inicio").replace(/^#\/?/, "").toLowerCase();
+  const pageId = Object.prototype.hasOwnProperty.call(PAGE_TITLES, cleanId) ? cleanId : "inicio";
+  state.activePage = pageId;
+
+  document.querySelectorAll("[data-page]").forEach((section) => {
+    const isTarget = section.getAttribute("data-page") === pageId;
+    section.hidden = !isTarget;
+    section.classList.toggle("is-page-active", isTarget);
+    if (isTarget) {
+      section.querySelectorAll("[data-reveal]").forEach((node) => node.classList.add("is-visible"));
+    }
+  });
+
+  document.querySelectorAll(".nav__link[data-page-link]").forEach((link) => {
+    const active = link.getAttribute("data-page-link") === pageId;
+    link.classList.toggle("is-active", active);
+    if (active) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+
+  if (el.navLinks && el.navToggle) {
+    el.navLinks.classList.remove("is-open");
+    el.navToggle.setAttribute("aria-expanded", "false");
+  }
+
+  document.title = PAGE_TITLES[pageId];
+
+  if (updateHash && window.location.hash !== `#${pageId}`) {
+    try {
+      history.pushState({ pageId }, "", `#${pageId}`);
+    } catch {
+      window.location.hash = pageId;
+    }
+  }
+
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function initPageRouter() {
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("[data-page-link]");
+    if (!link) return;
+    e.preventDefault();
+    navigateToPage(link.getAttribute("data-page-link"), true);
+  });
+
+  const syncFromHash = () => {
+    const hash = window.location.hash || "#inicio";
+    navigateToPage(hash, false);
+  };
+
+  window.addEventListener("hashchange", syncFromHash);
+  window.addEventListener("popstate", syncFromHash);
+  syncFromHash();
+}
+
+/* === NAVBAR, THEME CONSOLE & REVEAL === */
 function initNavigationAndTheme() {
   const isMac = /Mac|iPhone|iPad/i.test(navigator.platform || "");
   document.querySelectorAll("[data-kbd-mod]").forEach((k) => {
@@ -4633,6 +5089,7 @@ function initNavigationAndTheme() {
         localStorage.setItem("evm-theme", next);
       } catch {}
       syncThemeBtn();
+      showToast(next === "console" ? "Modo Consola activado" : "Modo Studio activado");
     });
   }
 
@@ -4640,12 +5097,6 @@ function initNavigationAndTheme() {
     el.navToggle.addEventListener("click", () => {
       const open = el.navLinks.classList.toggle("is-open");
       el.navToggle.setAttribute("aria-expanded", String(open));
-    });
-    el.navLinks.addEventListener("click", (e) => {
-      if (e.target.closest("a")) {
-        el.navLinks.classList.remove("is-open");
-        el.navToggle.setAttribute("aria-expanded", "false");
-      }
     });
   }
 
@@ -4655,27 +5106,7 @@ function initNavigationAndTheme() {
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // Scroll Spy de secciones
-  const spyLinks = new Map();
-  document.querySelectorAll("[data-spy]").forEach((a) => spyLinks.set(a.getAttribute("data-spy"), a));
-
   if ("IntersectionObserver" in window) {
-    const spyObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            spyLinks.forEach((link, key) => link.classList.toggle("is-active", key === id));
-          }
-        });
-      },
-      { rootMargin: "-38% 0px -52% 0px" }
-    );
-    spyLinks.forEach((_, id) => {
-      const sec = document.getElementById(id);
-      if (sec) spyObserver.observe(sec);
-    });
-
     const revealObserver = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
@@ -4757,29 +5188,73 @@ function initHeroInteractions() {
   }
 
   // Selector de vistas del Workstation en Hero
-  document.querySelectorAll("[data-screen]").forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const target = tab.getAttribute("data-screen");
-      document.querySelectorAll("[data-screen]").forEach((b) => {
-        const active = b === tab;
-        b.classList.toggle("is-active", active);
-        b.setAttribute("aria-selected", String(active));
-        b.tabIndex = active ? 0 : -1;
-      });
+  const screenTabs = Array.from(document.querySelectorAll("[data-screen]"));
+  const activateScreenTab = (tab) => {
+    const target = tab.getAttribute("data-screen");
+    screenTabs.forEach((b) => {
+      const active = b === tab;
+      b.classList.toggle("is-active", active);
+      b.setAttribute("aria-selected", String(active));
+      b.tabIndex = active ? 0 : -1;
+    });
 
-      if (target === "dashboard") {
-        if (el.dash) el.dash.hidden = false;
-        if (el.screenShot) el.screenShot.hidden = true;
-      } else {
-        const proj = state.projects.find((p) => p.slug === target) || state.projects[0];
-        if (proj && el.heroShowcaseImg && el.heroShowcaseLabel) {
-          el.heroShowcaseImg.src = resolveAssetUrl(proj.imagenPrincipal);
-          el.heroShowcaseImg.alt = `Vista de ${proj.nombre}`;
-          el.heroShowcaseLabel.textContent = `${proj.nombre} · ${proj.tipo}`;
-          if (el.dash) el.dash.hidden = true;
-          if (el.screenShot) el.screenShot.hidden = false;
-        }
+    if (target === "dashboard") {
+      if (el.dash) el.dash.hidden = false;
+      if (el.screenShot) el.screenShot.hidden = true;
+    } else {
+      const idx = state.projects.findIndex((p) => p.slug === target);
+      const safeIdx = idx >= 0 ? idx : 0;
+      const proj = state.projects[safeIdx];
+      state.activeScreenProjIndex = safeIdx;
+      if (proj && el.heroShowcaseImg && el.heroShowcaseLabel) {
+        el.heroShowcaseImg.src = resolveAssetUrl(proj.imagenPrincipal);
+        el.heroShowcaseImg.alt = `Vista de ${proj.nombre}`;
+        el.heroShowcaseLabel.textContent = `${proj.nombre} · ${proj.tipo}`;
+        if (el.heroScreenVisit) el.heroScreenVisit.href = proj.urlPublica;
+        if (el.dash) el.dash.hidden = true;
+        if (el.screenShot) el.screenShot.hidden = false;
       }
+    }
+  };
+
+  screenTabs.forEach((tab, idx) => {
+    tab.addEventListener("click", () => activateScreenTab(tab));
+    tab.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      e.preventDefault();
+      const nextIdx = (idx + (e.key === "ArrowRight" ? 1 : -1) + screenTabs.length) % screenTabs.length;
+      screenTabs[nextIdx].focus();
+      activateScreenTab(screenTabs[nextIdx]);
+    });
+  });
+
+  if (el.heroScreenOpen) {
+    el.heroScreenOpen.addEventListener("click", () => {
+      openProjectModal(state.activeScreenProjIndex);
+    });
+  }
+
+  // Inspector interactivo de capas en Arquitectura
+  const archButtons = Array.from(document.querySelectorAll("[data-arch-layer]"));
+  const archEyebrow = document.getElementById("arch-layer-eyebrow");
+  const archTitle = document.getElementById("arch-layer-title");
+  const archDesc = document.getElementById("arch-layer-desc");
+  const archMeta = document.getElementById("arch-layer-meta");
+
+  archButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const key = btn.getAttribute("data-arch-layer");
+      const info = ARCH_LAYERS[key];
+      if (!info) return;
+      archButtons.forEach((b) => {
+        const active = b === btn;
+        b.classList.toggle("is-active", active);
+        b.setAttribute("aria-pressed", String(active));
+      });
+      if (archEyebrow) archEyebrow.textContent = info.eyebrow;
+      if (archTitle) archTitle.textContent = info.title;
+      if (archDesc) archDesc.textContent = info.desc;
+      if (archMeta) archMeta.textContent = info.meta;
     });
   });
 
@@ -4827,6 +5302,7 @@ function initHeroInteractions() {
       a.download = "EVM_Software_Studio_Whitepaper_2026.txt";
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast("Whitepaper técnico descargado");
     });
   }
 }
@@ -4929,7 +5405,8 @@ function initSolutionsCatalog() {
         updatePreview();
       }
       closeDialog(el.specModal);
-      document.getElementById("contacto").scrollIntoView({ behavior: "smooth" });
+      navigateToPage("contacto");
+      showToast(`Módulo "${spec ? spec.title : ""}" agregado al brief`);
     });
   }
 }
@@ -4939,12 +5416,12 @@ function initCommandPalette() {
   if (!el.cmdkDialog || !el.cmdkInput || !el.cmdkList) return;
 
   const baseCommands = [
-    { label: "Ir a Inicio (Hero)", meta: "Sección", action: () => location.assign("#inicio") },
-    { label: "Ir a Catálogo de Soluciones", meta: "Sección", action: () => location.assign("#soluciones") },
-    { label: "Ir a Stack Técnico", meta: "Sección", action: () => location.assign("#stack") },
-    { label: "Ir a Arquitectura de Referencia", meta: "Sección", action: () => location.assign("#arquitectura") },
-    { label: "Ir a Casos en Producción", meta: "Sección", action: () => location.assign("#casos") },
-    { label: "Iniciar Proyecto / Enviar Brief", meta: "Acción", action: () => location.assign("#contacto") },
+    { label: "Ir a página: Inicio", meta: "Página", action: () => navigateToPage("inicio") },
+    { label: "Ir a página: Catálogo de Soluciones", meta: "Página", action: () => navigateToPage("soluciones") },
+    { label: "Ir a página: Stack Técnico", meta: "Página", action: () => navigateToPage("stack") },
+    { label: "Ir a página: Arquitectura", meta: "Página", action: () => navigateToPage("arquitectura") },
+    { label: "Ir a página: Casos en Producción", meta: "Página", action: () => navigateToPage("casos") },
+    { label: "Ir a página: Contacto / Iniciar Proyecto", meta: "Página", action: () => navigateToPage("contacto") },
     {
       label: "Alternar Tema (Studio / Modo Consola)",
       meta: "Tema",
@@ -5567,6 +6044,7 @@ function bindEvents() {
       await navigator.clipboard.writeText(buildPreviewMessage());
       const prev = el.btnCopyText.textContent;
       el.btnCopyText.textContent = "Copiado";
+      showToast("Mensaje copiado al portapapeles");
       setTimeout(() => {
         el.btnCopyText.textContent = prev;
       }, 1600);
@@ -5616,7 +6094,8 @@ function bindEvents() {
         updatePreview();
       }
       closeDialog(el.modal);
-      document.getElementById("contacto").scrollIntoView({ behavior: "smooth" });
+      navigateToPage("contacto");
+      showToast("Referencia cargada en tu brief");
     });
   }
 
@@ -5635,6 +6114,7 @@ function bindEvents() {
 }
 
 /* === BOOTSTRAP === */
+initPageRouter();
 initPreloader();
 initNavigationAndTheme();
 initHeroInteractions();
