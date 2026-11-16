@@ -12,7 +12,7 @@ Aplicacion web en espanol para mostrar proyectos reales de software, recibir req
 - **Procesador de imagenes en C++17 (`native/image_analyzer.cpp`)**:
   - Valida firmas binarias reales (PNG, JPEG, WebP, GIF), extrae dimensiones (`ancho x alto`) y calcula checksum FNV-1a antes de guardar en SQLite.
 - **Interfaz web (`web/` y copia estatica en `docs/`)**:
-  - Galeria de los 5 proyectos reales verificados (`Pelitos Veterinaria`, `Pelitos Docs`, `Ferreteria Sullcairi PRO POS`, `Estacion de Servicios Sullcairi`, `Leytrix ISP`).
+  - Galeria de los 4 proyectos reales verificados (`Pelitos Veterinaria`, `Ferreteria Sullcairi PRO POS`, `Estacion de Servicios Sullcairi`, `Leytrix ISP`).
   - Formulario de requerimiento ("que quieres que haga tu software"), subida multiple de imagenes (arrastrar, seleccionar o `Ctrl + V`), descarga de ficha PNG, envio con guardado en base de datos y redireccion a `https://wa.me/51914662798`.
 - **Archivo entregable incluido**:
   - `entregables/portafolio_capturas.zip`: Paquete ZIP con todas las capturas limpias y piezas `1080x1080` de los 5 proyectos.

@@ -2632,53 +2632,11 @@ textarea:focus,
   gap: 10px;
 }
 
-/* === FOOTER STRIP: 4 PILARES DE INGENIERÍA & FOOTER === */
+/* === FOOTER === */
 .footer {
-  padding: 64px 0 36px;
+  padding: 20px 0 36px;
   border-top: 1px solid var(--glass-border);
   background: rgba(5, 7, 11, 0.92);
-}
-
-.pillars {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.pillar {
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  border-radius: var(--radius-md);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-}
-
-.pillar__ico {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: rgba(0, 102, 255, 0.14);
-  border: 1px solid rgba(0, 210, 255, 0.3);
-  color: var(--accent-cyan);
-  flex-shrink: 0;
-}
-
-.pillar strong {
-  display: block;
-  font-size: 14px;
-  color: var(--text-titanium);
-}
-
-.pillar span {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  color: var(--text-metallic);
 }
 
 .footer__main {
@@ -3007,8 +2965,7 @@ textarea:focus,
   .workspace {
     grid-template-columns: minmax(0, 1fr);
   }
-  .stack-grid,
-  .pillars {
+  .stack-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .arch {
@@ -3104,7 +3061,6 @@ textarea:focus,
   }
   .field-row,
   .stack-grid,
-  .pillars,
   .spec__stats,
   .portfolio-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -3670,7 +3626,7 @@ textarea:focus,
           </a>
           <a class="home-hub__card glass" href="#casos" data-page-link="casos">
             <span class="home-hub__num">04</span>
-            <div><strong>Casos</strong><small>5 plataformas en producción</small></div>
+            <div><strong>Casos</strong><small>4 plataformas en producción</small></div>
             <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
           </a>
           <a class="home-hub__card glass home-hub__card--accent" href="#contacto" data-page-link="contacto">
@@ -4320,28 +4276,9 @@ textarea:focus,
     </section>
   </main>
 
-  <!-- === BANDA DE CONFIANZA (FOOTER STRIP) + FOOTER === -->
+  <!-- === FOOTER === -->
   <footer class="footer">
     <div class="container">
-      <ul class="pillars" role="list" aria-label="Estándares de ingeniería EVM">
-        <li class="pillar" data-reveal style="--d:0">
-          <span class="pillar__ico"><svg class="ico" aria-hidden="true"><use href="#i-clock" /></svg></span>
-          <div><strong>Soporte Crítico 24/7</strong><span>SLA Empresarial 99.99%</span></div>
-        </li>
-        <li class="pillar" data-reveal style="--d:1">
-          <span class="pillar__ico"><svg class="ico" aria-hidden="true"><use href="#i-lock" /></svg></span>
-          <div><strong>Criptografía Grado Bancario</strong><span>Ciberseguridad by design</span></div>
-        </li>
-        <li class="pillar" data-reveal style="--d:2">
-          <span class="pillar__ico"><svg class="ico" aria-hidden="true"><use href="#i-code" /></svg></span>
-          <div><strong>Código Limpio</strong><span>Transferencia total de IP</span></div>
-        </li>
-        <li class="pillar" data-reveal style="--d:3">
-          <span class="pillar__ico"><svg class="ico" aria-hidden="true"><use href="#i-rocket" /></svg></span>
-          <div><strong>Despliegue Automatizado</strong><span>Infraestructura CI/CD</span></div>
-        </li>
-      </ul>
-
       <div class="footer__main">
         <div class="footer__brand">
           <div class="footer__logo-wrap">
@@ -4510,25 +4447,6 @@ const FALLBACK_PROJECTS = [
       "Selector rápido de reserva de cita en portada",
       "Catálogo PetShop con buscador, conteo y filtros",
       "Directorio de servicios médicos con detalle desplegable",
-    ],
-  },
-  {
-    slug: "02_Pelitos_Administracion",
-    nombre: "Pelitos Docs",
-    tipo: "Aplicación web de gestión documental",
-    descripcion:
-      "Biblioteca y explorador empresarial de documentos organizado por unidades de negocio y servicios compartidos, con búsqueda, filtros por formato, carga de archivos e inspector visual.",
-    urlPublica: "https://ediczon2006.github.io/-administracion_de_clientes_pelitos_veterinaria/",
-    imagenPrincipal:
-      "assets/portafolio/02_Pelitos_Administracion/capturas_limpias/01_inicio_escritorio.png",
-    galeria: [
-      "assets/portafolio/02_Pelitos_Administracion/capturas_limpias/01_inicio_escritorio.png",
-      "assets/portafolio/02_Pelitos_Administracion/capturas_limpias/02_explorador_documental.png",
-    ],
-    aspectos: [
-      "Organización por unidades de negocio y servicios compartidos",
-      "Buscador por nombre y filtro por formato de documento",
-      "Explorador con árbol de directorios e inspector lateral",
     ],
   },
   {
@@ -4788,7 +4706,6 @@ const MODULE_SPECS = {
 
 const PROJECT_CATEGORY = {
   "01_Pelitos_Web": "web",
-  "02_Pelitos_Administracion": "gestion",
   "03_Ferreteria_Sullcairi": "ventas",
   "04_Sullcairi": "gestion",
   "05_Leyder": "gestion",

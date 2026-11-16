@@ -54,25 +54,6 @@ const FALLBACK_PROJECTS = [
     ],
   },
   {
-    slug: "02_Pelitos_Administracion",
-    nombre: "Pelitos Docs",
-    tipo: "Aplicación web de gestión documental",
-    descripcion:
-      "Biblioteca y explorador empresarial de documentos organizado por unidades de negocio y servicios compartidos, con búsqueda, filtros por formato, carga de archivos e inspector visual.",
-    urlPublica: "https://ediczon2006.github.io/-administracion_de_clientes_pelitos_veterinaria/",
-    imagenPrincipal:
-      "assets/portafolio/02_Pelitos_Administracion/capturas_limpias/01_inicio_escritorio.png",
-    galeria: [
-      "assets/portafolio/02_Pelitos_Administracion/capturas_limpias/01_inicio_escritorio.png",
-      "assets/portafolio/02_Pelitos_Administracion/capturas_limpias/02_explorador_documental.png",
-    ],
-    aspectos: [
-      "Organización por unidades de negocio y servicios compartidos",
-      "Buscador por nombre y filtro por formato de documento",
-      "Explorador con árbol de directorios e inspector lateral",
-    ],
-  },
-  {
     slug: "03_Ferreteria_Sullcairi",
     nombre: "Ferretería Sullcairi PRO POS",
     tipo: "Sistema web de inventario y reportes comerciales",
@@ -329,7 +310,6 @@ const MODULE_SPECS = {
 
 const PROJECT_CATEGORY = {
   "01_Pelitos_Web": "web",
-  "02_Pelitos_Administracion": "gestion",
   "03_Ferreteria_Sullcairi": "ventas",
   "04_Sullcairi": "gestion",
   "05_Leyder": "gestion",

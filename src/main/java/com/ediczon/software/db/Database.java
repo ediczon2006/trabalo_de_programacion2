@@ -132,6 +132,9 @@ public final class Database {
             """);
 
             seedPortfolioIfEmpty(conn);
+            try (Statement stCleanup = conn.createStatement()) {
+                stCleanup.execute("DELETE FROM proyectos_portafolio WHERE slug = '02_Pelitos_Administracion';");
+            }
         }
     }
 
@@ -143,7 +146,7 @@ public final class Database {
             }
         }
 
-        // Solo los 5 proyectos reales verificados; sin agregar C++ ni Java como items de portafolio.
+        // Solo los 4 proyectos reales verificados; sin agregar C++ ni Java como items de portafolio.
         List<PortfolioProject> defaults = List.of(
             makeProject(
                 "01_Pelitos_Web",
@@ -162,23 +165,6 @@ public final class Database {
                     "Selector rápido de reserva de cita en portada",
                     "Catálogo PetShop con buscador, conteo y filtros",
                     "Directorio de servicios médicos con detalle desplegable"
-                )
-            ),
-            makeProject(
-                "02_Pelitos_Administracion",
-                "Pelitos Docs",
-                "Aplicación web de gestión documental",
-                "Biblioteca y explorador empresarial de documentos organizado por unidades de negocio y servicios compartidos, con búsqueda, filtros por formato, carga de archivos e inspector visual.",
-                "https://ediczon2006.github.io/-administracion_de_clientes_pelitos_veterinaria/",
-                "assets/portafolio/02_Pelitos_Administracion/capturas_limpias/01_inicio_escritorio.png",
-                List.of(
-                    "assets/portafolio/02_Pelitos_Administracion/capturas_limpias/01_inicio_escritorio.png",
-                    "assets/portafolio/02_Pelitos_Administracion/capturas_limpias/02_explorador_documental.png"
-                ),
-                List.of(
-                    "Organización por unidades de negocio y servicios compartidos",
-                    "Buscador por nombre y filtro por formato de documento",
-                    "Explorador con árbol de directorios e inspector lateral"
                 )
             ),
             makeProject(

@@ -2597,53 +2597,11 @@ textarea:focus,
   gap: 10px;
 }
 
-/* === FOOTER STRIP: 4 PILARES DE INGENIERÍA & FOOTER === */
+/* === FOOTER === */
 .footer {
-  padding: 64px 0 36px;
+  padding: 20px 0 36px;
   border-top: 1px solid var(--glass-border);
   background: rgba(5, 7, 11, 0.92);
-}
-
-.pillars {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.pillar {
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  border-radius: var(--radius-md);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-}
-
-.pillar__ico {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: rgba(0, 102, 255, 0.14);
-  border: 1px solid rgba(0, 210, 255, 0.3);
-  color: var(--accent-cyan);
-  flex-shrink: 0;
-}
-
-.pillar strong {
-  display: block;
-  font-size: 14px;
-  color: var(--text-titanium);
-}
-
-.pillar span {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  color: var(--text-metallic);
 }
 
 .footer__main {
@@ -2972,8 +2930,7 @@ textarea:focus,
   .workspace {
     grid-template-columns: minmax(0, 1fr);
   }
-  .stack-grid,
-  .pillars {
+  .stack-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .arch {
@@ -3069,7 +3026,6 @@ textarea:focus,
   }
   .field-row,
   .stack-grid,
-  .pillars,
   .spec__stats,
   .portfolio-grid {
     grid-template-columns: minmax(0, 1fr);
