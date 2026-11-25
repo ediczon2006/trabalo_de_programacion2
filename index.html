@@ -4,272 +4,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>EVM Software Studio | Ingeniería de Software Empresarial y Sistemas a Medida</title>
-  <meta
-    name="description"
-    content="EVM Software Studio: desarrollo de software empresarial a medida, sistemas POS e inventario, plataformas web, arquitectura cloud, ciberseguridad y agentes de IA con código limpio y soporte 24/7."
-  />
-  <meta name="author" content="EVM Software Studio" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#07090e" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="EVM Software Studio: diseñamos, construimos y operamos plataformas críticas, ERP, POS, cloud, ciberseguridad y agentes de IA con código limpio y soporte 24/7." />
+  <meta name="theme-color" content="#06080e" />
   <link rel="canonical" href="https://ediczon2006.github.io/trabalo_de_programacion2/" />
 
-  <!-- === OPEN GRAPH (WhatsApp, LinkedIn, Facebook) — URLs absolutas requeridas por crawlers === -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="EVM Software Studio" />
   <meta property="og:locale" content="es_PE" />
   <meta property="og:url" content="https://ediczon2006.github.io/trabalo_de_programacion2/" />
   <meta property="og:title" content="EVM Software Studio · Ingeniería de Software Empresarial" />
-  <meta
-    property="og:description"
-    content="Todo el software que tu empresa merece: plataformas web, sistemas POS e inventario, nube, ciberseguridad y agentes de IA listos para escalar."
-  />
-  <meta property="og:image" content="https://ediczon2006.github.io/trabalo_de_programacion2/assets/brand/og-cover.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="EVM Software Studio · Ingeniería de Software Empresarial, Sistemas POS, Web, Cloud e IA" />
-
-  <!-- === TWITTER / X CARDS === -->
+  <meta property="og:description" content="Todo el software que tu empresa merece: plataformas web, sistemas POS e inventario, nube y agentes de IA." />
+  <meta property="og:image" content="https://ediczon2006.github.io/trabalo_de_programacion2/assets/img/brand/og-cover.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="EVM Software Studio · Innovación en código" />
-  <meta
-    name="twitter:description"
-    content="Ingeniería de software empresarial: sistemas POS, portales web, arquitectura cloud y agentes de IA a medida."
-  />
-  <meta name="twitter:image" content="https://ediczon2006.github.io/trabalo_de_programacion2/assets/brand/og-cover.png" />
+  <meta name="twitter:image" content="https://ediczon2006.github.io/trabalo_de_programacion2/assets/img/brand/og-cover.png" />
 
-  <!-- === FAVICON SVG VECTORIAL + ICONO TÁCTIL RELATIVO === -->
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307090e'/%3E%3Crect x='3' y='3' width='58' height='58' rx='12' fill='none' stroke='%2300d2ff' stroke-opacity='.35' stroke-width='2'/%3E%3Cpath d='M13 19h14M13 32h11M13 45h14M13 19v26' stroke='%23f0f4f8' stroke-width='5' fill='none' stroke-linecap='square'/%3E%3Cpath d='M31 19l8 26 8-26' stroke='%2300d2ff' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
-  />
-  <link rel="apple-touch-icon" href="assets/brand/evm-logo.png" />
-
-  <!-- === TIPOGRAFÍAS GOOGLE FONTS === -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/img/brand/evm-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
 
-  <!-- === CRITICAL SHELL CSS (evita parpadeo FOUC antes de cargar style.css) === -->
-  <style id="critical-shell">
-    html, body { margin: 0; background: #07090e; color: #f0f4f8; font-family: Inter, system-ui, -apple-system, sans-serif; }
-    .sprite, [hidden] { display: none !important; }
-    .skip-link { position: fixed; top: -120px; left: 16px; }
-    .preloader { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: #07090e; color: #f0f4f8; }
-    .preloader.is-complete { opacity: 0; visibility: hidden; pointer-events: none; }
-    .preloader__core { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; text-align: center; }
-    .preloader__logo { width: min(320px, 78vw); height: auto; }
-    .preloader__rail { position: relative; width: min(280px, 80vw); height: 2px; background: rgba(138, 148, 166, 0.24); }
-  </style>
-
-  <!-- === HOJA DE ESTILOS PRINCIPAL (ruta relativa compatible con GitHub Pages) === -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- === INICIALIZACIÓN TEMPRANA DE TEMA Y FALLBACK SEGURO DEL PRELOADER === -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/animations.css" />
   <script>
     (function () {
-      var docEl = document.documentElement;
-      docEl.classList.add("js", "is-loading");
-      try {
-        var savedTheme = localStorage.getItem("evm-theme");
-        if (savedTheme === "console") docEl.setAttribute("data-theme", "console");
-      } catch (err) {}
-      setTimeout(function () {
-        if (!docEl.classList.contains("is-ready")) {
-          var preloader = document.getElementById("preloader");
-          if (preloader) preloader.classList.add("is-complete");
-          docEl.classList.remove("is-loading");
-          docEl.classList.add("is-ready");
-        }
-      }, 2200);
+      var d = document.documentElement;
+      d.classList.add("js");
+      try { if (localStorage.getItem("evm-theme") === "console") d.setAttribute("data-theme", "console"); } catch (e) {}
     })();
   </script>
 </head>
-<body>
-  <!-- === BARRA SUPERIOR DE PROGRESO DE LECTURA === -->
+<body data-root=".">
   <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-
-  <!-- === FONDO 3D INTERACTIVO LIGERO (Three.js con degradación elegante) === -->
   <canvas id="evm-bg-3d" class="bg-3d" aria-hidden="true"></canvas>
-
-  <!-- === SPRITE SVG REUTILIZABLE === -->
-  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
-    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="m7 9 3 3-3 3M12.5 15H17"/></symbol>
-    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18h10.5a4 4 0 0 0 .6-7.96A6 6 0 0 0 6.5 9.2 4.5 4.5 0 0 0 7 18Z"/></symbol>
-    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 14.5v2.5"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.3 7.5 9.5 4.3-1.2 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m9 12 2.2 2.2L15.5 10"/></symbol>
-    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 9.5 12 4l9 5.5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20.5h18"/></symbol>
-    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
-    <symbol id="i-pos" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4M7 8h4M7 11h7"/></symbol>
-    <symbol id="i-pipeline" viewBox="0 0 24 24"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.2 6h9.6M6.2 8l4.6 8M17.8 8l-4.6 8"/></symbol>
-    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 8.5-8.5M16 7l2.5 2.5M14 9l2 2"/></symbol>
-    <symbol id="i-agent" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 15.5h5M2.5 11.5v3M21.5 11.5v3"/></symbol>
-    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
-    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
-    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></symbol>
-    <symbol id="i-mobile" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
-    <symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12 18.5 5.5"/><circle cx="12" cy="12" r="1"/></symbol>
-    <symbol id="i-hex" viewBox="0 0 24 24"><path d="m12 2.8 4 2.3v4.6l-4 2.3-4-2.3V5.1zM7 12.2l4 2.3v4.6l-4 2.3-4-2.3v-4.6zM17 12.2l4 2.3v4.6l-4 2.3-4-2.3v-4.6z"/></symbol>
-    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></symbol>
-    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></symbol>
-    <symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13.5" width="4" height="6" rx="1.5"/><rect x="17" y="13.5" width="4" height="6" rx="1.5"/><path d="M19 19.5c0 1.2-1.5 2-4 2h-2"/></symbol>
-    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
-    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
-    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
-    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="m12 2.8 2.8 5.7 6.3.9-4.55 4.43 1.07 6.27L12 17.15 6.38 20.1l1.07-6.27L2.9 9.4l6.3-.9L12 2.8Z"/></symbol>
-    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></symbol>
-    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v13c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-13M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/></symbol>
-    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></symbol>
-    <symbol id="i-server" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="7" rx="1.8"/><rect x="3.5" y="13" width="17" height="7" rx="1.8"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></symbol>
-    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.78 14.07c-.24.68-1.39 1.29-1.93 1.37-.5.08-1.14.11-1.84-.12-.43-.14-.98-.32-1.69-.63-2.97-1.28-4.91-4.27-5.06-4.47-.15-.2-1.21-1.61-1.21-3.07 0-1.46.76-2.18 1.03-2.48.27-.3.59-.38.79-.38.2 0 .39.01.56.01.18 0 .42-.07.66.5.24.58.83 2.02.9 2.17.07.15.12.33.02.53-.1.2-.15.33-.3.5-.15.18-.32.4-.45.54-.15.15-.31.31-.13.61.18.3.78 1.29 1.68 2.09 1.15 1.03 2.12 1.35 2.42 1.5.3.15.48.13.66-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.13.08.73-.16 1.41Z"/></symbol>
-  </svg>
-
   <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 
-  <!-- === PRELOADER BREVE Y ELEGANTE === -->
-  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Cargando EVM Software Studio">
-    <div class="preloader__core">
-      <svg class="preloader__logo" viewBox="0 0 360 132" aria-hidden="true">
-        <defs>
-          <linearGradient id="pl-blue" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#00d2ff" />
-            <stop offset="1" stop-color="#0066ff" />
-          </linearGradient>
-          <linearGradient id="pl-metal" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#f0f4f8" />
-            <stop offset="1" stop-color="#8a94a6" />
-          </linearGradient>
-        </defs>
-        <g class="pl-traces" fill="none" stroke="url(#pl-blue)" stroke-width="1.4">
-          <path class="pl-trace" style="--t:0" pathLength="1" d="M8 122H110l8-8h124l8 8h102" />
-          <path class="pl-trace" style="--t:1" pathLength="1" d="M60 6h92l6 6h44l6-6h92" />
-          <path class="pl-trace" style="--t:2" pathLength="1" d="M180 104v12M101 104v6h-30M265 104v6h30" />
-        </g>
-        <g class="pl-nodes" fill="#00d2ff">
-          <circle class="pl-node" style="--t:0" cx="8" cy="122" r="3" />
-          <circle class="pl-node" style="--t:1" cx="352" cy="122" r="3" />
-          <circle class="pl-node" style="--t:2" cx="60" cy="6" r="2.6" />
-          <circle class="pl-node" style="--t:3" cx="300" cy="6" r="2.6" />
-          <circle class="pl-node" style="--t:4" cx="71" cy="110" r="2.4" />
-          <circle class="pl-node" style="--t:5" cx="295" cy="110" r="2.4" />
-        </g>
-        <g fill="none" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter">
-          <path class="pl-glyph pl-brace" style="--t:0" pathLength="1" stroke="url(#pl-metal)" stroke-width="6" stroke-linecap="round" d="M40 22c-14 0-14 12-14 22s-4 16-14 16c10 0 14 6 14 16s0 22 14 22" />
-          <path class="pl-glyph" style="--t:1" pathLength="1" stroke="url(#pl-metal)" d="M130 28H76v68h54M76 62h44" />
-          <path class="pl-glyph" style="--t:2" pathLength="1" stroke="url(#pl-blue)" d="M146 28l34 68 34-68" />
-          <path class="pl-glyph" style="--t:3" pathLength="1" stroke="url(#pl-metal)" d="M236 96V28l32 44 32-44v68" />
-          <path class="pl-glyph pl-brace" style="--t:4" pathLength="1" stroke="url(#pl-metal)" stroke-width="6" stroke-linecap="round" d="M320 22c14 0 14 12 14 22s4 16 14 16c-10 0-14 6-14 16s0 22-14 22" />
-        </g>
-      </svg>
-
-      <p class="preloader__label">
-        <span class="preloader__status">Inicializando sistemas</span>
-        <span class="preloader__pct" id="preloader-pct">000%</span>
-      </p>
-
-      <div class="preloader__rail" id="preloader-rail">
-        <div class="preloader__fill" id="preloader-fill"></div>
-        <div class="preloader__node" id="preloader-node" aria-hidden="true">
-          <span class="preloader__node-glow"></span>
-          <span class="preloader__node-tag">/&gt;</span>
-        </div>
-        <div class="preloader__wave" aria-hidden="true"></div>
-      </div>
-      <p class="preloader__sub">EVM Software Studio · Innovación en código</p>
-    </div>
-  </div>
-
-  <!-- === ENCABEZADO Y NAVEGACIÓN FLOTANTE === -->
+  <!-- Encabezado común en todas las páginas -->
   <header class="site-header" id="nav">
     <div class="site-header__capsule">
-      <a class="site-header__brand" href="#inicio" data-nav-section="inicio" aria-label="EVM Software Studio, ir al inicio">
-        <svg class="wordmark" viewBox="0 0 104 32" aria-hidden="true">
-          <defs>
-            <linearGradient id="wm-blue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00d2ff" /><stop offset="1" stop-color="#0066ff" /></linearGradient>
-            <linearGradient id="wm-metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#8a94a6" /></linearGradient>
-          </defs>
-          <path d="M2 3h26v6H9v4h16v6H9v4h19v6H2Z" fill="url(#wm-metal)" />
-          <path d="M31 3h8l9 18 9-18h8L52 29h-8Z" fill="url(#wm-blue)" />
-          <path d="M68 29V3h7l9 12 9-12h7v26h-7V14l-9 12-9-12v15Z" fill="url(#wm-metal)" />
-        </svg>
+      <a class="site-header__brand" href="index.html" aria-label="EVM Software Studio, ir al inicio">
+        <img class="wordmark" src="assets/icons/evm-wordmark.svg" alt="EVM" width="104" height="32" />
         <span class="site-header__brand-sub">Software Studio</span>
       </a>
 
       <p class="site-header__status" title="Todos los sistemas operativos · SLA 99.9%">
         <span class="pulse-dot" aria-hidden="true"></span>
-        <span class="site-header__status-text">SYSTEMS OPERATIONAL • 99.9% SLA</span>
-        <span class="visually-hidden">Estado: todos los sistemas operativos, SLA 99.9%</span>
+        <span>SYSTEMS OPERATIONAL • 99.9% SLA</span>
       </p>
 
       <nav class="site-nav" id="nav-links" aria-label="Navegación principal">
         <ul role="list" class="site-nav__list">
-          <li><a class="site-nav__link is-active" href="#inicio" data-nav-section="inicio" aria-current="page">Inicio</a></li>
-          <li><a class="site-nav__link" href="#soluciones" data-nav-section="soluciones">Soluciones</a></li>
-          <li><a class="site-nav__link" href="#stack" data-nav-section="stack">Stack Técnico</a></li>
-          <li><a class="site-nav__link" href="#arquitectura" data-nav-section="arquitectura">Arquitectura</a></li>
-          <li><a class="site-nav__link" href="#casos" data-nav-section="casos">Casos</a></li>
-          <li><a class="site-nav__link" href="#contacto" data-nav-section="contacto">Contacto</a></li>
+          <li><a class="site-nav__link is-active" href="index.html" aria-current="page">Inicio</a></li>
+          <li><a class="site-nav__link" href="paginas/about.html">Nosotros &amp; Arquitectura</a></li>
+          <li><a class="site-nav__link" href="paginas/servicios.html">Servicios</a></li>
+          <li><a class="site-nav__link" href="paginas/casos.html">Casos Reales</a></li>
+          <li><a class="site-nav__link" href="paginas/contacto.html">Contacto</a></li>
         </ul>
-        <a class="btn btn--glow site-nav__mobile-cta" href="#contacto" data-nav-section="contacto">
+        <a class="btn btn--glow site-nav__mobile-cta" href="paginas/contacto.html">
           <span>Iniciar Proyecto</span>
-          <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+          <i data-lucide="arrow-right" aria-hidden="true"></i>
         </a>
       </nav>
 
       <div class="site-header__actions">
-        <button
-          type="button"
-          class="site-header__search"
-          id="cmdk-trigger"
-          aria-haspopup="dialog"
-          aria-controls="cmdk"
-          aria-label="Abrir buscador rápido de comandos (Ctrl + K)"
-        >
-          <svg class="ico" aria-hidden="true"><use href="#i-search" /></svg>
+        <button type="button" class="site-header__search" id="cmdk-trigger" aria-label="Abrir buscador rápido (Ctrl + K)">
+          <i data-lucide="search" aria-hidden="true"></i>
           <span class="site-header__search-label">Buscar</span>
           <kbd class="kbd" data-kbd-mod>Ctrl</kbd><kbd class="kbd">K</kbd>
         </button>
-        <button
-          type="button"
-          class="icon-btn"
-          id="theme-toggle"
-          aria-pressed="false"
-          aria-label="Activar modo consola técnica"
-          title="Alternar tema Studio / Consola"
-        >
-          <svg class="ico" aria-hidden="true"><use href="#i-terminal" /></svg>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-pressed="false" aria-label="Alternar modo consola" title="Modo Consola Técnica">
+          <i data-lucide="terminal" aria-hidden="true"></i>
         </button>
-        <a class="btn btn--glow site-header__cta" href="#contacto" data-nav-section="contacto">
-          <span>Iniciar Proyecto</span>
-        </a>
-        <button
-          type="button"
-          class="icon-btn site-header__toggle"
-          id="nav-toggle"
-          aria-expanded="false"
-          aria-controls="nav-links"
-          aria-label="Abrir menú de navegación"
-        >
-          <svg class="ico" aria-hidden="true"><use id="nav-toggle-icon" href="#i-menu" /></svg>
+        <a class="btn btn--glow site-header__cta" href="paginas/contacto.html">Iniciar Proyecto</a>
+        <button type="button" class="icon-btn site-header__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú de navegación">
+          <i data-lucide="menu" aria-hidden="true"></i>
         </button>
       </div>
     </div>
   </header>
 
   <main id="contenido" tabindex="-1">
-    <!-- =====================================================================
-         SECCIÓN 1: HERO PRINCIPAL + ESTACIÓN HOLOGRÁFICA 3D INTERACTIVA
-         ===================================================================== -->
-    <section class="hero" id="inicio" data-section="inicio" aria-labelledby="hero-title">
+    <!-- Sección Principal Hero + Estación Holográfica 3D -->
+    <section class="hero" aria-labelledby="hero-title">
       <div class="hero__glow" aria-hidden="true"></div>
-
       <div class="container hero__grid">
         <div class="hero__copy">
           <p class="eyebrow-mono" data-enter style="--i:0">// INGENIERÍA DIGITAL DE ALTO IMPACTO</p>
@@ -283,15 +100,15 @@
           </p>
 
           <div class="hero__actions" data-enter style="--i:3">
-            <a class="btn btn--primary btn--lg btn--sheen magnetic" href="#contacto" data-nav-section="contacto">
+            <a class="btn btn--primary btn--lg btn--sheen magnetic" href="paginas/contacto.html">
               <span>Iniciar Proyecto</span>
-              <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
             </a>
-            <a class="btn btn--ghost btn--lg" href="#soluciones" data-nav-section="soluciones">Explorar soluciones</a>
+            <a class="btn btn--ghost btn--lg" href="paginas/servicios.html">Explorar soluciones</a>
           </div>
 
           <div class="trust" data-enter style="--i:4">
-            <ul class="trust__avatars" role="list" aria-label="Líderes de empresas que confían en EVM">
+            <ul class="trust__avatars" role="list" aria-label="Líderes empresariales que confían en EVM">
               <li class="avatar" style="--h:212">LP</li>
               <li class="avatar" style="--h:190">MC</li>
               <li class="avatar" style="--h:228">RA</li>
@@ -299,23 +116,17 @@
               <li class="avatar avatar--more" aria-hidden="true">+</li>
             </ul>
             <div class="trust__meta">
-              <div class="trust__stars" role="img" aria-label="Calificación 5 de 5 estrellas">
-                <svg class="ico ico--star" aria-hidden="true"><use href="#i-star" /></svg>
-                <svg class="ico ico--star" aria-hidden="true"><use href="#i-star" /></svg>
-                <svg class="ico ico--star" aria-hidden="true"><use href="#i-star" /></svg>
-                <svg class="ico ico--star" aria-hidden="true"><use href="#i-star" /></svg>
-                <svg class="ico ico--star" aria-hidden="true"><use href="#i-star" /></svg>
-                <span class="trust__score">5.0</span>
+              <div class="trust__stars" role="img" aria-label="Calificación 5.0 de 5 estrellas">
+                ★★★★★ <span class="trust__score">5.0</span>
               </div>
               <p class="trust__metric">
                 <strong>+<span data-count-to="120">120</span></strong> plataformas empresariales en producción
-                <svg class="ico ico--verified" aria-hidden="true"><use href="#i-shield" /></svg>
               </p>
             </div>
           </div>
         </div>
 
-        <!-- Elemento principal 3D interactivo: Estación Holográfica Multi-Plano -->
+        <!-- Elemento Principal 3D Interactivo -->
         <div class="hero-stage" id="hero-stage" data-enter style="--i:2">
           <div class="hero-stage__halo" aria-hidden="true"></div>
           <div class="hero-stage__halo hero-stage__halo--inner" aria-hidden="true"></div>
@@ -324,20 +135,11 @@
             <div class="laptop">
               <div class="laptop__lid">
                 <span class="laptop__cam" aria-hidden="true"></span>
-                <div
-                  class="laptop__display"
-                  id="hero-screen-panel"
-                  role="tabpanel"
-                  aria-labelledby="screen-tab-dashboard"
-                  tabindex="0"
-                >
-                  <!-- Dashboard analítico con capas 3D internas en eje Z -->
-                  <div class="dash" id="dash" aria-label="Panel de operaciones en tiempo real (demostración)">
+                <div class="laptop__display" id="hero-screen-panel" role="tabpanel" aria-labelledby="screen-tab-dashboard" tabindex="0">
+                  <div class="dash" id="dash" aria-label="Panel de operaciones en tiempo real">
                     <div class="dash__top">
-                      <span class="dash__url">evm://ops-console/prod</span>
-                      <span class="dash__live">
-                        <span class="pulse-dot pulse-dot--sm" aria-hidden="true"></span>LIVE 3D
-                      </span>
+                      <span>evm://ops-console/prod</span>
+                      <span class="dash__live"><span class="pulse-dot pulse-dot--sm" aria-hidden="true"></span>LIVE 3D</span>
                     </div>
                     <div class="dash__kpis">
                       <div class="dash__kpi"><span>REQ/S</span><strong id="kpi-rps">12.4k</strong></div>
@@ -353,30 +155,23 @@
                           </linearGradient>
                         </defs>
                         <path class="dash__grid" d="M0 30H300M0 60H300M0 90H300" />
-                        <path id="dash-area" fill="url(#dash-area-g)" d="M0 120V80L25 70 50 76 75 58 100 64 125 48 150 54 175 40 200 46 225 32 250 38 275 26 300 30V120Z" />
-                        <polyline id="dash-line" class="dash__line" points="0,80 25,70 50,76 75,58 100,64 125,48 150,54 175,40 200,46 225,32 250,38 275,26 300,30" />
+                        <path fill="url(#dash-area-g)" d="M0 120V80L25 70 50 76 75 58 100 64 125 48 150 54 175 40 200 46 225 32 250 38 275 26 300 30V120Z" />
+                        <polyline class="dash__line" points="0,80 25,70 50,76 75,58 100,64 125,48 150,54 175,40 200,46 225,32 250,38 275,26 300,30" />
                       </svg>
                     </div>
                     <div class="dash__net">
                       <svg viewBox="0 0 160 120" aria-hidden="true">
-                        <g class="net-edges">
-                          <path d="M80 60 30 25M80 60 130 25M80 60 25 95M80 60 135 95M80 60 80 12M80 60 80 108" />
-                        </g>
+                        <g class="net-edges"><path d="M80 60 30 25M80 60 130 25M80 60 25 95M80 60 135 95M80 60 80 12M80 60 80 108" /></g>
                         <g class="net-packets">
                           <circle cx="80" cy="60" r="2.2" style="--tx:-50px;--ty:-35px;--d:0s" />
                           <circle cx="80" cy="60" r="2.2" style="--tx:50px;--ty:-35px;--d:.5s" />
                           <circle cx="80" cy="60" r="2.2" style="--tx:-55px;--ty:35px;--d:1s" />
                           <circle cx="80" cy="60" r="2.2" style="--tx:55px;--ty:35px;--d:1.5s" />
-                          <circle cx="80" cy="60" r="2.2" style="--tx:0px;--ty:-48px;--d:.25s" />
-                          <circle cx="80" cy="60" r="2.2" style="--tx:0px;--ty:48px;--d:1.25s" />
                         </g>
                         <g class="net-nodes">
-                          <circle cx="30" cy="25" r="5" style="--d:.2s" />
-                          <circle cx="130" cy="25" r="5" style="--d:.6s" />
-                          <circle cx="25" cy="95" r="5" style="--d:1s" />
-                          <circle cx="135" cy="95" r="5" style="--d:1.4s" />
-                          <circle cx="80" cy="12" r="4" style="--d:1.8s" />
-                          <circle cx="80" cy="108" r="4" style="--d:2.2s" />
+                          <circle cx="30" cy="25" r="5" /><circle cx="130" cy="25" r="5" />
+                          <circle cx="25" cy="95" r="5" /><circle cx="135" cy="95" r="5" />
+                          <circle cx="80" cy="12" r="4" /><circle cx="80" cy="108" r="4" />
                           <circle class="net-core" cx="80" cy="60" r="9" />
                         </g>
                       </svg>
@@ -389,27 +184,13 @@
                     </div>
                   </div>
 
-                  <!-- Vista de capturas reales de proyectos en producción -->
                   <figure class="screen-shot" id="screen-shot" hidden>
-                    <img
-                      id="hero-showcase-img"
-                      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 10'/%3E"
-                      alt="Vista previa de plataforma desarrollada por EVM Software Studio"
-                      width="1600"
-                      height="1000"
-                      decoding="async"
-                    />
+                    <img id="hero-showcase-img" src="assets/img/portafolio/01_Pelitos_Web/01_inicio_escritorio.png" alt="Vista previa de sistema en producción" width="1600" height="1000" decoding="async" />
                     <figcaption class="screen-shot__bar">
                       <span id="hero-showcase-label" class="screen-shot__cap">Caso en producción</span>
                       <div class="screen-shot__btns">
-                        <button type="button" class="screen-shot__btn" id="hero-screen-open">Ampliar</button>
-                        <a
-                          class="screen-shot__btn screen-shot__btn--link"
-                          id="hero-screen-visit"
-                          href="https://github.com/ediczon2006"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >Sitio ↗</a>
+                        <a class="screen-shot__btn" href="paginas/casos.html">Ver portafolio</a>
+                        <a class="screen-shot__btn" id="hero-screen-visit" href="https://ediczon2006.github.io/Pelitos_Veterinarias/" target="_blank" rel="noopener noreferrer">Sitio real ↗</a>
                       </div>
                     </figcaption>
                   </figure>
@@ -421,872 +202,128 @@
           </div>
 
           <div class="screen-tabs" role="tablist" aria-label="Cambiar vista de la estación de trabajo">
-            <button type="button" class="screen-tab is-active" role="tab" id="screen-tab-dashboard" aria-selected="true" aria-controls="hero-screen-panel" data-screen="dashboard">Ops Dashboard</button>
-            <button type="button" class="screen-tab" role="tab" id="screen-tab-pelitos" aria-selected="false" aria-controls="hero-screen-panel" tabindex="-1" data-screen="01_Pelitos_Web">Pelitos Web</button>
-            <button type="button" class="screen-tab" role="tab" id="screen-tab-pos" aria-selected="false" aria-controls="hero-screen-panel" tabindex="-1" data-screen="03_Ferreteria_Sullcairi">POS Sullcairi</button>
-            <button type="button" class="screen-tab" role="tab" id="screen-tab-isp" aria-selected="false" aria-controls="hero-screen-panel" tabindex="-1" data-screen="05_Leyder">Leytrix ISP</button>
+            <button type="button" class="screen-tab is-active" role="tab" id="screen-tab-dashboard" aria-selected="true" data-screen="dashboard">Ops Dashboard</button>
+            <button type="button" class="screen-tab" role="tab" aria-selected="false" tabindex="-1" data-screen="01_Pelitos_Web">Pelitos Web</button>
+            <button type="button" class="screen-tab" role="tab" aria-selected="false" tabindex="-1" data-screen="03_Ferreteria_Sullcairi">POS Sullcairi</button>
+            <button type="button" class="screen-tab" role="tab" aria-selected="false" tabindex="-1" data-screen="05_Leyder">Leytrix ISP</button>
           </div>
 
-          <!-- Nodos satelitales flotantes 3D con paralaje multicapa -->
-          <div class="sat sat--chip" data-depth="0.95" aria-hidden="true">
-            <div class="sat__body"><svg class="ico"><use href="#i-chip" /></svg><span>SoC · Edge</span></div>
-          </div>
-          <div class="sat sat--code" data-depth="1.35" aria-hidden="true">
-            <div class="sat__body sat__body--mono">{ ; }</div>
-          </div>
-          <div class="sat sat--lock" data-depth="0.75" aria-hidden="true">
-            <div class="sat__body"><svg class="ico"><use href="#i-lock" /></svg><span>DevSecOps</span></div>
-          </div>
-          <div class="sat sat--cloud" data-depth="1.15" aria-hidden="true">
-            <div class="sat__body"><svg class="ico"><use href="#i-cloud" /></svg><span>Serverless</span></div>
-          </div>
-          <div class="sat sat--micro" data-depth="0.85" aria-hidden="true">
-            <div class="sat__body"><svg class="ico"><use href="#i-hex" /></svg><span>Microservicios</span></div>
-          </div>
-          <div class="sat sat--cicd" data-depth="1.25" aria-hidden="true">
-            <div class="sat__body sat__body--pill"><span class="pulse-dot pulse-dot--sm"></span>CI/CD · build #4821 ✓</div>
-          </div>
-
-          <!-- Sellos circulares giratorios -->
-          <div class="sat sat--badge" data-depth="0.6" aria-hidden="true">
-            <div class="rot-badge">
-              <svg class="rot-badge__ring" viewBox="0 0 120 120">
-                <defs><path id="badge-circle-a" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" /></defs>
-                <text><textPath href="#badge-circle-a" textLength="286" lengthAdjust="spacing">• CÓDIGO LIMPIO • ARQUITECTURA ESCALABLE • DESPLIEGUE CONTINUO </textPath></text>
-              </svg>
-              <span class="rot-badge__core">EVM</span>
-            </div>
-          </div>
-          <div class="sat sat--badge-sm" data-depth="1.45" aria-hidden="true">
-            <div class="rot-badge rot-badge--sm">
-              <svg class="rot-badge__ring" viewBox="0 0 120 120">
-                <defs><path id="badge-circle-b" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" /></defs>
-                <text><textPath href="#badge-circle-b" textLength="286" lengthAdjust="spacing">• CÓDIGO LIMPIO • ARQUITECTURA ESCALABLE • DESPLIEGUE CONTINUO </textPath></text>
-              </svg>
-              <span class="rot-badge__core">&lt;/&gt;</span>
-            </div>
-          </div>
+          <div class="sat sat--chip" data-depth="0.95" aria-hidden="true"><div class="sat__body"><i data-lucide="cpu"></i><span>SoC · Edge</span></div></div>
+          <div class="sat sat--code" data-depth="1.3" aria-hidden="true"><div class="sat__body sat__body--mono">{ ; }</div></div>
+          <div class="sat sat--lock" data-depth="0.8" aria-hidden="true"><div class="sat__body"><i data-lucide="shield-check"></i><span>DevSecOps</span></div></div>
+          <div class="sat sat--cloud" data-depth="1.15" aria-hidden="true"><div class="sat__body"><i data-lucide="cloud"></i><span>Serverless</span></div></div>
+          <div class="sat sat--cicd" data-depth="1.2" aria-hidden="true"><div class="sat__body sat__body--pill"><span class="pulse-dot pulse-dot--sm"></span>CI/CD · build #4821 ✓</div></div>
         </div>
       </div>
 
-      <!-- Barra lateral de acciones rápidas -->
-      <aside class="rail" aria-label="Acciones rápidas" data-enter style="--i:5">
-        <button type="button" class="rail__btn" id="btn-whitepaper" data-tip="Descargar Whitepaper">
-          <svg class="ico" aria-hidden="true"><use href="#i-download" /></svg>
-          <span class="visually-hidden">Descargar Whitepaper técnico</span>
-        </button>
-        <a class="rail__btn" href="https://github.com/ediczon2006" target="_blank" rel="noopener noreferrer" data-tip="Repositorio GitHub">
-          <svg class="ico" aria-hidden="true"><use href="#i-github" /></svg>
-          <span class="visually-hidden">Repositorio GitHub (se abre en una pestaña nueva)</span>
-        </a>
-        <a class="rail__btn" href="https://wa.me/51914662798" target="_blank" rel="noopener noreferrer" data-tip="Soporte Directo">
-          <svg class="ico" aria-hidden="true"><use href="#i-headset" /></svg>
-          <span class="visually-hidden">Soporte directo por WhatsApp (se abre en una pestaña nueva)</span>
-        </a>
-        <span class="rail__line" aria-hidden="true"></span>
-        <span class="rail__label" aria-hidden="true">EVM · 2026</span>
-      </aside>
-
-      <!-- Hub de acceso rápido con inclinación 3D -->
+      <!-- Hub 3D hacia cada página HTML independiente -->
       <div class="container">
-        <nav class="home-hub" aria-label="Índice rápido del estudio" data-enter style="--i:6">
-          <a class="home-hub__card glass tilt-3d" href="#soluciones" data-nav-section="soluciones">
+        <nav class="home-hub" aria-label="Explorar páginas del estudio" data-enter style="--i:5">
+          <a class="home-hub__card glass tilt-3d" href="paginas/about.html">
             <span class="home-hub__num">01</span>
-            <div class="home-hub__text"><strong>Soluciones</strong><small>12 módulos listos para escalar</small></div>
-            <svg class="ico home-hub__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+            <div><strong>Nosotros &amp; Arquitectura</strong><small>Stack de 24 tecnologías y 5 capas</small></div>
+            <i data-lucide="arrow-right" class="home-hub__arrow" aria-hidden="true"></i>
           </a>
-          <a class="home-hub__card glass tilt-3d" href="#stack" data-nav-section="stack">
+          <a class="home-hub__card glass tilt-3d" href="paginas/servicios.html">
             <span class="home-hub__num">02</span>
-            <div class="home-hub__text"><strong>Stack Técnico</strong><small>Lenguajes, nube y observabilidad</small></div>
-            <svg class="ico home-hub__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+            <div><strong>Servicios &amp; Módulos</strong><small>12 soluciones listas para escalar</small></div>
+            <i data-lucide="arrow-right" class="home-hub__arrow" aria-hidden="true"></i>
           </a>
-          <a class="home-hub__card glass tilt-3d" href="#arquitectura" data-nav-section="arquitectura">
+          <a class="home-hub__card glass tilt-3d" href="paginas/casos.html">
             <span class="home-hub__num">03</span>
-            <div class="home-hub__text"><strong>Arquitectura</strong><small>Capas, seguridad y pipeline CI/CD</small></div>
-            <svg class="ico home-hub__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+            <div><strong>Casos en Producción</strong><small>4 plataformas reales verificadas</small></div>
+            <i data-lucide="arrow-right" class="home-hub__arrow" aria-hidden="true"></i>
           </a>
-          <a class="home-hub__card glass tilt-3d" href="#casos" data-nav-section="casos">
+          <a class="home-hub__card glass home-hub__card--accent tilt-3d" href="paginas/contacto.html">
             <span class="home-hub__num">04</span>
-            <div class="home-hub__text"><strong>Casos Reales</strong><small>4 plataformas en producción</small></div>
-            <svg class="ico home-hub__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
-          </a>
-          <a class="home-hub__card glass home-hub__card--accent tilt-3d" href="#contacto" data-nav-section="contacto">
-            <span class="home-hub__num">05</span>
-            <div class="home-hub__text"><strong>Contacto</strong><small>Brief + imágenes a WhatsApp</small></div>
-            <svg class="ico home-hub__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+            <div><strong>Contacto &amp; Brief</strong><small>Adjunta imágenes y envía a WhatsApp</small></div>
+            <i data-lucide="arrow-right" class="home-hub__arrow" aria-hidden="true"></i>
           </a>
         </nav>
       </div>
     </section>
 
-    <!-- =====================================================================
-         SECCIÓN 2: CATÁLOGO DE SOLUCIONES DE INGENIERÍA (TARJETAS 3D)
-         ===================================================================== -->
-    <section class="section" id="soluciones" data-section="soluciones" aria-labelledby="sol-title">
-      <div class="container container--wide">
+    <!-- Sección de Pilares de Ingeniería en portada -->
+    <section class="section section--band" aria-labelledby="pilares-title">
+      <div class="container">
         <div class="section__head section__head--split">
           <div data-reveal="up">
-            <p class="eyebrow-mono">// 01 · CATÁLOGO DE MÓDULOS</p>
-            <h2 class="section__title" id="sol-title">Soluciones de ingeniería <em>listas para escalar</em></h2>
-            <p class="section__sub">
-              Módulos tecnológicos probados en entornos reales. Filtra por dominio, ordena según tu prioridad y consulta
-              los entregables técnicos de cada solución.
-            </p>
+            <p class="eyebrow-mono">// ESTÁNDARES DE CALIDAD EVM</p>
+            <h2 class="section__title" id="pilares-title">Ingeniería diseñada para <em>operaciones reales</em></h2>
+            <p class="section__sub">Cada sistema se entrega documentado, seguro y listo para evolucionar junto a tu empresa.</p>
           </div>
-          <div class="catalog-controls" data-reveal="up" style="--d:1">
-            <div class="filters" role="group" aria-label="Filtrar soluciones por categoría" id="sol-filters">
-              <button type="button" class="filter is-active" aria-pressed="true" data-sol-filter="all">Todos</button>
-              <button type="button" class="filter" aria-pressed="false" data-sol-filter="erp">ERP &amp; Finanzas</button>
-              <button type="button" class="filter" aria-pressed="false" data-sol-filter="cloud">Cloud &amp; DevOps</button>
-              <button type="button" class="filter" aria-pressed="false" data-sol-filter="ia">IA &amp; Agentes</button>
-              <button type="button" class="filter" aria-pressed="false" data-sol-filter="web">Apps &amp; Web</button>
-              <button type="button" class="filter" aria-pressed="false" data-sol-filter="sec">Ciberseguridad</button>
-            </div>
-            <div class="sort">
-              <label class="sort__label" for="sol-sort">Ordenar por</label>
-              <div class="select-wrap">
-                <select id="sol-sort" class="select">
-                  <option value="demand">Mayor demanda</option>
-                  <option value="deploy">Tiempo de despliegue</option>
-                  <option value="complexity">Complejidad técnica</option>
-                </select>
-              </div>
-            </div>
-          </div>
+          <a class="btn btn--secondary btn--sm" href="paginas/about.html" data-reveal="up" style="--d:1">
+            <span>Ver Arquitectura Completa</span>
+            <i data-lucide="arrow-right" aria-hidden="true"></i>
+          </a>
         </div>
 
-        <p class="catalog-count" id="sol-count" aria-live="polite" data-reveal="up">12 módulos disponibles</p>
-
-        <ul class="sol-grid" id="sol-grid" role="list">
-          <li class="sol-grid__item" data-id="core-erp" data-cat="erp" data-demand="98" data-deploy="16" data-complexity="5" data-reveal="scale" style="--d:0">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-bank" /></svg></span>
-                <span class="tier tier--enterprise">Enterprise</span>
-              </div>
-              <p class="sol-card__cat">ERP &amp; Finanzas</p>
-              <h3 class="sol-card__title">Core Bancario &amp; ERP Cloud</h3>
-              <p class="sol-card__desc">Contabilidad, tesorería y operaciones integradas en un núcleo transaccional auditable.</p>
-              <p class="code-tag">TypeScript • Go • PostgreSQL • AWS</p>
-              <div class="sol-card__meta">
-                <span>~16 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 5 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="core-erp">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="billing" data-cat="erp" data-demand="92" data-deploy="6" data-complexity="3" data-reveal="scale" style="--d:1">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-receipt" /></svg></span>
-                <span class="tier">Modular</span>
-              </div>
-              <p class="sol-card__cat">ERP &amp; Finanzas</p>
-              <h3 class="sol-card__title">Facturación Electrónica &amp; Tesorería</h3>
-              <p class="sol-card__desc">Emisión SUNAT, conciliación bancaria automatizada y flujo de caja en tiempo real.</p>
-              <p class="code-tag">Java • Spring • Redis • REST</p>
-              <div class="sol-card__meta">
-                <span>~6 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 3 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="billing">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="pos" data-cat="erp" data-demand="95" data-deploy="4" data-complexity="2" data-reveal="scale" style="--d:2">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-pos" /></svg></span>
-                <span class="tier">Modular</span>
-              </div>
-              <p class="sol-card__cat">ERP &amp; Finanzas</p>
-              <h3 class="sol-card__title">POS &amp; Inventario Omnicanal</h3>
-              <p class="sol-card__desc">Control de caja, stock con alertas de reposición y reportes exportables a Excel.</p>
-              <p class="code-tag">JavaScript • Node.js • SQLite • PWA</p>
-              <div class="sol-card__meta">
-                <span>~4 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 2 de 5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="pos">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="multicloud" data-cat="cloud" data-demand="88" data-deploy="10" data-complexity="5" data-reveal="scale" style="--d:3">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-cloud" /></svg></span>
-                <span class="tier tier--enterprise">Enterprise</span>
-              </div>
-              <p class="sol-card__cat">Cloud &amp; DevOps</p>
-              <h3 class="sol-card__title">Arquitectura Multi-Cloud</h3>
-              <p class="sol-card__desc">Infraestructura como código, alta disponibilidad multi-zona y observabilidad SRE.</p>
-              <p class="code-tag">Terraform • Kubernetes • AWS • GCP</p>
-              <div class="sol-card__meta">
-                <span>~10 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 5 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="multicloud">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="cicd" data-cat="cloud" data-demand="84" data-deploy="3" data-complexity="3" data-reveal="scale" style="--d:4">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-pipeline" /></svg></span>
-                <span class="tier">Modular</span>
-              </div>
-              <p class="sol-card__cat">Cloud &amp; DevOps</p>
-              <h3 class="sol-card__title">Pipelines CI/CD &amp; GitOps</h3>
-              <p class="sol-card__desc">Compilaciones reproducibles, pruebas automáticas y despliegues continuos sin caídas.</p>
-              <p class="code-tag">GitHub Actions • Docker • ArgoCD</p>
-              <div class="sol-card__meta">
-                <span>~3 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 3 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="cicd">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="agents" data-cat="ia" data-demand="97" data-deploy="8" data-complexity="5" data-reveal="scale" style="--d:5">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-agent" /></svg></span>
-                <span class="tier tier--enterprise">Enterprise</span>
-              </div>
-              <p class="sol-card__cat">IA &amp; Agentes</p>
-              <h3 class="sol-card__title">Agentes Autónomos IA</h3>
-              <p class="sol-card__desc">Agentes con herramientas, memoria semántica y supervisión humana sobre tus datos.</p>
-              <p class="code-tag">Python • LangGraph • Gemini • pgvector</p>
-              <div class="sol-card__meta">
-                <span>~8 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 5 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="agents">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="wa-bot" data-cat="ia" data-demand="93" data-deploy="3" data-complexity="3" data-reveal="scale" style="--d:0">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-chat" /></svg></span>
-                <span class="tier">Modular</span>
-              </div>
-              <p class="sol-card__cat">IA &amp; Agentes</p>
-              <h3 class="sol-card__title">Asistentes WhatsApp con IA</h3>
-              <p class="sol-card__desc">Atención comercial, cotizaciones y reservas 24/7 conectadas a tu catálogo y CRM.</p>
-              <p class="code-tag">Node.js • WhatsApp Cloud API • RAG</p>
-              <div class="sol-card__meta">
-                <span>~3 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 3 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="wa-bot">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="vision" data-cat="ia" data-demand="72" data-deploy="9" data-complexity="4" data-reveal="scale" style="--d:1">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-eye" /></svg></span>
-                <span class="tier tier--enterprise">Enterprise</span>
-              </div>
-              <p class="sol-card__cat">IA &amp; Agentes</p>
-              <h3 class="sol-card__title">Visión Computacional &amp; OCR</h3>
-              <p class="sol-card__desc">Lectura estructurada de comprobantes, control de calidad y validación nativa de imágenes.</p>
-              <p class="code-tag">C++17 • Python • OpenCV • ONNX</p>
-              <div class="sol-card__meta">
-                <span>~9 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 4 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="vision">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="web" data-cat="web" data-demand="96" data-deploy="4" data-complexity="2" data-reveal="scale" style="--d:2">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-globe" /></svg></span>
-                <span class="tier">Modular</span>
-              </div>
-              <p class="sol-card__cat">Apps &amp; Web</p>
-              <h3 class="sol-card__title">Plataformas Web &amp; Portales</h3>
-              <p class="sol-card__desc">Sitios corporativos, catálogos interactivos y portales de clientes de carga instantánea.</p>
-              <p class="code-tag">TypeScript • Next.js • Edge CDN</p>
-              <div class="sol-card__meta">
-                <span>~4 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 2 de 5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="web">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="mobile" data-cat="web" data-demand="90" data-deploy="10" data-complexity="4" data-reveal="scale" style="--d:3">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-mobile" /></svg></span>
-                <span class="tier tier--enterprise">Enterprise</span>
-              </div>
-              <p class="sol-card__cat">Apps &amp; Web</p>
-              <h3 class="sol-card__title">Apps Móviles Nativas</h3>
-              <p class="sol-card__desc">Aplicaciones iOS y Android con sincronización offline, notificaciones y pagos integrados.</p>
-              <p class="code-tag">Flutter • Kotlin • Swift • Firebase</p>
-              <div class="sol-card__meta">
-                <span>~10 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 4 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="mobile">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="iam" data-cat="sec" data-demand="78" data-deploy="5" data-complexity="4" data-reveal="scale" style="--d:4">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-key" /></svg></span>
-                <span class="tier tier--enterprise">Enterprise</span>
-              </div>
-              <p class="sol-card__cat">Ciberseguridad</p>
-              <h3 class="sol-card__title">Identidad &amp; Zero Trust (IAM)</h3>
-              <p class="sol-card__desc">Inicio de sesión único (SSO), MFA, permisos por turno/PIN y custodia de secretos.</p>
-              <p class="code-tag">Keycloak • OAuth 2.1 • Vault</p>
-              <div class="sol-card__meta">
-                <span>~5 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 4 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="iam">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-
-          <li class="sol-grid__item" data-id="devsecops" data-cat="sec" data-demand="81" data-deploy="3" data-complexity="4" data-reveal="scale" style="--d:5">
-            <article class="sol-card tilt-3d">
-              <div class="sol-card__head">
-                <span class="sol-card__ico"><svg class="ico" aria-hidden="true"><use href="#i-radar" /></svg></span>
-                <span class="tier">Modular</span>
-              </div>
-              <p class="sol-card__cat">Ciberseguridad</p>
-              <h3 class="sol-card__title">Auditoría DevSecOps &amp; Pentesting</h3>
-              <p class="sol-card__desc">Análisis SAST/DAST, endurecimiento de servidores y plan de remediación priorizado.</p>
-              <p class="code-tag">OWASP ASVS • SAST • DAST • SBOM</p>
-              <div class="sol-card__meta">
-                <span>~3 sem</span>
-                <span class="cx" role="img" aria-label="Complejidad 4 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
-              </div>
-              <button type="button" class="sol-card__cta" data-spec="devsecops">Ver Especificaciones <span aria-hidden="true">→</span></button>
-            </article>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         SECCIÓN 3: STACK TÉCNICO DE GRADO PRODUCCIÓN
-         ===================================================================== -->
-    <section class="section section--band" id="stack" data-section="stack" aria-labelledby="stack-title">
-      <div class="container">
-        <div class="section__head section__head--center" data-reveal="up">
-          <p class="eyebrow-mono">// 02 · STACK TÉCNICO</p>
-          <h2 class="section__title" id="stack-title">Tecnología de grado <em>producción</em></h2>
-          <p class="section__sub">
-            Seleccionamos herramientas maduras, observables y con soporte a largo plazo para garantizar rendimiento,
-            mantenibilidad y cero bloqueos tecnológicos.
-          </p>
-        </div>
-      </div>
-
-      <div class="marquee" data-reveal="up">
-        <ul class="marquee__track" role="list" aria-label="Lenguajes y frameworks que utilizamos">
-          <li>TypeScript</li><li>Java 21</li><li>C++17</li><li>Go</li><li>Python</li><li>Kotlin</li><li>Swift</li><li>Node.js</li><li>Spring</li><li>Next.js</li><li>Flutter</li><li>PostgreSQL</li>
-        </ul>
-        <ul class="marquee__track" role="list" aria-hidden="true">
-          <li>TypeScript</li><li>Java 21</li><li>C++17</li><li>Go</li><li>Python</li><li>Kotlin</li><li>Swift</li><li>Node.js</li><li>Spring</li><li>Next.js</li><li>Flutter</li><li>PostgreSQL</li>
-        </ul>
-      </div>
-
-      <div class="marquee marquee--reverse" data-reveal="up" style="--d:1">
-        <ul class="marquee__track" role="list" aria-label="Infraestructura, bases de datos y observabilidad">
-          <li>Docker</li><li>Kubernetes</li><li>Terraform</li><li>AWS</li><li>Google Cloud</li><li>Railway</li><li>GitHub Actions</li><li>Redis</li><li>SQLite</li><li>OpenTelemetry</li><li>Grafana</li><li>Vault</li>
-        </ul>
-        <ul class="marquee__track" role="list" aria-hidden="true">
-          <li>Docker</li><li>Kubernetes</li><li>Terraform</li><li>AWS</li><li>Google Cloud</li><li>Railway</li><li>GitHub Actions</li><li>Redis</li><li>SQLite</li><li>OpenTelemetry</li><li>Grafana</li><li>Vault</li>
-        </ul>
-      </div>
-
-      <div class="container">
         <ul class="stack-grid" role="list">
-          <li data-reveal="up" style="--d:0">
+          <li data-reveal="scale" style="--d:0">
             <article class="glass stack-col tilt-3d">
-              <svg class="ico stack-col__ico" aria-hidden="true"><use href="#i-globe" /></svg>
-              <h3>Frontend &amp; Mobile</h3>
-              <p>Interfaces accesibles WCAG 2.1 AA, Core Web Vitals en verde y aplicaciones multiplataforma fluidas.</p>
-              <p class="code-tag">HTML5 • CSS3 • TS • Flutter</p>
+              <i data-lucide="code-2" class="stack-col__ico" aria-hidden="true"></i>
+              <h3>Código Limpio &amp; IP Propia</h3>
+              <p>Arquitectura modular mantenible y transferencia total del código fuente y manuales técnicos.</p>
+              <p class="code-tag">100% Transferencia IP</p>
             </article>
           </li>
-          <li data-reveal="up" style="--d:1">
+          <li data-reveal="scale" style="--d:1">
             <article class="glass stack-col tilt-3d">
-              <svg class="ico stack-col__ico" aria-hidden="true"><use href="#i-server" /></svg>
-              <h3>Backend &amp; APIs</h3>
-              <p>Servicios concurrentes con hilos virtuales, contratos REST versionados y módulos nativos de alto rendimiento.</p>
-              <p class="code-tag">Java 21 • Go • C++17</p>
+              <i data-lucide="shield-check" class="stack-col__ico" aria-hidden="true"></i>
+              <h3>Seguridad por Capas</h3>
+              <p>Cifrado TLS 1.3, control de acceso por roles/turnos y validación binaria nativa en C++17.</p>
+              <p class="code-tag">OWASP ASVS · C++17</p>
             </article>
           </li>
-          <li data-reveal="up" style="--d:2">
+          <li data-reveal="scale" style="--d:2">
             <article class="glass stack-col tilt-3d">
-              <svg class="ico stack-col__ico" aria-hidden="true"><use href="#i-database" /></svg>
-              <h3>Datos &amp; IA</h3>
-              <p>Modelado relacional ACID, búsqueda vectorial y flujos RAG con trazabilidad y evaluación continua.</p>
-              <p class="code-tag">PostgreSQL • SQLite • RAG</p>
+              <i data-lucide="server" class="stack-col__ico" aria-hidden="true"></i>
+              <h3>Concurrencia &amp; Datos ACID</h3>
+              <p>Servicios rápidos sobre Java 21 con hilos virtuales y persistencia transaccional confiable.</p>
+              <p class="code-tag">Java 21 · SQLite · PostgreSQL</p>
             </article>
           </li>
-          <li data-reveal="up" style="--d:3">
+          <li data-reveal="scale" style="--d:3">
             <article class="glass stack-col tilt-3d">
-              <svg class="ico stack-col__ico" aria-hidden="true"><use href="#i-layers" /></svg>
-              <h3>Infra &amp; Operaciones</h3>
-              <p>Contenedores inmutables, infraestructura declarativa y telemetría con alertas accionables 24/7.</p>
-              <p class="code-tag">Docker • K8s • Terraform</p>
+              <i data-lucide="message-circle" class="stack-col__ico" aria-hidden="true"></i>
+              <h3>Conexión Comercial Directa</h3>
+              <p>Integración nativa con flujos de pedidos, fichas visuales y atención inmediata por WhatsApp.</p>
+              <p class="code-tag">SLA 99.9% · Soporte 24/7</p>
             </article>
           </li>
         </ul>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         SECCIÓN 4: ARQUITECTURA DE REFERENCIA E INSPECTOR INTERACTIVO
-         ===================================================================== -->
-    <section class="section" id="arquitectura" data-section="arquitectura" aria-labelledby="arch-title">
-      <div class="container">
-        <div class="section__head section__head--split">
-          <div data-reveal="up">
-            <p class="eyebrow-mono">// 03 · ARQUITECTURA</p>
-            <h2 class="section__title" id="arch-title">Arquitectura de referencia <em>EVM</em></h2>
-            <p class="section__sub">
-              Selecciona cualquier capa del diagrama (también con las teclas ← / →) para inspeccionar su protocolo,
-              controles de seguridad y nivel de servicio en tiempo real.
-            </p>
-          </div>
-        </div>
-
-        <ol class="arch" role="list" data-reveal="up">
-          <li>
-            <button type="button" class="arch__node glass tilt-3d" data-arch-layer="clientes" aria-pressed="false">
-              <svg class="ico" aria-hidden="true"><use href="#i-mobile" /></svg>
-              <strong>Clientes</strong><span>Web · Apps · WhatsApp</span>
-            </button>
-          </li>
-          <li class="arch__link" aria-hidden="true"><span class="arch__packet"></span></li>
-          <li>
-            <button type="button" class="arch__node glass tilt-3d" data-arch-layer="edge" aria-pressed="false">
-              <svg class="ico" aria-hidden="true"><use href="#i-shield" /></svg>
-              <strong>Edge &amp; WAF</strong><span>CDN · TLS 1.3 · Rate limit</span>
-            </button>
-          </li>
-          <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:.4s"></span></li>
-          <li>
-            <button type="button" class="arch__node glass arch__node--core is-active tilt-3d" data-arch-layer="gateway" aria-pressed="true">
-              <svg class="ico" aria-hidden="true"><use href="#i-server" /></svg>
-              <strong>API Gateway</strong><span>Java 21 · Hilos virtuales</span>
-            </button>
-          </li>
-          <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:.8s"></span></li>
-          <li>
-            <button type="button" class="arch__node glass tilt-3d" data-arch-layer="servicios" aria-pressed="false">
-              <svg class="ico" aria-hidden="true"><use href="#i-hex" /></svg>
-              <strong>Servicios</strong><span>C++17 nativo · Agentes IA</span>
-            </button>
-          </li>
-          <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:1.2s"></span></li>
-          <li>
-            <button type="button" class="arch__node glass tilt-3d" data-arch-layer="datos" aria-pressed="false">
-              <svg class="ico" aria-hidden="true"><use href="#i-database" /></svg>
-              <strong>Datos</strong><span>PostgreSQL · SQLite · Objetos</span>
-            </button>
-          </li>
-        </ol>
-
-        <div class="glass arch-inspector" id="arch-inspector" aria-live="polite" data-reveal="scale">
-          <div>
-            <span class="eyebrow-mono" id="arch-layer-eyebrow">CAPA 03 · API GATEWAY</span>
-            <h3 id="arch-layer-title">Java 21 con Hilos Virtuales y Contratos REST Versionados</h3>
-            <p id="arch-layer-desc">
-              Enrutamiento concurrente sin bloqueo, validación estricta multipart/form-data, control de cuota por IP y
-              trazabilidad OpenTelemetry.
-            </p>
-          </div>
-          <p class="code-tag" id="arch-layer-meta">SLA 99.99% · p95 38 ms · Zero Downtime</p>
-        </div>
-
-        <div class="arch-detail">
-          <div class="terminal glass" data-reveal="left">
-            <div class="terminal__bar"><span></span><span></span><span></span><em>evm@deploy:~/pipeline</em></div>
-            <pre class="terminal__body"><code><span class="t-line" style="--l:0"><b>$</b> git push origin main</span>
-<span class="t-line" style="--l:1"><i>▸</i> lint · typecheck · unit tests ........ <u>OK</u></span>
-<span class="t-line" style="--l:2"><i>▸</i> SAST · dependency audit · SBOM ....... <u>OK</u></span>
-<span class="t-line" style="--l:3"><i>▸</i> build image evm/api:4821 ............ <u>OK</u></span>
-<span class="t-line" style="--l:4"><i>▸</i> canary 10% → p95 38 ms · 0 errores ... <u>OK</u></span>
-<span class="t-line" style="--l:5"><i>▸</i> rollout 100% · zero downtime ......... <u>LIVE</u></span>
-<span class="t-line t-line--cursor" style="--l:6"><b>$</b> <span class="t-cursor"></span></span></code></pre>
-          </div>
-
-          <ul class="principles" role="list">
-            <li class="glass principle tilt-3d" data-reveal="right" style="--d:0">
-              <span class="principle__num">01</span>
-              <div>
-                <h3>Escalabilidad horizontal</h3>
-                <p>Servicios sin estado, colas asíncronas y caché distribuida. Creces agregando nodos, no reescribiendo código.</p>
-              </div>
-            </li>
-            <li class="glass principle tilt-3d" data-reveal="right" style="--d:1">
-              <span class="principle__num">02</span>
-              <div>
-                <h3>Seguridad por capas</h3>
-                <p>Cifrado en tránsito y en reposo, mínimo privilegio y verificación binaria real de archivos en C++17.</p>
-              </div>
-            </li>
-            <li class="glass principle tilt-3d" data-reveal="right" style="--d:2">
-              <span class="principle__num">03</span>
-              <div>
-                <h3>Observabilidad total</h3>
-                <p>Métricas, trazas y registros correlacionados para anticipar cuellos de botella y resolver incidentes en minutos.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         SECCIÓN 5: CASOS REALES EN PRODUCCIÓN (PORTAFOLIO VERIFICADO)
-         ===================================================================== -->
-    <section class="section section--band" id="casos" data-section="casos" aria-labelledby="casos-title">
-      <div class="container">
-        <div class="section__head section__head--split">
-          <div data-reveal="up">
-            <p class="eyebrow-mono">// 04 · CASOS REALES</p>
-            <h2 class="section__title" id="casos-title">Plataformas en <em>producción</em></h2>
-            <p class="section__sub">
-              Capturas verificadas de sistemas comerciales, puntos de venta y paneles operativos desplegados por EVM.
-            </p>
-          </div>
-          <div class="filters" id="portfolio-filters" role="group" aria-label="Filtrar casos por categoría" data-reveal="up" style="--d:1">
-            <button type="button" class="filter is-active" aria-pressed="true" data-filter="all">Todos</button>
-            <button type="button" class="filter" aria-pressed="false" data-filter="web">Sitios Web</button>
-            <button type="button" class="filter" aria-pressed="false" data-filter="ventas">Ventas y Stock</button>
-            <button type="button" class="filter" aria-pressed="false" data-filter="gestion">Paneles y Acceso</button>
-          </div>
-        </div>
-
-        <div id="portfolio-grid" class="portfolio-grid" aria-live="polite">
-          <p class="loading-msg">Cargando casos verificados…</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         SECCIÓN 6: CONTACTO, BRIEF INTERACTIVO E INTEGRACIÓN WHATSAPP
-         ===================================================================== -->
-    <section class="section" id="contacto" data-section="contacto" aria-labelledby="contacto-title">
-      <div class="container">
-        <div class="section__head section__head--split">
-          <div data-reveal="up">
-            <p class="eyebrow-mono">// 05 · INICIAR PROYECTO</p>
-            <h2 class="section__title" id="contacto-title">Cuéntanos qué debe <em>hacer</em> tu software</h2>
-            <p class="section__sub">
-              Completa el brief técnico, adjunta capturas o bocetos de referencia y envíalo directo a nuestro equipo en
-              WhatsApp con el resumen estructurado listo.
-            </p>
-          </div>
-          <p id="server-status-pill" class="status-pill" aria-live="polite" data-reveal="up" style="--d:1">
-            <span class="pulse-dot pulse-dot--sm" aria-hidden="true"></span>
-            <span class="status-pill__text">Listo para enviar a WhatsApp</span>
-          </p>
-        </div>
-
-        <ol class="process" role="list">
-          <li class="process__item glass tilt-3d" data-reveal="up" style="--d:0">
-            <span class="process__num">01</span>
-            <div>
-              <strong>Elige tu referencia</strong>
-              <p>Explora nuestros módulos y casos reales para seleccionar el enfoque ideal para tu operación.</p>
-            </div>
-          </li>
-          <li class="process__item glass tilt-3d" data-reveal="up" style="--d:1">
-            <span class="process__num">02</span>
-            <div>
-              <strong>Describe y adjunta</strong>
-              <p>Sube capturas, bocetos o tu logotipo y detalla las funciones clave que necesitas automatizar.</p>
-            </div>
-          </li>
-          <li class="process__item glass tilt-3d" data-reveal="up" style="--d:2">
-            <span class="process__num">03</span>
-            <div>
-              <strong>Envía a WhatsApp</strong>
-              <p>Generamos tu ficha visual descargable y abrimos WhatsApp con todo el requerimiento listo.</p>
-            </div>
-          </li>
-        </ol>
-
-        <div class="workspace">
-          <form id="brief-form" class="form-column" novalidate>
-            <fieldset class="glass card" data-reveal="up">
-              <legend class="visually-hidden">Paso 1: ¿Qué tipo de proyecto necesitas?</legend>
-              <div class="card__head">
-                <span class="step-tag">Paso 1</span>
-                <span>
-                  <span class="card__title">¿Qué tipo de proyecto necesitas?</span>
-                  <span class="card__hint">Puedes marcar una o varias opciones según tu objetivo.</span>
-                </span>
-              </div>
-              <div class="type-grid">
-                <label class="type-option">
-                  <input type="checkbox" name="projectType" value="Sitio Web / Portafolio" />
-                  <span class="type-box"><strong>Sitio Web / Portafolio</strong><small>Información, servicios, contacto y reservas</small></span>
-                </label>
-                <label class="type-option">
-                  <input type="checkbox" name="projectType" value="Catálogo o Tienda Online" />
-                  <span class="type-box"><strong>Catálogo / Tienda Online</strong><small>Productos, filtros, variantes y pedidos</small></span>
-                </label>
-                <label class="type-option">
-                  <input type="checkbox" name="projectType" value="Sistema de Ventas / Inventario" />
-                  <span class="type-box"><strong>Ventas e Inventario (POS)</strong><small>Stock, alertas, caja y reportes</small></span>
-                </label>
-                <label class="type-option">
-                  <input type="checkbox" name="projectType" value="Panel Administrativo" />
-                  <span class="type-box"><strong>Panel Administrativo</strong><small>Clientes, pagos, comprobantes o documentos</small></span>
-                </label>
-                <label class="type-option">
-                  <input type="checkbox" name="projectType" value="Sistema Web a Medida" />
-                  <span class="type-box"><strong>Sistema a Medida</strong><small>Base de datos, usuarios, IA y flujo propio</small></span>
-                </label>
-                <label class="type-option">
-                  <input type="checkbox" name="projectType" value="Rediseño o Mejoras" />
-                  <span class="type-box"><strong>Rediseño / Mejoras</strong><small>Modernizar, asegurar o adaptar a móvil</small></span>
-                </label>
-              </div>
-            </fieldset>
-
-            <fieldset class="glass card" data-reveal="up" style="--d:1">
-              <legend class="visually-hidden">Paso 2: Detalles del proyecto y funciones</legend>
-              <div class="card__head">
-                <span class="step-tag">Paso 2</span>
-                <span>
-                  <span class="card__title">Cuéntanos qué quieres que haga</span>
-                  <span class="card__hint">Escríbelo con claridad para preparar una propuesta técnica precisa.</span>
-                </span>
-              </div>
-
-              <div class="field-row">
-                <div class="field">
-                  <label for="client-name">Tu nombre o empresa <span class="req" aria-hidden="true">*</span></label>
-                  <input
-                    id="client-name"
-                    name="clientName"
-                    type="text"
-                    autocomplete="organization"
-                    placeholder="Ej. Luis Paredes / Comercial Andina"
-                    required
-                    aria-required="true"
-                    aria-describedby="form-feedback"
-                  />
-                </div>
-                <div class="field">
-                  <label for="business-sector">Rubro de tu negocio</label>
-                  <input
-                    id="business-sector"
-                    name="businessSector"
-                    type="text"
-                    placeholder="Ej. Ferretería, clínica veterinaria, ISP…"
-                  />
-                </div>
-              </div>
-
-              <div class="field-row">
-                <div class="field">
-                  <label for="client-contact">Teléfono o correo (opcional)</label>
-                  <input
-                    id="client-contact"
-                    name="clientContact"
-                    type="text"
-                    autocomplete="email"
-                    placeholder="Ej. +51 999 888 777 o correo@empresa.com"
-                  />
-                </div>
-                <div class="field">
-                  <label for="project-timeline">Plazo estimado</label>
-                  <div class="select-wrap">
-                    <select id="project-timeline" name="timeline" class="select">
-                      <option value="Lo antes posible">Lo antes posible</option>
-                      <option value="En 2 a 4 semanas" selected>En 2 a 4 semanas</option>
-                      <option value="En 1 a 2 meses">En 1 a 2 meses</option>
-                      <option value="Solo estoy cotizando por ahora">Solo estoy cotizando por ahora</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="field" role="group" aria-labelledby="features-label">
-                <span class="field__label" id="features-label">Funciones que te gustaría incluir</span>
-                <div class="chips-group">
-                  <label class="chip"><input type="checkbox" name="features" value="Catálogo con fotos y precios" /><span>Catálogo con fotos</span></label>
-                  <label class="chip"><input type="checkbox" name="features" value="Buscador y filtros" /><span>Buscador y filtros</span></label>
-                  <label class="chip"><input type="checkbox" name="features" value="Botón o pedidos a WhatsApp" /><span>Envío a WhatsApp</span></label>
-                  <label class="chip"><input type="checkbox" name="features" value="Registro de clientes" /><span>Registro de clientes</span></label>
-                  <label class="chip"><input type="checkbox" name="features" value="Control de inventario y stock" /><span>Inventario y stock</span></label>
-                  <label class="chip"><input type="checkbox" name="features" value="Pagos y comprobantes" /><span>Pagos y comprobantes</span></label>
-                  <label class="chip"><input type="checkbox" name="features" value="Inicio de sesión por usuario" /><span>Inicio de sesión</span></label>
-                  <label class="chip"><input type="checkbox" name="features" value="Reportes / Exportar Excel" /><span>Reportes / Excel</span></label>
-                  <label class="chip"><input type="checkbox" name="features" value="Asistente con IA" /><span>Asistente con IA</span></label>
-                  <label class="chip"><input type="checkbox" name="features" value="Adaptado a celular" /><span>Diseño móvil</span></label>
-                </div>
-              </div>
-
-              <div class="field">
-                <label for="project-description">¿Qué necesitas y qué debe hacer? <span class="req" aria-hidden="true">*</span></label>
-                <textarea
-                  id="project-description"
-                  name="description"
-                  rows="5"
-                  placeholder="Ejemplo: Necesito una plataforma donde mis clientes vean productos con precios, filtren por categoría y envíen su pedido por WhatsApp. También quiero administrar el stock…"
-                  required
-                  aria-required="true"
-                  aria-describedby="form-feedback"
-                ></textarea>
-              </div>
-            </fieldset>
-
-            <fieldset class="glass card" data-reveal="up" style="--d:2">
-              <legend class="visually-hidden">Paso 3: Adjunta tus imágenes de referencia</legend>
-              <div class="card__head">
-                <span class="step-tag">Paso 3</span>
-                <span>
-                  <span class="card__title">Adjunta tus imágenes de referencia</span>
-                  <span class="card__hint">
-                    Capturas, bocetos, logotipo o fotos (máx. 8 · JPG, PNG, WebP o GIF). También puedes pegar con
-                    <kbd class="kbd">Ctrl</kbd> + <kbd class="kbd">V</kbd>.
-                  </span>
-                </span>
-              </div>
-
-              <div id="dropzone" class="dropzone" role="region" aria-label="Zona para arrastrar o seleccionar imágenes de referencia">
-                <input id="image-input" type="file" accept="image/*" multiple class="visually-hidden" tabindex="-1" aria-hidden="true" />
-                <svg class="ico dropzone__icon" aria-hidden="true"><use href="#i-image" /></svg>
-                <p class="dropzone__title">Arrastra tus imágenes aquí</p>
-                <p class="dropzone__meta" id="dropzone-hint">Agrega una nota breve en cada imagen para indicar qué detalle deseas aplicar.</p>
-                <button type="button" class="btn btn--secondary btn--sm" id="btn-pick-images" aria-describedby="dropzone-hint">
-                  <svg class="ico" aria-hidden="true"><use href="#i-download" /></svg>
-                  <span>Seleccionar imágenes</span>
-                </button>
-              </div>
-
-              <div id="image-list-wrap" class="image-list-wrap" hidden>
-                <div class="image-list-head">
-                  <strong id="image-count-label">0 imágenes adjuntas</strong>
-                  <button type="button" class="text-btn" id="btn-clear-images">Quitar todas</button>
-                </div>
-                <ul id="image-grid" class="image-grid" role="list"></ul>
-              </div>
-            </fieldset>
-          </form>
-
-          <!-- Columna lateral de vista previa en vivo para WhatsApp -->
-          <aside class="summary-column" aria-label="Resumen de solicitud en tiempo real" data-reveal="left">
-            <div class="glass summary-card">
-              <div class="wa-chat-header">
-                <span class="wa-chat-header__avatar" aria-hidden="true"><svg class="ico"><use href="#i-whatsapp" /></svg></span>
-                <span class="wa-chat-header__text">
-                  <strong>Mensaje para WhatsApp</strong>
-                  <small>Vista previa automática en vivo</small>
-                </span>
-                <button type="button" class="wa-copy-pill" id="btn-copy-text">Copiar</button>
-              </div>
-
-              <div id="form-feedback" class="feedback" role="status" aria-live="polite" hidden></div>
-
-              <div class="wa-chat-canvas">
-                <div class="wa-bubble">
-                  <pre id="message-preview" class="preview-box__body" tabindex="0" aria-label="Vista previa del mensaje para WhatsApp"></pre>
-                </div>
-              </div>
-
-              <div id="saved-result-box" class="saved-box" hidden>
-                <strong>Solicitud lista (<span id="saved-code"></span>)</strong>
-                <p id="saved-detail-text"></p>
-                <div class="saved-box__links">
-                  <a
-                    id="saved-wa-link"
-                    class="btn btn--whatsapp btn--full"
-                    href="https://wa.me/51914662798"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >Abrir chat en WhatsApp ahora</a>
-                  <a
-                    id="saved-view-link"
-                    class="btn btn--secondary btn--full"
-                    href="#contacto"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >Ver ficha e imágenes guardadas</a>
-                </div>
-              </div>
-
-              <div class="actions-stack">
-                <button type="button" class="btn btn--whatsapp btn--full btn--sheen" id="btn-submit-request">
-                  <svg class="ico" aria-hidden="true"><use href="#i-whatsapp" /></svg>
-                  <span class="btn__label">Enviar pedido y redirigir a WhatsApp</span>
-                </button>
-                <button type="button" class="btn btn--primary btn--full" id="btn-share-native" hidden>
-                  <span>Compartir imágenes + mensaje (Móvil)</span>
-                </button>
-                <button type="button" class="btn btn--secondary btn--full" id="btn-download-sheet">
-                  <span>Descargar ficha visual con imágenes (PNG)</span>
-                </button>
-              </div>
-            </div>
-          </aside>
-        </div>
       </div>
     </section>
   </main>
 
-  <!-- === PIE DE PÁGINA SEMÁNTICO === -->
   <footer class="footer">
     <div class="container">
       <div class="footer__main">
         <div class="footer__brand">
           <div class="footer__logo-wrap">
-            <img
-              src="assets/brand/evm-logo.png"
-              alt="Logotipo de EVM Software Studio · Innovación en código"
-              width="975"
-              height="541"
-              loading="lazy"
-              decoding="async"
-            />
+            <img src="assets/img/brand/evm-logo.png" alt="Logotipo de EVM Software Studio · Innovación en código" width="975" height="541" loading="lazy" decoding="async" />
           </div>
-          <p>
-            Ingeniería de software empresarial. Diseñamos, construimos y operamos plataformas escalables que impulsan
-            negocios reales.
-          </p>
+          <p>Ingeniería de software empresarial. Diseñamos, construimos y operamos plataformas que sostienen negocios reales.</p>
         </div>
-
-        <nav class="footer__col" aria-label="Navegación del pie de página">
-          <h2 class="footer__heading">Secciones</h2>
+        <nav class="footer__col" aria-label="Páginas del sitio">
+          <h2 class="footer__heading">Páginas</h2>
           <ul role="list">
-            <li><a href="#inicio" data-nav-section="inicio">Inicio</a></li>
-            <li><a href="#soluciones" data-nav-section="soluciones">Soluciones</a></li>
-            <li><a href="#stack" data-nav-section="stack">Stack Técnico</a></li>
-            <li><a href="#arquitectura" data-nav-section="arquitectura">Arquitectura</a></li>
-            <li><a href="#casos" data-nav-section="casos">Casos en Producción</a></li>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="paginas/about.html">Nosotros &amp; Arquitectura</a></li>
+            <li><a href="paginas/servicios.html">Servicios &amp; Soluciones</a></li>
+            <li><a href="paginas/casos.html">Casos en Producción</a></li>
+            <li><a href="paginas/contacto.html">Contacto</a></li>
           </ul>
         </nav>
-
         <div class="footer__col">
-          <h2 class="footer__heading">Contacto Directo</h2>
+          <h2 class="footer__heading">Canales Directos</h2>
           <ul role="list">
             <li><a href="https://wa.me/51914662798" target="_blank" rel="noopener noreferrer">WhatsApp Ingeniería</a></li>
             <li><a href="https://github.com/ediczon2006" target="_blank" rel="noopener noreferrer">Repositorio GitHub</a></li>
-            <li><a href="#contacto" data-nav-section="contacto">Iniciar proyecto</a></li>
+            <li><a href="paginas/contacto.html">Enviar requerimiento</a></li>
           </ul>
         </div>
       </div>
-
       <div class="footer__legal">
         <p>© <span id="year">2026</span> EVM Software Studio. Todos los derechos reservados.</p>
         <p class="mono-muted">Proyecto Programación 2 · HTML5, CSS3 3D, Three.js, Java 21, C++17 &amp; SQLite</p>
@@ -1294,109 +331,14 @@
     </div>
   </footer>
 
-  <!-- === BOTÓN FLOTANTE VOLVER ARRIBA === -->
-  <button type="button" class="back-top" id="back-to-top" aria-label="Volver al inicio de la página" hidden>
-    <svg class="ico" aria-hidden="true"><use href="#i-arrow-up" /></svg>
+  <button type="button" class="back-top" id="back-to-top" aria-label="Volver arriba" hidden>
+    <i data-lucide="arrow-up" aria-hidden="true"></i>
   </button>
-
-  <!-- === MODAL: VISOR DE CASOS EN PRODUCCIÓN === -->
-  <dialog id="project-modal" class="dialog dialog--media" aria-labelledby="modal-title">
-    <div class="dialog__panel">
-      <div class="dialog__head">
-        <div>
-          <span id="modal-type" class="dialog__eyebrow">Caso en producción</span>
-          <h2 id="modal-title" class="dialog__title">Vista del proyecto</h2>
-        </div>
-        <button type="button" class="icon-btn" data-close-dialog aria-label="Cerrar visor de capturas">
-          <svg class="ico" aria-hidden="true"><use href="#i-close" /></svg>
-        </button>
-      </div>
-      <div class="dialog__stage">
-        <img
-          id="modal-main-img"
-          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 10'/%3E"
-          alt="Captura ampliada del proyecto seleccionado"
-          width="1600"
-          height="1000"
-          decoding="async"
-        />
-      </div>
-      <div id="modal-thumbs" class="dialog__thumbs" role="group" aria-label="Miniaturas del proyecto"></div>
-      <div class="dialog__foot">
-        <p id="modal-desc"></p>
-        <div class="dialog__actions">
-          <button type="button" class="btn btn--primary btn--sm" id="modal-btn-similar">Quiero un proyecto similar</button>
-          <a id="modal-btn-visit" class="btn btn--secondary btn--sm" href="https://github.com/ediczon2006" target="_blank" rel="noopener noreferrer">Visitar sitio real ↗</a>
-        </div>
-      </div>
-    </div>
-  </dialog>
-
-  <!-- === MODAL: ESPECIFICACIONES DE MÓDULO === -->
-  <dialog id="spec-modal" class="dialog dialog--spec" aria-labelledby="spec-title">
-    <div class="dialog__panel">
-      <div class="dialog__head">
-        <div>
-          <span id="spec-cat" class="dialog__eyebrow">Módulo de ingeniería</span>
-          <h2 id="spec-title" class="dialog__title">Especificaciones del módulo</h2>
-        </div>
-        <button type="button" class="icon-btn" data-close-dialog aria-label="Cerrar especificaciones">
-          <svg class="ico" aria-hidden="true"><use href="#i-close" /></svg>
-        </button>
-      </div>
-      <p id="spec-summary" class="spec__summary"></p>
-      <dl class="spec__stats">
-        <div><dt>Despliegue</dt><dd id="spec-deploy"></dd></div>
-        <div><dt>Complejidad</dt><dd id="spec-cx"></dd></div>
-        <div><dt>Demanda</dt><dd id="spec-demand"></dd></div>
-        <div><dt>Modalidad</dt><dd id="spec-tier"></dd></div>
-      </dl>
-      <h3 class="spec__heading">Entregables incluidos</h3>
-      <ul id="spec-deliverables" class="spec__list" role="list"></ul>
-      <h3 class="spec__heading">Stack tecnológico</h3>
-      <p id="spec-stack" class="code-tag"></p>
-      <div class="dialog__actions dialog__actions--end">
-        <button type="button" class="btn btn--ghost btn--sm" data-close-dialog>Cerrar</button>
-        <button type="button" class="btn btn--primary btn--sm" id="spec-request">
-          <span>Solicitar este módulo</span>
-          <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
-        </button>
-      </div>
-    </div>
-  </dialog>
-
-  <!-- === MODAL: BUSCADOR RÁPIDO DE COMANDOS (Ctrl/Cmd + K) === -->
-  <dialog id="cmdk" class="dialog dialog--cmdk" aria-label="Buscador rápido de comandos">
-    <div class="cmdk">
-      <div class="cmdk__search">
-        <svg class="ico" aria-hidden="true"><use href="#i-search" /></svg>
-        <input
-          id="cmdk-input"
-          class="cmdk__input"
-          type="text"
-          role="combobox"
-          aria-expanded="true"
-          aria-controls="cmdk-list"
-          aria-autocomplete="list"
-          aria-activedescendant=""
-          placeholder="Busca secciones, módulos o acciones rápidas…"
-          autocomplete="off"
-          spellcheck="false"
-        />
-        <kbd class="kbd">Esc</kbd>
-      </div>
-      <ul id="cmdk-list" class="cmdk__list" role="listbox" aria-label="Resultados de búsqueda"></ul>
-      <p class="cmdk__foot">
-        <kbd class="kbd">↑</kbd><kbd class="kbd">↓</kbd> navegar
-        <kbd class="kbd">Enter</kbd> ir
-        <kbd class="kbd">Esc</kbd> cerrar
-      </p>
-    </div>
-  </dialog>
-
   <div class="toast" id="evm-toast" role="status" aria-live="polite" hidden></div>
 
-  <!-- === SCRIPT PRINCIPAL (ruta relativa compatible con GitHub Pages) === -->
-  <script src="script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/3d-effects.js" defer></script>
 </body>
 </html>

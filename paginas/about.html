@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="studio">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Nosotros, Stack Técnico y Arquitectura | EVM Software Studio</title>
+  <meta name="description" content="Conoce el stack tecnológico de grado producción y la arquitectura de referencia en 5 capas de EVM Software Studio: Java 21, C++17, TypeScript, Cloud e IA." />
+  <meta name="theme-color" content="#06080e" />
+  <link rel="canonical" href="https://ediczon2006.github.io/trabalo_de_programacion2/paginas/about.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="EVM Software Studio" />
+  <meta property="og:title" content="Stack Técnico y Arquitectura de Referencia · EVM Software Studio" />
+  <meta property="og:description" content="Explora nuestras capas de ingeniería, seguridad, pipeline CI/CD y herramientas de producción." />
+  <meta property="og:image" content="https://ediczon2006.github.io/trabalo_de_programacion2/assets/img/brand/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://ediczon2006.github.io/trabalo_de_programacion2/assets/img/brand/og-cover.png" />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg" />
+  <link rel="apple-touch-icon" href="../assets/img/brand/evm-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add("js");
+      try { if (localStorage.getItem("evm-theme") === "console") d.setAttribute("data-theme", "console"); } catch (e) {}
+    })();
+  </script>
+</head>
+<body data-root="..">
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <canvas id="evm-bg-3d" class="bg-3d" aria-hidden="true"></canvas>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header" id="nav">
+    <div class="site-header__capsule">
+      <a class="site-header__brand" href="../index.html" aria-label="EVM Software Studio, ir al inicio">
+        <img class="wordmark" src="../assets/icons/evm-wordmark.svg" alt="EVM" width="104" height="32" />
+        <span class="site-header__brand-sub">Software Studio</span>
+      </a>
+      <p class="site-header__status"><span class="pulse-dot" aria-hidden="true"></span><span>SYSTEMS OPERATIONAL • 99.9% SLA</span></p>
+      <nav class="site-nav" id="nav-links" aria-label="Navegación principal">
+        <ul role="list" class="site-nav__list">
+          <li><a class="site-nav__link" href="../index.html">Inicio</a></li>
+          <li><a class="site-nav__link is-active" href="about.html" aria-current="page">Nosotros &amp; Arquitectura</a></li>
+          <li><a class="site-nav__link" href="servicios.html">Servicios</a></li>
+          <li><a class="site-nav__link" href="casos.html">Casos Reales</a></li>
+          <li><a class="site-nav__link" href="contacto.html">Contacto</a></li>
+        </ul>
+        <a class="btn btn--glow site-nav__mobile-cta" href="contacto.html"><span>Iniciar Proyecto</span><i data-lucide="arrow-right" aria-hidden="true"></i></a>
+      </nav>
+      <div class="site-header__actions">
+        <button type="button" class="site-header__search" id="cmdk-trigger" aria-label="Abrir buscador rápido (Ctrl + K)">
+          <i data-lucide="search" aria-hidden="true"></i><span class="site-header__search-label">Buscar</span><kbd class="kbd" data-kbd-mod>Ctrl</kbd><kbd class="kbd">K</kbd>
+        </button>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-pressed="false" aria-label="Alternar modo consola" title="Modo Consola Técnica">
+          <i data-lucide="terminal" aria-hidden="true"></i>
+        </button>
+        <a class="btn btn--glow site-header__cta" href="contacto.html">Iniciar Proyecto</a>
+        <button type="button" class="icon-btn site-header__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú de navegación">
+          <i data-lucide="menu" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Ruta de navegación" data-enter style="--i:0">
+          <a href="../index.html">Inicio</a> <span aria-hidden="true">/</span> <span>Nosotros &amp; Arquitectura</span>
+        </nav>
+        <div class="section__head--split">
+          <div>
+            <p class="eyebrow-mono" data-enter style="--i:1">// ESTUDIO DE INGENIERÍA &amp; ARQUITECTURA</p>
+            <h1 class="page-title" data-enter style="--i:2">Tecnología de grado <em>producción</em></h1>
+            <p class="page-lead" data-enter style="--i:3">
+              En EVM Software Studio construimos software empresarial combinando interfaces modernas, servidores
+              concurrentes en Java 21, validación binaria nativa en C++17 y bases de datos transaccionales.
+            </p>
+          </div>
+          <button type="button" class="btn btn--secondary btn--sm" id="btn-whitepaper" data-enter style="--i:3">
+            <i data-lucide="download" aria-hidden="true"></i>
+            <span>Descargar Whitepaper Técnico</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stack Técnico y Marquee -->
+    <section class="section section--band" aria-labelledby="stack-heading">
+      <div class="container">
+        <div class="section__head section__head--center" data-reveal="up">
+          <p class="eyebrow-mono">// 01 · STACK TÉCNICO</p>
+          <h2 class="section__title" id="stack-heading">Herramientas maduras y <em>observables</em></h2>
+          <p class="section__sub">Seleccionamos tecnologías con soporte a largo plazo, alto rendimiento y cero dependencias innecesarias.</p>
+        </div>
+      </div>
+
+      <div class="marquee" data-reveal="up">
+        <ul class="marquee__track" role="list" aria-label="Lenguajes y frameworks">
+          <li>TypeScript</li><li>Java 21</li><li>C++17</li><li>Go</li><li>Python</li><li>Kotlin</li><li>Swift</li><li>Node.js</li><li>Spring</li><li>Next.js</li><li>Flutter</li><li>PostgreSQL</li>
+        </ul>
+        <ul class="marquee__track" role="list" aria-hidden="true">
+          <li>TypeScript</li><li>Java 21</li><li>C++17</li><li>Go</li><li>Python</li><li>Kotlin</li><li>Swift</li><li>Node.js</li><li>Spring</li><li>Next.js</li><li>Flutter</li><li>PostgreSQL</li>
+        </ul>
+      </div>
+      <div class="marquee marquee--reverse" data-reveal="up" style="--d:1">
+        <ul class="marquee__track" role="list" aria-label="Infraestructura y operaciones">
+          <li>Docker</li><li>Kubernetes</li><li>Terraform</li><li>AWS</li><li>Google Cloud</li><li>Railway</li><li>GitHub Actions</li><li>Redis</li><li>SQLite</li><li>OpenTelemetry</li><li>Grafana</li><li>Vault</li>
+        </ul>
+        <ul class="marquee__track" role="list" aria-hidden="true">
+          <li>Docker</li><li>Kubernetes</li><li>Terraform</li><li>AWS</li><li>Google Cloud</li><li>Railway</li><li>GitHub Actions</li><li>Redis</li><li>SQLite</li><li>OpenTelemetry</li><li>Grafana</li><li>Vault</li>
+        </ul>
+      </div>
+
+      <div class="container">
+        <ul class="stack-grid" role="list">
+          <li data-reveal="scale" style="--d:0">
+            <article class="glass stack-col tilt-3d">
+              <i data-lucide="globe" class="stack-col__ico" aria-hidden="true"></i>
+              <h3>Frontend &amp; Mobile</h3>
+              <p>Interfaces accesibles WCAG 2.1 AA, Core Web Vitals en verde y aplicaciones nativas multiplataforma.</p>
+              <p class="code-tag">HTML5 • CSS3 • TS • Flutter</p>
+            </article>
+          </li>
+          <li data-reveal="scale" style="--d:1">
+            <article class="glass stack-col tilt-3d">
+              <i data-lucide="server" class="stack-col__ico" aria-hidden="true"></i>
+              <h3>Backend &amp; APIs</h3>
+              <p>Servicios concurrentes con hilos virtuales, contratos REST versionados y módulos nativos de alto rendimiento.</p>
+              <p class="code-tag">Java 21 • Go • C++17</p>
+            </article>
+          </li>
+          <li data-reveal="scale" style="--d:2">
+            <article class="glass stack-col tilt-3d">
+              <i data-lucide="database" class="stack-col__ico" aria-hidden="true"></i>
+              <h3>Datos &amp; IA</h3>
+              <p>Modelado relacional ACID, búsqueda vectorial y pipelines RAG con trazabilidad y evaluación continua.</p>
+              <p class="code-tag">PostgreSQL • SQLite • RAG</p>
+            </article>
+          </li>
+          <li data-reveal="scale" style="--d:3">
+            <article class="glass stack-col tilt-3d">
+              <i data-lucide="layers" class="stack-col__ico" aria-hidden="true"></i>
+              <h3>Infra &amp; Operaciones</h3>
+              <p>Contenedores inmutables, infraestructura como código y monitoreo continuo con alertas accionables.</p>
+              <p class="code-tag">Docker • K8s • Terraform</p>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Diagrama Interactivo de Arquitectura de Referencia -->
+    <section class="section" aria-labelledby="arch-title">
+      <div class="container">
+        <div class="section__head" data-reveal="up">
+          <p class="eyebrow-mono">// 02 · ARQUITECTURA DE REFERENCIA</p>
+          <h2 class="section__title" id="arch-title">Inspecciona cada capa del <em>sistema</em></h2>
+          <p class="section__sub">Haz clic o navega con las flechas ← / → sobre cualquier nodo para revisar protocolos, seguridad y SLA.</p>
+        </div>
+
+        <ol class="arch" role="list" data-reveal="up">
+          <li>
+            <button type="button" class="arch__node glass tilt-3d" data-arch-layer="clientes" aria-pressed="false">
+              <i data-lucide="smartphone" aria-hidden="true"></i>
+              <strong>Clientes</strong><span>Web · Apps · WhatsApp</span>
+            </button>
+          </li>
+          <li class="arch__link" aria-hidden="true"><span class="arch__packet"></span></li>
+          <li>
+            <button type="button" class="arch__node glass tilt-3d" data-arch-layer="edge" aria-pressed="false">
+              <i data-lucide="shield" aria-hidden="true"></i>
+              <strong>Edge &amp; WAF</strong><span>CDN · TLS 1.3 · Rate limit</span>
+            </button>
+          </li>
+          <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:.4s"></span></li>
+          <li>
+            <button type="button" class="arch__node glass is-active tilt-3d" data-arch-layer="gateway" aria-pressed="true">
+              <i data-lucide="server" aria-hidden="true"></i>
+              <strong>API Gateway</strong><span>Java 21 · Hilos virtuales</span>
+            </button>
+          </li>
+          <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:.8s"></span></li>
+          <li>
+            <button type="button" class="arch__node glass tilt-3d" data-arch-layer="servicios" aria-pressed="false">
+              <i data-lucide="cpu" aria-hidden="true"></i>
+              <strong>Servicios</strong><span>C++17 nativo · Agentes IA</span>
+            </button>
+          </li>
+          <li class="arch__link" aria-hidden="true"><span class="arch__packet" style="--d:1.2s"></span></li>
+          <li>
+            <button type="button" class="arch__node glass tilt-3d" data-arch-layer="datos" aria-pressed="false">
+              <i data-lucide="database" aria-hidden="true"></i>
+              <strong>Datos</strong><span>PostgreSQL · SQLite · Objetos</span>
+            </button>
+          </li>
+        </ol>
+
+        <div class="glass arch-inspector" id="arch-inspector" aria-live="polite" data-reveal="scale">
+          <div>
+            <span class="eyebrow-mono" id="arch-layer-eyebrow">CAPA 03 · API GATEWAY</span>
+            <h3 id="arch-layer-title">Java 21 con Hilos Virtuales y Contratos REST Versionados</h3>
+            <p id="arch-layer-desc">Enrutamiento concurrente sin bloqueo, validación estricta multipart/form-data, control de cuota por IP y trazabilidad OpenTelemetry.</p>
+          </div>
+          <p class="code-tag" id="arch-layer-meta">SLA 99.99% · p95 38 ms · Zero Downtime</p>
+        </div>
+
+        <div class="arch-detail">
+          <div class="terminal glass" data-reveal="left">
+            <div class="terminal__bar"><span></span><span></span><span></span><em>evm@deploy:~/pipeline</em></div>
+            <pre class="terminal__body"><code><span class="t-line"><b>$</b> git push origin main</span>
+<span class="t-line"><i>▸</i> lint · typecheck · unit tests ........ <u>OK</u></span>
+<span class="t-line"><i>▸</i> SAST · dependency audit · SBOM ....... <u>OK</u></span>
+<span class="t-line"><i>▸</i> build image evm/api:4821 ............ <u>OK</u></span>
+<span class="t-line"><i>▸</i> canary 10% → p95 38 ms · 0 errores ... <u>OK</u></span>
+<span class="t-line"><i>▸</i> rollout 100% · zero downtime ......... <u>LIVE</u></span>
+<span class="t-line"><b>$</b> <span class="t-cursor"></span></span></code></pre>
+          </div>
+
+          <ul class="principles" role="list">
+            <li class="glass principle tilt-3d" data-reveal="right" style="--d:0">
+              <span class="principle__num">01</span>
+              <div><h3>Escalabilidad horizontal</h3><p>Servicios sin estado, colas y caché distribuida. Creces agregando nodos, no reescribiendo código.</p></div>
+            </li>
+            <li class="glass principle tilt-3d" data-reveal="right" style="--d:1">
+              <span class="principle__num">02</span>
+              <div><h3>Seguridad por capas</h3><p>Cifrado en tránsito y reposo, mínimo privilegio y validación binaria de imágenes en nuestro módulo C++17.</p></div>
+            </li>
+            <li class="glass principle tilt-3d" data-reveal="right" style="--d:2">
+              <span class="principle__num">03</span>
+              <div><h3>Observabilidad total</h3><p>Métricas, trazas y logs correlacionados para detectar y resolver incidentes en minutos.</p></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__main">
+        <div class="footer__brand">
+          <div class="footer__logo-wrap">
+            <img src="../assets/img/brand/evm-logo.png" alt="Logotipo de EVM Software Studio" width="975" height="541" loading="lazy" decoding="async" />
+          </div>
+          <p>Ingeniería de software empresarial. Diseñamos, construimos y operamos plataformas que sostienen negocios reales.</p>
+        </div>
+        <nav class="footer__col" aria-label="Páginas del sitio">
+          <h2 class="footer__heading">Páginas</h2>
+          <ul role="list">
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="about.html">Nosotros &amp; Arquitectura</a></li>
+            <li><a href="servicios.html">Servicios &amp; Soluciones</a></li>
+            <li><a href="casos.html">Casos en Producción</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="footer__col">
+          <h2 class="footer__heading">Canales Directos</h2>
+          <ul role="list">
+            <li><a href="https://wa.me/51914662798" target="_blank" rel="noopener noreferrer">WhatsApp Ingeniería</a></li>
+            <li><a href="https://github.com/ediczon2006" target="_blank" rel="noopener noreferrer">Repositorio GitHub</a></li>
+            <li><a href="contacto.html">Enviar requerimiento</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <p>© <span id="year">2026</span> EVM Software Studio. Todos los derechos reservados.</p>
+        <p class="mono-muted">Proyecto Programación 2 · HTML5, CSS3 3D, Three.js, Java 21, C++17 &amp; SQLite</p>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="back-top" id="back-to-top" aria-label="Volver arriba" hidden><i data-lucide="arrow-up" aria-hidden="true"></i></button>
+  <div class="toast" id="evm-toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/animations.js" defer></script>
+  <script src="../js/3d-effects.js" defer></script>
+</body>
+</html>

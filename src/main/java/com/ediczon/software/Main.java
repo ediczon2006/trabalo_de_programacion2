@@ -296,8 +296,13 @@ public final class Main {
         if (decoded.equals("/") || decoded.isEmpty()) {
             decoded = "/index.html";
         }
+        boolean allowedPublic = decoded.equals("/index.html")
+            || decoded.startsWith("/paginas/")
+            || decoded.startsWith("/css/")
+            || decoded.startsWith("/js/")
+            || decoded.startsWith("/assets/");
         Path target = cfg.webRoot.resolve(decoded.substring(1)).normalize();
-        if (!target.startsWith(cfg.webRoot) || !Files.isRegularFile(target)) {
+        if (!allowedPublic || !target.startsWith(cfg.webRoot) || !Files.isRegularFile(target)) {
             sendText(ex, 404, "Recurso no encontrado");
             return;
         }

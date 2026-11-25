@@ -19,10 +19,14 @@ WORKDIR /app
 
 COPY --from=builder /app/target/software-app.jar ./software-app.jar
 COPY --from=builder /app/native/bin/image_analyzer ./native/bin/image_analyzer
-COPY web ./web
+COPY index.html ./index.html
+COPY paginas ./paginas
+COPY css ./css
+COPY js ./js
+COPY assets ./assets
 
 ENV PORT=8080
-ENV WEB_ROOT=/app/web
+ENV WEB_ROOT=/app
 ENV DB_PATH=/app/data/solicitudes.db
 ENV UPLOAD_DIR=/app/data/uploads
 ENV CPP_ANALYZER_BIN=/app/native/bin/image_analyzer

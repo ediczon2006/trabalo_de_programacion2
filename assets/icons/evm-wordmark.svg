@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104 32">
+  <defs>
+    <linearGradient id="wm-b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#00d2ff"/>
+      <stop offset="1" stop-color="#0066ff"/>
+    </linearGradient>
+    <linearGradient id="wm-m" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#8f9cb3"/>
+    </linearGradient>
+  </defs>
+  <path d="M2 3h26v6H9v4h16v6H9v4h19v6H2Z" fill="url(#wm-m)"/>
+  <path d="M31 3h8l9 18 9-18h8L52 29h-8Z" fill="url(#wm-b)"/>
+  <path d="M68 29V3h7l9 12 9-12h7v26h-7V14l-9 12-9-12v15Z" fill="url(#wm-m)"/>
+</svg>

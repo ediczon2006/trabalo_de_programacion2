@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="studio">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Servicios y Catálogo de Soluciones | EVM Software Studio</title>
+  <meta name="description" content="Catálogo de 12 soluciones de ingeniería de software de EVM: ERP, facturación electrónica, POS e inventario, multi-cloud, agentes IA, apps web/móviles y ciberseguridad." />
+  <meta name="theme-color" content="#06080e" />
+  <link rel="canonical" href="https://ediczon2006.github.io/trabalo_de_programacion2/paginas/servicios.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="EVM Software Studio" />
+  <meta property="og:title" content="Catálogo de Servicios y Soluciones · EVM Software Studio" />
+  <meta property="og:description" content="12 módulos tecnológicos listos para escalar: ERP, POS, Cloud, IA, Apps y Ciberseguridad." />
+  <meta property="og:image" content="https://ediczon2006.github.io/trabalo_de_programacion2/assets/img/brand/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://ediczon2006.github.io/trabalo_de_programacion2/assets/img/brand/og-cover.png" />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg" />
+  <link rel="apple-touch-icon" href="../assets/img/brand/evm-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add("js");
+      try { if (localStorage.getItem("evm-theme") === "console") d.setAttribute("data-theme", "console"); } catch (e) {}
+    })();
+  </script>
+</head>
+<body data-root="..">
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <canvas id="evm-bg-3d" class="bg-3d" aria-hidden="true"></canvas>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header" id="nav">
+    <div class="site-header__capsule">
+      <a class="site-header__brand" href="../index.html" aria-label="EVM Software Studio, ir al inicio">
+        <img class="wordmark" src="../assets/icons/evm-wordmark.svg" alt="EVM" width="104" height="32" />
+        <span class="site-header__brand-sub">Software Studio</span>
+      </a>
+      <p class="site-header__status"><span class="pulse-dot" aria-hidden="true"></span><span>SYSTEMS OPERATIONAL • 99.9% SLA</span></p>
+      <nav class="site-nav" id="nav-links" aria-label="Navegación principal">
+        <ul role="list" class="site-nav__list">
+          <li><a class="site-nav__link" href="../index.html">Inicio</a></li>
+          <li><a class="site-nav__link" href="about.html">Nosotros &amp; Arquitectura</a></li>
+          <li><a class="site-nav__link is-active" href="servicios.html" aria-current="page">Servicios</a></li>
+          <li><a class="site-nav__link" href="casos.html">Casos Reales</a></li>
+          <li><a class="site-nav__link" href="contacto.html">Contacto</a></li>
+        </ul>
+        <a class="btn btn--glow site-nav__mobile-cta" href="contacto.html"><span>Iniciar Proyecto</span><i data-lucide="arrow-right" aria-hidden="true"></i></a>
+      </nav>
+      <div class="site-header__actions">
+        <button type="button" class="site-header__search" id="cmdk-trigger" aria-label="Abrir buscador rápido (Ctrl + K)">
+          <i data-lucide="search" aria-hidden="true"></i><span class="site-header__search-label">Buscar</span><kbd class="kbd" data-kbd-mod>Ctrl</kbd><kbd class="kbd">K</kbd>
+        </button>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-pressed="false" aria-label="Alternar modo consola" title="Modo Consola Técnica">
+          <i data-lucide="terminal" aria-hidden="true"></i>
+        </button>
+        <a class="btn btn--glow site-header__cta" href="contacto.html">Iniciar Proyecto</a>
+        <button type="button" class="icon-btn site-header__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú de navegación">
+          <i data-lucide="menu" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <section class="page-hero">
+      <div class="container container--wide">
+        <nav class="breadcrumb" aria-label="Ruta de navegación" data-enter style="--i:0">
+          <a href="../index.html">Inicio</a> <span aria-hidden="true">/</span> <span>Servicios &amp; Soluciones</span>
+        </nav>
+        <p class="eyebrow-mono" data-enter style="--i:1">// CATÁLOGO DE MÓDULOS EMPRESARIALES</p>
+        <h1 class="page-title" data-enter style="--i:2">Soluciones de ingeniería <em>listas para escalar</em></h1>
+        <p class="page-lead" data-enter style="--i:3">
+          Módulos tecnológicos probados en producción. Filtra por dominio, ordena según tu prioridad y consulta los
+          entregables técnicos antes de enviar tu solicitud.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Listado interactivo de módulos">
+      <div class="container container--wide">
+        <div class="catalog-controls" data-reveal="up">
+          <div class="filters" role="group" aria-label="Filtrar soluciones por categoría" id="sol-filters">
+            <button type="button" class="filter is-active" aria-pressed="true" data-sol-filter="all">Todos</button>
+            <button type="button" class="filter" aria-pressed="false" data-sol-filter="erp">ERP &amp; Finanzas</button>
+            <button type="button" class="filter" aria-pressed="false" data-sol-filter="cloud">Cloud &amp; DevOps</button>
+            <button type="button" class="filter" aria-pressed="false" data-sol-filter="ia">IA &amp; Agentes</button>
+            <button type="button" class="filter" aria-pressed="false" data-sol-filter="web">Apps &amp; Web</button>
+            <button type="button" class="filter" aria-pressed="false" data-sol-filter="sec">Ciberseguridad</button>
+          </div>
+          <div class="sort">
+            <label class="sort__label" for="sol-sort">Ordenar por</label>
+            <select id="sol-sort" class="select">
+              <option value="demand">Mayor demanda</option>
+              <option value="deploy">Tiempo de despliegue</option>
+              <option value="complexity">Complejidad técnica</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="catalog-count" id="sol-count" aria-live="polite">12 módulos disponibles</p>
+        <ul class="sol-grid" id="sol-grid" role="list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de especificaciones técnicas -->
+  <dialog id="spec-modal" class="dialog dialog--spec" aria-labelledby="spec-title">
+    <div class="dialog__panel">
+      <div class="dialog__head">
+        <div>
+          <span id="spec-cat" class="dialog__eyebrow">Módulo de ingeniería</span>
+          <h2 id="spec-title" class="dialog__title">Especificaciones</h2>
+        </div>
+        <button type="button" class="icon-btn" data-close-dialog aria-label="Cerrar especificaciones">
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <p id="spec-summary"></p>
+      <dl class="spec__stats">
+        <div><dt>Despliegue</dt><dd id="spec-deploy"></dd></div>
+        <div><dt>Complejidad</dt><dd id="spec-cx"></dd></div>
+        <div><dt>Demanda</dt><dd id="spec-demand"></dd></div>
+        <div><dt>Modalidad</dt><dd id="spec-tier"></dd></div>
+      </dl>
+      <h3 class="spec__heading">Entregables incluidos</h3>
+      <ul id="spec-deliverables" class="spec__list" role="list"></ul>
+      <h3 class="spec__heading">Stack tecnológico</h3>
+      <p id="spec-stack" class="code-tag"></p>
+      <div class="dialog__actions dialog__actions--end">
+        <button type="button" class="btn btn--ghost btn--sm" data-close-dialog>Cerrar</button>
+        <a class="btn btn--primary btn--sm" id="spec-request" href="contacto.html">
+          <span>Solicitar este módulo</span>
+          <i data-lucide="arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__main">
+        <div class="footer__brand">
+          <div class="footer__logo-wrap">
+            <img src="../assets/img/brand/evm-logo.png" alt="Logotipo de EVM Software Studio" width="975" height="541" loading="lazy" decoding="async" />
+          </div>
+          <p>Ingeniería de software empresarial. Diseñamos, construimos y operamos plataformas que sostienen negocios reales.</p>
+        </div>
+        <nav class="footer__col" aria-label="Páginas del sitio">
+          <h2 class="footer__heading">Páginas</h2>
+          <ul role="list">
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="about.html">Nosotros &amp; Arquitectura</a></li>
+            <li><a href="servicios.html">Servicios &amp; Soluciones</a></li>
+            <li><a href="casos.html">Casos en Producción</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="footer__col">
+          <h2 class="footer__heading">Canales Directos</h2>
+          <ul role="list">
+            <li><a href="https://wa.me/51914662798" target="_blank" rel="noopener noreferrer">WhatsApp Ingeniería</a></li>
+            <li><a href="https://github.com/ediczon2006" target="_blank" rel="noopener noreferrer">Repositorio GitHub</a></li>
+            <li><a href="contacto.html">Enviar requerimiento</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <p>© <span id="year">2026</span> EVM Software Studio. Todos los derechos reservados.</p>
+        <p class="mono-muted">Proyecto Programación 2 · HTML5, CSS3 3D, Three.js, Java 21, C++17 &amp; SQLite</p>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="back-top" id="back-to-top" aria-label="Volver arriba" hidden><i data-lucide="arrow-up" aria-hidden="true"></i></button>
+  <div class="toast" id="evm-toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/animations.js" defer></script>
+  <script src="../js/3d-effects.js" defer></script>
+</body>
+</html>

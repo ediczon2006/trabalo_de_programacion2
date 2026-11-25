@@ -45,7 +45,7 @@ public final class AppConfig {
 
     public static AppConfig load() {
         int port = parseIntOrDefault(System.getenv("PORT"), 8080);
-        Path webRoot = Paths.get(envOrDefault("WEB_ROOT", "web")).toAbsolutePath().normalize();
+        Path webRoot = Paths.get(envOrDefault("WEB_ROOT", ".")).toAbsolutePath().normalize();
         Path dbPath = Paths.get(envOrDefault("DB_PATH", "data/solicitudes.db")).toAbsolutePath().normalize();
         Path uploadDir = Paths.get(envOrDefault("UPLOAD_DIR", "data/uploads")).toAbsolutePath().normalize();
 
