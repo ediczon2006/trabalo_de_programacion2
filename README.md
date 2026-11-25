@@ -1,23 +1,28 @@
-# Portafolio y Plataforma de Solicitudes de Software (Java + C++ + SQLite)
+# EVM Software Studio — Plataforma Web 3D & Sistema de Solicitudes (Programación 2)
 
-Aplicacion web en espanol para mostrar proyectos reales de software, recibir requerimientos de clientes junto con imagenes de referencia, almacenarlos en base de datos y redirigir el pedido completo al WhatsApp **+51 914 662 798**.
+Aplicación web moderna de ingeniería de software empresarial desarrollada en **HTML5 semántico, CSS3 con efectos 3D multicapa, JavaScript ES6+ y Three.js**, integrada con un backend propio en **Java 21 + C++17 + SQLite** y 100% compatible en modo estático con **GitHub Pages**.
 
-## Arquitectura del proyecto
+- **Sitio publicado en GitHub Pages:** https://ediczon2006.github.io/trabalo_de_programacion2/
+- **Contacto directo WhatsApp:** `+51 914 662 798`
 
-- **Servidor y API REST en Java (`src/main/java/com/ediczon/software/`)**:
-  - `Main.java`: Servidor HTTP multihilo con hilos virtuales y rutas `/api/proyectos`, `/api/solicitudes`, `/api/imagenes/{codigo}/{archivo}`, `/ver/{codigo}` y `/api/health`.
-  - `MultipartParser.java`: Procesamiento de formularios `multipart/form-data` con texto y multiples imagenes.
-  - `Database.java`: Persistencia en **SQLite** (`sqlite-jdbc`) con tablas `proyectos_portafolio`, `solicitudes` e `imagenes_referencia`.
-  - `CppImageBridge.java`: Invocacion al modulo nativo en C++.
-- **Procesador de imagenes en C++17 (`native/image_analyzer.cpp`)**:
-  - Valida firmas binarias reales (PNG, JPEG, WebP, GIF), extrae dimensiones (`ancho x alto`) y calcula checksum FNV-1a antes de guardar en SQLite.
-- **Interfaz web (`web/` y copia estatica en `docs/`)**:
-  - Galeria de los 4 proyectos reales verificados (`Pelitos Veterinaria`, `Ferreteria Sullcairi PRO POS`, `Estacion de Servicios Sullcairi`, `Leytrix ISP`).
-  - Formulario de requerimiento ("que quieres que haga tu software"), subida multiple de imagenes (arrastrar, seleccionar o `Ctrl + V`), descarga de ficha PNG, envio con guardado en base de datos y redireccion a `https://wa.me/51914662798`.
-- **Archivo entregable incluido**:
-  - `entregables/portafolio_capturas.zip`: Paquete ZIP con todas las capturas limpias y piezas `1080x1080` de los 5 proyectos.
+## Estructura Principal del Proyecto
 
-## Compilar y ejecutar localmente (Windows)
+- **`index.html` / `style.css` / `script.js` (raíz, sincronizados con `web/` y `docs/`)**:
+  - Estación holográfica 3D interactiva en la portada (`perspective`, `rotateX/Y`, capas `translateZ`) y fondo ligero en **Three.js** adaptable a móvil y escritorio.
+  - Animaciones de entrada al hacer scroll (`IntersectionObserver`), ScrollSpy automático, menú móvil animado, buscador de comandos (`Ctrl + K`) y modo alternativo **Consola Técnica**.
+  - Catálogo filtrable de 12 módulos de ingeniería y galería verificada de 4 sistemas en producción (`Pelitos Veterinaria`, `Ferretería Sullcairi PRO POS`, `Estación de Servicios Sullcairi` y `Leytrix ISP`).
+  - Formulario de requerimientos en 3 pasos con carga múltiple de imágenes de referencia (`drag & drop`, selector o `Ctrl + V`), vista previa en vivo estilo WhatsApp, generación de ficha visual PNG y envío directo a `https://wa.me/51914662798`.
+- **`assets/`**:
+  - `assets/brand/`: Logotipo oficial (`evm-logo.png`) y portada Open Graph corporativa `1200x630` (`og-cover.png`).
+  - `assets/portafolio/`: Capturas reales optimizadas para carga rápida en redes móviles.
+- **Servidor Backend en Java 21 (`src/main/java/com/ediczon/software/`)**:
+  - `Main.java`: Servidor HTTP concurrente con hilos virtuales (`/api/health`, `/api/proyectos`, `/api/solicitudes`, `/api/imagenes/{codigo}/{archivo}`, `/ver/{codigo}`).
+  - `Database.java`: Persistencia relacional en **SQLite** (`sqlite-jdbc`).
+  - `CppImageBridge.java`: Puente nativo hacia el validador binario en C++17.
+- **Validador Binario de Imágenes en C++17 (`native/image_analyzer.cpp`)**:
+  - Verifica firmas mágicas reales (PNG, JPEG, WebP, GIF), extrae dimensiones (`ancho x alto`) y calcula hash `FNV-1a` antes de registrar en base de datos.
+
+## Ejecución Local Completa (Java 21 + C++17 + SQLite en Windows)
 
 ```powershell
 .\build_and_run.ps1
@@ -25,7 +30,7 @@ Aplicacion web en espanol para mostrar proyectos reales de software, recibir req
 
 Luego abre `http://localhost:8080` en tu navegador.
 
-## Despliegue en la nube
+## Despliegue
 
-- **Backend completo (Java + C++ + SQLite + almacenamiento de imagenes):** incluye `Dockerfile` listo para desplegar en Railway u otro proveedor de contenedores.
-- **Vista estatica en GitHub Pages:** la carpeta `docs/` permite activar GitHub Pages directamente desde el repositorio (con redireccion a WhatsApp, compartir imagenes en movil y descarga de ficha PNG).
+- **GitHub Pages (Frontend Estático + WhatsApp + Ficha PNG):** publicado desde la rama `main` en `/ (root)` con `.nojekyll`.
+- **Contenedor Docker (Backend Completo):** incluye `Dockerfile` multi-etapa listo para Railway, Render o cualquier plataforma OCI.

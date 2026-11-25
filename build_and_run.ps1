@@ -5,16 +5,17 @@ Set-Location $Root
 
 # Detectar JDK y Maven locales si no estan en PATH
 if (-not (Get-Command javac -ErrorAction SilentlyContinue)) {
-    $jdk = "C:\Users\edicz\.jdks\openjdk-24.0.2+12-54"
-    if (Test-Path "$jdk\bin\javac.exe") {
-        $env:JAVA_HOME = $jdk
-        $env:Path = "$jdk\bin;$env:Path"
+    $jdkDir = Join-Path $env:USERPROFILE ".jdks"
+    $jdk = Get-ChildItem -Path $jdkDir -Directory -ErrorAction SilentlyContinue | Sort-Object Name -Descending | Select-Object -First 1
+    if ($jdk -and (Test-Path "$($jdk.FullName)\bin\javac.exe")) {
+        $env:JAVA_HOME = $jdk.FullName
+        $env:Path = "$($jdk.FullName)\bin;$env:Path"
     }
 }
 if (-not (Get-Command mvn -ErrorAction SilentlyContinue)) {
-    $mvnBin = "C:\Program Files\JetBrains\IntelliJ IDEA 2025.2.1\plugins\maven\lib\maven3\bin"
-    if (Test-Path "$mvnBin\mvn.cmd") {
-        $env:Path = "$mvnBin;$env:Path"
+    $mvnCmd = Get-ChildItem "$env:ProgramFiles\JetBrains" -Recurse -Filter "mvn.cmd" -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($mvnCmd) {
+        $env:Path = "$($mvnCmd.DirectoryName);$env:Path"
     }
 }
 if (-not (Get-Command g++ -ErrorAction SilentlyContinue)) {

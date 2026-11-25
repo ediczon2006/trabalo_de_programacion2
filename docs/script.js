@@ -1,9 +1,9 @@
 /**
  * ==========================================================================
- * EVM SOFTWARE STUDIO — INTERACTIVE FRONTEND ENGINE (Vanilla ES6+)
- * Arquitectura modular sin dependencias externas.
- * Conecta con el backend Java + C++ + SQLite (/api/proyectos, /api/solicitudes)
- * y conserva respaldo estático funcional para GitHub Pages.
+ * EVM SOFTWARE STUDIO — FRONTEND INTERACTIVO, ANIMACIONES & 3D (script.js)
+ * Código ES6+ modular, accesible y libre de errores en consola.
+ * Compatible 100% con GitHub Pages (modo estático) y con el backend local
+ * Java 21 + C++17 + SQLite cuando se ejecuta en servidor propio.
  * ==========================================================================
  */
 
@@ -15,23 +15,48 @@ const CONFIG = {
   apiBaseUrl: "",
 };
 
-const SCRIPT_BASE_URL =
-  document.currentScript && document.currentScript.src
-    ? new URL(".", document.currentScript.src).href
-    : window.location.href;
-
-function resolveAssetUrl(relPath) {
-  if (!relPath || /^https?:\/\//i.test(relPath)) return relPath;
-  try {
-    return new URL(relPath, SCRIPT_BASE_URL).href;
-  } catch {
-    return relPath;
-  }
-}
-
 const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* === DATOS VERIFICADOS DE CASOS Y ESPECIFICACIONES DE MÓDULOS === */
+/**
+ * Normaliza cualquier ruta de imagen o recurso para que sea siempre relativa
+ * al documento actual y funcione tanto en subdirectorios de GitHub Pages
+ * (/trabalo_de_programacion2/) como en servidor local.
+ */
+function resolveAssetUrl(relPath) {
+  if (!relPath) return "";
+  if (/^(https?:|data:|blob:)/i.test(relPath)) return relPath;
+  return String(relPath).replace(/^[./\\]+/, "");
+}
+
+/**
+ * Detecta si la página corre en un alojamiento estático puro (GitHub Pages o archivo local)
+ * para evitar peticiones innecesarias /api/* que generarían errores 404 en consola.
+ */
+function isPureStaticEnvironment() {
+  if (CONFIG.apiBaseUrl) return false;
+  if (window.location.protocol === "file:") return true;
+  const host = window.location.hostname.toLowerCase();
+  return (
+    host.endsWith(".github.io") ||
+    host.endsWith(".pages.dev") ||
+    host.endsWith(".netlify.app")
+  );
+}
+
+function apiUrl(path) {
+  const cleanPath = String(path || "").replace(/^\/+/, "");
+  return CONFIG.apiBaseUrl ? `${CONFIG.apiBaseUrl.replace(/\/+$/, "")}/${cleanPath}` : `./${cleanPath}`;
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+/* === 1. DATOS VERIFICADOS DE CASOS REALES Y MÓDULOS DE INGENIERÍA === */
 const FALLBACK_PROJECTS = [
   {
     slug: "01_Pelitos_Web",
@@ -60,8 +85,7 @@ const FALLBACK_PROJECTS = [
     descripcion:
       "Sistema de control de stock y caja en modo local con indicadores de inventario, importación y exportación en Excel, alertas de reposición y resumen comercial de ventas.",
     urlPublica: "https://ediczon2006.github.io/ferreteria_sullcairi/",
-    imagenPrincipal:
-      "assets/portafolio/03_Ferreteria_Sullcairi/capturas_limpias/01_inventario_y_stock.png",
+    imagenPrincipal: "assets/portafolio/03_Ferreteria_Sullcairi/capturas_limpias/01_inventario_y_stock.png",
     galeria: [
       "assets/portafolio/03_Ferreteria_Sullcairi/capturas_limpias/01_inventario_y_stock.png",
       "assets/portafolio/03_Ferreteria_Sullcairi/capturas_limpias/02_resumen_de_ventas.png",
@@ -245,7 +269,7 @@ const MODULE_SPECS = {
   web: {
     title: "Plataformas Web & Portales",
     cat: "Apps & Web",
-    summary: "Sitios corporativos de alto impacto, catálogos interactivos y portales de autogestión con rendimiento perfecto.",
+    summary: "Sitios corporativos de alto impacto, catálogos interactivos y portales de autogestión con rendimiento óptimo.",
     deploy: "3–4 semanas",
     cx: "2 / 5 (Ágil)",
     demand: "96% índice",
@@ -315,41 +339,17 @@ const PROJECT_CATEGORY = {
   "05_Leyder": "gestion",
 };
 
-const state = {
-  projects: FALLBACK_PROJECTS,
-  activePage: "inicio",
-  activeFilter: "all",
-  activeSolFilter: "all",
-  activeSolSort: "demand",
-  activeScreenProjIndex: 0,
-  backendOnline: false,
-  images: [],
-  activeModalProject: null,
-  activeSpecId: null,
-  cmdkItems: [],
-  cmdkIndex: 0,
-};
-
-const PAGE_TITLES = {
-  inicio: "EVM Software Studio | Ingeniería de software empresarial",
-  soluciones: "Soluciones | EVM Software Studio",
-  stack: "Stack Técnico | EVM Software Studio",
-  arquitectura: "Arquitectura | EVM Software Studio",
-  casos: "Casos en Producción | EVM Software Studio",
-  contacto: "Contacto e Iniciar Proyecto | EVM Software Studio",
-};
-
 const ARCH_LAYERS = {
   clientes: {
     eyebrow: "CAPA 01 · CLIENTES",
     title: "Web Semántica, Apps Móviles Nativas y Canales WhatsApp",
-    desc: "Interfaces rápidas optimizadas para Core Web Vitals, accesibilidad WCAG 2.1 AA, modo offline-first y capturas o pedidos directos por WhatsApp.",
+    desc: "Interfaces rápidas optimizadas para Core Web Vitals, accesibilidad WCAG 2.1 AA, modo offline-first y pedidos directos por WhatsApp.",
     meta: "LCP < 1.2 s · WCAG 2.1 AA · Responsive",
   },
   edge: {
     eyebrow: "CAPA 02 · EDGE & WAF",
     title: "CDN Global, TLS 1.3 y Protección Anti-Abuso en el Borde",
-    desc: "Terminación cifrada TLS 1.3, cabeceras de seguridad estrictas, rate limiting adaptativo y entrega en caché perimetral de activos estáticos.",
+    desc: "Terminación cifrada TLS 1.3, cabeceras de seguridad estrictas, rate limiting adaptativo y entrega perimetral de activos estáticos.",
     meta: "TLS 1.3 · HTTP/3 · DDoS Mitigation",
   },
   gateway: {
@@ -372,7 +372,26 @@ const ARCH_LAYERS = {
   },
 };
 
+/* === 2. ESTADO CENTRAL Y REFERENCIAS AL DOM === */
+const state = {
+  projects: FALLBACK_PROJECTS,
+  activeFilter: "all",
+  activeSolFilter: "all",
+  activeSolSort: "demand",
+  activeScreenProjIndex: 0,
+  backendOnline: false,
+  images: [],
+  activeModalProject: null,
+  activeSpecId: null,
+  cmdkItems: [],
+  cmdkIndex: 0,
+  lastFocusedEl: null,
+  revealObserver: null,
+  bg3dSyncTheme: null,
+};
+
 const el = {
+  scrollProgress: document.getElementById("scroll-progress"),
   preloader: document.getElementById("preloader"),
   preloaderRail: document.getElementById("preloader-rail"),
   preloaderFill: document.getElementById("preloader-fill"),
@@ -381,6 +400,7 @@ const el = {
   nav: document.getElementById("nav"),
   navLinks: document.getElementById("nav-links"),
   navToggle: document.getElementById("nav-toggle"),
+  navToggleIcon: document.getElementById("nav-toggle-icon"),
   themeToggle: document.getElementById("theme-toggle"),
   cmdkTrigger: document.getElementById("cmdk-trigger"),
   cmdkDialog: document.getElementById("cmdk"),
@@ -394,6 +414,8 @@ const el = {
   heroScreenOpen: document.getElementById("hero-screen-open"),
   heroScreenVisit: document.getElementById("hero-screen-visit"),
   toast: document.getElementById("evm-toast"),
+  bg3d: document.getElementById("evm-bg-3d"),
+  backToTop: document.getElementById("back-to-top"),
   btnWhitepaper: document.getElementById("btn-whitepaper"),
   solFilters: document.getElementById("sol-filters"),
   solSort: document.getElementById("sol-sort"),
@@ -446,18 +468,7 @@ const el = {
   specRequest: document.getElementById("spec-request"),
 };
 
-function apiUrl(path) {
-  return `${CONFIG.apiBaseUrl}${path}`;
-}
-
-function escapeHtml(s) {
-  return String(s || "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
+/* === 3. PRELOADER, CONTADORES Y TOASTS === */
 function animateCounters() {
   document.querySelectorAll("[data-count-to]").forEach((node) => {
     const target = Number(node.getAttribute("data-count-to") || "0");
@@ -466,18 +477,17 @@ function animateCounters() {
       return;
     }
     const start = performance.now();
-    const dur = 950;
+    const duration = 900;
     const step = (now) => {
-      const p = Math.min(1, (now - start) / dur);
-      const eased = 1 - Math.pow(1 - p, 3);
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
       node.textContent = String(Math.round(target * eased));
-      if (p < 1) requestAnimationFrame(step);
+      if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
   });
 }
 
-/* === PRELOADER LOGIC === */
 function initPreloader() {
   const root = document.documentElement;
   if (!el.preloader || REDUCED_MOTION) {
@@ -488,7 +498,7 @@ function initPreloader() {
     return;
   }
 
-  const duration = 1150;
+  const duration = 850;
   const start = performance.now();
 
   function tick(now) {
@@ -512,7 +522,7 @@ function initPreloader() {
         root.classList.remove("is-loading");
         root.classList.add("is-ready");
         animateCounters();
-      }, 220);
+      }, 180);
     }
   }
 
@@ -520,9 +530,9 @@ function initPreloader() {
 }
 
 let toastTimer = 0;
-function showToast(msg) {
+function showToast(message) {
   if (!el.toast) return;
-  el.toast.textContent = msg;
+  el.toast.textContent = message;
   el.toast.hidden = false;
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
@@ -530,74 +540,72 @@ function showToast(msg) {
   }, 2600);
 }
 
-/* === MULTIPAGE ROUTER (PÁGINAS INDIVIDUALES) === */
-function navigateToPage(rawId, updateHash = true) {
-  const cleanId = String(rawId || "inicio").replace(/^#\/?/, "").toLowerCase();
-  const pageId = Object.prototype.hasOwnProperty.call(PAGE_TITLES, cleanId) ? cleanId : "inicio";
-  state.activePage = pageId;
+/* === 4. NAVEGACIÓN SUAVE, MENÚ MÓVIL ANIMADO, SCROLLSPY Y REVEAL === */
+function setMobileMenuState(open, restoreFocus = false) {
+  if (!el.navLinks || !el.navToggle) return;
+  el.navLinks.classList.toggle("is-open", open);
+  el.navToggle.setAttribute("aria-expanded", String(open));
+  el.navToggle.setAttribute("aria-label", open ? "Cerrar menú de navegación" : "Abrir menú de navegación");
+  if (el.navToggleIcon) {
+    el.navToggleIcon.setAttribute("href", open ? "#i-close" : "#i-menu");
+  }
+  if (!open && restoreFocus) {
+    el.navToggle.focus();
+  }
+}
 
-  document.querySelectorAll("[data-page]").forEach((section) => {
-    const isTarget = section.getAttribute("data-page") === pageId;
-    section.hidden = !isTarget;
-    section.classList.toggle("is-page-active", isTarget);
-    if (isTarget) {
-      section.querySelectorAll("[data-reveal]").forEach((node) => node.classList.add("is-visible"));
-    }
-  });
-
-  document.querySelectorAll(".nav__link[data-page-link]").forEach((link) => {
-    const active = link.getAttribute("data-page-link") === pageId;
+function setActiveNavLink(sectionId) {
+  document.querySelectorAll(".site-nav__link[data-nav-section]").forEach((link) => {
+    const active = link.getAttribute("data-nav-section") === sectionId;
     link.classList.toggle("is-active", active);
     if (active) link.setAttribute("aria-current", "page");
     else link.removeAttribute("aria-current");
   });
+}
 
-  if (el.navLinks && el.navToggle) {
-    el.navLinks.classList.remove("is-open");
-    el.navToggle.setAttribute("aria-expanded", "false");
-  }
+function scrollToSection(sectionId, updateUrl = true) {
+  const cleanId = String(sectionId || "inicio").replace(/^#/, "");
+  const target = document.getElementById(cleanId);
+  if (!target) return;
 
-  document.title = PAGE_TITLES[pageId];
+  setMobileMenuState(false, false);
+  setActiveNavLink(cleanId);
 
-  if (updateHash && window.location.hash !== `#${pageId}`) {
+  target.scrollIntoView({
+    behavior: REDUCED_MOTION ? "auto" : "smooth",
+    block: "start",
+  });
+
+  if (updateUrl && window.location.hash !== `#${cleanId}`) {
     try {
-      history.pushState({ pageId }, "", `#${pageId}`);
+      history.replaceState(null, "", `#${cleanId}`);
     } catch {
-      window.location.hash = pageId;
+      window.location.hash = cleanId;
     }
   }
-
-  window.scrollTo({ top: 0, behavior: "instant" });
 }
 
-function initPageRouter() {
-  document.addEventListener("click", (e) => {
-    const link = e.target.closest("[data-page-link]");
-    if (!link) return;
-    e.preventDefault();
-    navigateToPage(link.getAttribute("data-page-link"), true);
-  });
-
-  const syncFromHash = () => {
-    const hash = window.location.hash || "#inicio";
-    navigateToPage(hash, false);
-  };
-
-  window.addEventListener("hashchange", syncFromHash);
-  window.addEventListener("popstate", syncFromHash);
-  syncFromHash();
+function observeRevealNodes(root = document) {
+  const nodes = root.querySelectorAll("[data-reveal]:not(.is-visible)");
+  if (!nodes.length) return;
+  if (state.revealObserver) {
+    nodes.forEach((node) => state.revealObserver.observe(node));
+  } else {
+    nodes.forEach((node) => node.classList.add("is-visible"));
+  }
 }
 
-/* === NAVBAR, THEME CONSOLE & REVEAL === */
-function initNavigationAndTheme() {
+function initNavigationAndScroll() {
   const isMac = /Mac|iPhone|iPad/i.test(navigator.platform || "");
-  document.querySelectorAll("[data-kbd-mod]").forEach((k) => {
-    k.textContent = isMac ? "⌘" : "Ctrl";
+  document.querySelectorAll("[data-kbd-mod]").forEach((kbd) => {
+    kbd.textContent = isMac ? "⌘" : "Ctrl";
   });
 
+  // Tema Studio / Consola
   const syncThemeBtn = () => {
     const isConsole = document.documentElement.getAttribute("data-theme") === "console";
     if (el.themeToggle) el.themeToggle.setAttribute("aria-pressed", String(isConsole));
+    if (typeof state.bg3dSyncTheme === "function") state.bg3dSyncTheme(isConsole);
   };
   syncThemeBtn();
 
@@ -614,21 +622,71 @@ function initNavigationAndTheme() {
     });
   }
 
+  // Menú móvil accesible y animado
   if (el.navToggle && el.navLinks) {
     el.navToggle.addEventListener("click", () => {
-      const open = el.navLinks.classList.toggle("is-open");
-      el.navToggle.setAttribute("aria-expanded", String(open));
+      const nextOpen = !el.navLinks.classList.contains("is-open");
+      setMobileMenuState(nextOpen, false);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && el.navLinks.classList.contains("is-open")) {
+        setMobileMenuState(false, true);
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (el.nav && !el.nav.contains(e.target) && el.navLinks.classList.contains("is-open")) {
+        setMobileMenuState(false, false);
+      }
     });
   }
 
-  const onScroll = () => {
-    if (el.nav) el.nav.classList.toggle("is-scrolled", window.scrollY > 18);
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  // Navegación suave por secciones
+  document.addEventListener("click", (e) => {
+    const navTrigger = e.target instanceof Element ? e.target.closest("[data-nav-section]") : null;
+    if (!navTrigger) return;
+    e.preventDefault();
+    scrollToSection(navTrigger.getAttribute("data-nav-section"), true);
+  });
 
+  // Botón volver arriba
+  if (el.backToTop) {
+    el.backToTop.addEventListener("click", () => scrollToSection("inicio", true));
+  }
+
+  // Progreso de scroll + estado sticky del header
+  const updateScrollChrome = () => {
+    const y = window.scrollY || window.pageYOffset;
+    if (el.nav) el.nav.classList.toggle("is-scrolled", y > 18);
+    if (el.backToTop) el.backToTop.hidden = y < 520;
+    if (el.scrollProgress) {
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const pct = Math.min(1, Math.max(0, y / maxScroll));
+      el.scrollProgress.style.setProperty("--scroll-pct", pct.toFixed(4));
+    }
+  };
+  window.addEventListener("scroll", updateScrollChrome, { passive: true });
+  window.addEventListener("resize", updateScrollChrome, { passive: true });
+  updateScrollChrome();
+
+  // ScrollSpy automático para resaltar la sección visible en el menú
   if ("IntersectionObserver" in window) {
-    const revealObserver = new IntersectionObserver(
+    const spyObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("data-section");
+            if (id) setActiveNavLink(id);
+          }
+        });
+      },
+      { rootMargin: "-35% 0px -50% 0px", threshold: 0.01 }
+    );
+    document.querySelectorAll("[data-section]").forEach((sec) => spyObserver.observe(sec));
+
+    // Animaciones de entrada al hacer scroll
+    state.revealObserver = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -637,19 +695,22 @@ function initNavigationAndTheme() {
           }
         });
       },
-      { threshold: 0.04, rootMargin: "80px 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
-    document.querySelectorAll("[data-reveal]").forEach((node) => revealObserver.observe(node));
-  } else {
-    document.querySelectorAll("[data-reveal]").forEach((node) => node.classList.add("is-visible"));
   }
+  observeRevealNodes(document);
 
-  const yr = document.getElementById("year");
-  if (yr) yr.textContent = String(new Date().getFullYear());
+  const yearNode = document.getElementById("year");
+  if (yearNode) yearNode.textContent = String(new Date().getFullYear());
+
+  // Si la URL inicial trae un hash válido (#casos, #contacto, etc.), desplazar suavemente
+  if (window.location.hash && window.location.hash.length > 1) {
+    setTimeout(() => scrollToSection(window.location.hash, false), 120);
+  }
 }
 
-/* === HERO PARALLAX, MAGNETIC CTA, LIVE TELEMETRY & WHITEPAPER === */
-function initHeroInteractions() {
+/* === 5. ESTACIÓN 3D HERO, BOTONES MAGNÉTICOS, ARQUITECTURA Y TELEMETRÍA === */
+function initHeroAndArchitecture() {
   if (el.heroStage && !REDUCED_MOTION) {
     const tiltNode = el.heroStage.querySelector("[data-tilt]");
     const satellites = Array.from(el.heroStage.querySelectorAll(".sat"));
@@ -663,8 +724,8 @@ function initHeroInteractions() {
       curX += (targetX - curX) * 0.12;
       curY += (targetY - curY) * 0.12;
       if (tiltNode) {
-        tiltNode.style.setProperty("--rx", `${(4 - curY * 6).toFixed(2)}deg`);
-        tiltNode.style.setProperty("--ry", `${(-6 + curX * 8).toFixed(2)}deg`);
+        tiltNode.style.setProperty("--rx", `${(5 - curY * 7).toFixed(2)}deg`);
+        tiltNode.style.setProperty("--ry", `${(-7 + curX * 9).toFixed(2)}deg`);
       }
       satellites.forEach((sat) => {
         const depth = parseFloat(sat.getAttribute("data-depth") || "1");
@@ -693,13 +754,13 @@ function initHeroInteractions() {
     });
   }
 
-  // Micro-hover magnético en botones principales
-  if (!REDUCED_MOTION) {
+  // Botones magnéticos sutiles
+  if (!REDUCED_MOTION && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     document.querySelectorAll(".magnetic").forEach((btn) => {
       btn.addEventListener("pointermove", (e) => {
         const r = btn.getBoundingClientRect();
-        const dx = (e.clientX - (r.left + r.width / 2)) * 0.18;
-        const dy = (e.clientY - (r.top + r.height / 2)) * 0.22;
+        const dx = (e.clientX - (r.left + r.width / 2)) * 0.16;
+        const dy = (e.clientY - (r.top + r.height / 2)) * 0.2;
         btn.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`;
       });
       btn.addEventListener("pointerleave", () => {
@@ -708,7 +769,7 @@ function initHeroInteractions() {
     });
   }
 
-  // Selector de vistas del Workstation en Hero
+  // Pestañas de la estación de trabajo en el Hero
   const screenTabs = Array.from(document.querySelectorAll("[data-screen]"));
   const activateScreenTab = (tab) => {
     const target = tab.getAttribute("data-screen");
@@ -729,7 +790,7 @@ function initHeroInteractions() {
       state.activeScreenProjIndex = safeIdx;
       if (proj && el.heroShowcaseImg && el.heroShowcaseLabel) {
         el.heroShowcaseImg.src = resolveAssetUrl(proj.imagenPrincipal);
-        el.heroShowcaseImg.alt = `Vista de ${proj.nombre}`;
+        el.heroShowcaseImg.alt = `Vista previa real de ${proj.nombre}`;
         el.heroShowcaseLabel.textContent = `${proj.nombre} · ${proj.tipo}`;
         if (el.heroScreenVisit) el.heroScreenVisit.href = proj.urlPublica;
         if (el.dash) el.dash.hidden = true;
@@ -750,32 +811,39 @@ function initHeroInteractions() {
   });
 
   if (el.heroScreenOpen) {
-    el.heroScreenOpen.addEventListener("click", () => {
-      openProjectModal(state.activeScreenProjIndex);
-    });
+    el.heroScreenOpen.addEventListener("click", () => openProjectModal(state.activeScreenProjIndex));
   }
 
-  // Inspector interactivo de capas en Arquitectura
+  // Inspector interactivo de capas en Arquitectura (clic + teclado ← / →)
   const archButtons = Array.from(document.querySelectorAll("[data-arch-layer]"));
   const archEyebrow = document.getElementById("arch-layer-eyebrow");
   const archTitle = document.getElementById("arch-layer-title");
   const archDesc = document.getElementById("arch-layer-desc");
   const archMeta = document.getElementById("arch-layer-meta");
 
-  archButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const key = btn.getAttribute("data-arch-layer");
-      const info = ARCH_LAYERS[key];
-      if (!info) return;
-      archButtons.forEach((b) => {
-        const active = b === btn;
-        b.classList.toggle("is-active", active);
-        b.setAttribute("aria-pressed", String(active));
-      });
-      if (archEyebrow) archEyebrow.textContent = info.eyebrow;
-      if (archTitle) archTitle.textContent = info.title;
-      if (archDesc) archDesc.textContent = info.desc;
-      if (archMeta) archMeta.textContent = info.meta;
+  const selectArchButton = (btn) => {
+    const key = btn.getAttribute("data-arch-layer");
+    const info = ARCH_LAYERS[key];
+    if (!info) return;
+    archButtons.forEach((b) => {
+      const active = b === btn;
+      b.classList.toggle("is-active", active);
+      b.setAttribute("aria-pressed", String(active));
+    });
+    if (archEyebrow) archEyebrow.textContent = info.eyebrow;
+    if (archTitle) archTitle.textContent = info.title;
+    if (archDesc) archDesc.textContent = info.desc;
+    if (archMeta) archMeta.textContent = info.meta;
+  };
+
+  archButtons.forEach((btn, idx) => {
+    btn.addEventListener("click", () => selectArchButton(btn));
+    btn.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      e.preventDefault();
+      const nextIdx = (idx + (e.key === "ArrowRight" ? 1 : -1) + archButtons.length) % archButtons.length;
+      archButtons[nextIdx].focus();
+      selectArchButton(archButtons[nextIdx]);
     });
   });
 
@@ -792,7 +860,7 @@ function initHeroInteractions() {
     }, 2200);
   }
 
-  // Generador de Whitepaper Corporativo descargable
+  // Descarga de Whitepaper técnico
   if (el.btnWhitepaper) {
     el.btnWhitepaper.addEventListener("click", () => {
       const docContent = [
@@ -828,39 +896,35 @@ function initHeroInteractions() {
   }
 }
 
-/* === GLASS GRID: FILTRADO, ORDENAMIENTO Y MODAL DE ESPECIFICACIONES === */
+/* === 6. CATÁLOGO DE SOLUCIONES Y MODAL DE ESPECIFICACIONES === */
 function applySolutionsCatalog() {
   if (!el.solGrid) return;
-  const cards = Array.from(el.solGrid.querySelectorAll(".sol-card"));
+  const items = Array.from(el.solGrid.querySelectorAll(".sol-grid__item"));
   const filter = state.activeSolFilter;
   const sortBy = state.activeSolSort;
 
-  cards.sort((a, b) => {
-    if (sortBy === "deploy") {
-      return Number(a.dataset.deploy) - Number(b.dataset.deploy);
-    }
-    if (sortBy === "complexity") {
-      return Number(b.dataset.complexity) - Number(a.dataset.complexity);
-    }
+  items.sort((a, b) => {
+    if (sortBy === "deploy") return Number(a.dataset.deploy) - Number(b.dataset.deploy);
+    if (sortBy === "complexity") return Number(b.dataset.complexity) - Number(a.dataset.complexity);
     return Number(b.dataset.demand) - Number(a.dataset.demand);
   });
 
-  cards.forEach((c) => c.classList.add("is-filtering-out"));
+  items.forEach((item) => item.classList.add("is-filtering-out"));
 
   setTimeout(() => {
     let visibleCount = 0;
-    cards.forEach((card) => {
-      el.solGrid.appendChild(card);
-      const match = filter === "all" || card.dataset.cat === filter;
-      card.hidden = !match;
+    items.forEach((item) => {
+      el.solGrid.appendChild(item);
+      const match = filter === "all" || item.dataset.cat === filter;
+      item.hidden = !match;
       if (match) visibleCount++;
-      requestAnimationFrame(() => card.classList.remove("is-filtering-out"));
+      requestAnimationFrame(() => item.classList.remove("is-filtering-out"));
     });
     if (el.solCount) {
       el.solCount.textContent =
         visibleCount === 1 ? "1 módulo disponible" : `${visibleCount} módulos disponibles`;
     }
-  }, REDUCED_MOTION ? 0 : 140);
+  }, REDUCED_MOTION ? 0 : 130);
 }
 
 function openSpecModal(id) {
@@ -878,11 +942,7 @@ function openSpecModal(id) {
   el.specDeliverables.innerHTML = spec.deliverables
     .map((item) => `<li>${escapeHtml(item)}</li>`)
     .join("");
-  if (typeof el.specModal.showModal === "function") {
-    el.specModal.showModal();
-  } else {
-    el.specModal.setAttribute("open", "");
-  }
+  openDialog(el.specModal);
 }
 
 function initSolutionsCatalog() {
@@ -917,32 +977,32 @@ function initSolutionsCatalog() {
   if (el.specRequest) {
     el.specRequest.addEventListener("click", () => {
       const spec = MODULE_SPECS[state.activeSpecId];
-      if (spec) {
+      if (spec && el.form) {
         const box = el.form.querySelector(`input[name="projectType"][value="${spec.presetType}"]`);
         if (box) box.checked = true;
-        if (!el.description.value.trim()) {
+        if (el.description && !el.description.value.trim()) {
           el.description.value = `Solicito el módulo "${spec.title}" (${spec.cat}) adaptado a mi empresa con...`;
         }
         updatePreview();
       }
       closeDialog(el.specModal);
-      navigateToPage("contacto");
-      showToast(`Módulo "${spec ? spec.title : ""}" agregado al brief`);
+      scrollToSection("contacto", true);
+      showToast(`Módulo "${spec ? spec.title : ""}" cargado en el brief`);
     });
   }
 }
 
-/* === COMMAND PALETTE (Ctrl+K / Cmd+K) === */
+/* === 7. BUSCADOR DE COMANDOS (Ctrl + K / Cmd + K) === */
 function initCommandPalette() {
   if (!el.cmdkDialog || !el.cmdkInput || !el.cmdkList) return;
 
   const baseCommands = [
-    { label: "Ir a página: Inicio", meta: "Página", action: () => navigateToPage("inicio") },
-    { label: "Ir a página: Catálogo de Soluciones", meta: "Página", action: () => navigateToPage("soluciones") },
-    { label: "Ir a página: Stack Técnico", meta: "Página", action: () => navigateToPage("stack") },
-    { label: "Ir a página: Arquitectura", meta: "Página", action: () => navigateToPage("arquitectura") },
-    { label: "Ir a página: Casos en Producción", meta: "Página", action: () => navigateToPage("casos") },
-    { label: "Ir a página: Contacto / Iniciar Proyecto", meta: "Página", action: () => navigateToPage("contacto") },
+    { label: "Ir a sección: Inicio", meta: "Sección", action: () => scrollToSection("inicio") },
+    { label: "Ir a sección: Catálogo de Soluciones", meta: "Sección", action: () => scrollToSection("soluciones") },
+    { label: "Ir a sección: Stack Técnico", meta: "Sección", action: () => scrollToSection("stack") },
+    { label: "Ir a sección: Arquitectura de Referencia", meta: "Sección", action: () => scrollToSection("arquitectura") },
+    { label: "Ir a sección: Casos en Producción", meta: "Sección", action: () => scrollToSection("casos") },
+    { label: "Ir a sección: Contacto / Iniciar Proyecto", meta: "Sección", action: () => scrollToSection("contacto") },
     {
       label: "Alternar Tema (Studio / Modo Consola)",
       meta: "Tema",
@@ -985,11 +1045,7 @@ function initCommandPalette() {
   function openCmdk() {
     renderCmdk("");
     el.cmdkInput.value = "";
-    if (typeof el.cmdkDialog.showModal === "function") {
-      el.cmdkDialog.showModal();
-    } else {
-      el.cmdkDialog.setAttribute("open", "");
-    }
+    openDialog(el.cmdkDialog);
     el.cmdkInput.focus();
   }
 
@@ -1032,13 +1088,30 @@ function initCommandPalette() {
   });
 }
 
-function closeDialog(dlg) {
+function openDialog(dlg) {
   if (!dlg) return;
-  if (typeof dlg.close === "function") dlg.close();
-  else dlg.removeAttribute("open");
+  state.lastFocusedEl = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  if (typeof dlg.showModal === "function") {
+    if (!dlg.open) dlg.showModal();
+  } else {
+    dlg.setAttribute("open", "");
+  }
 }
 
-/* === PORTAFOLIO DE CASOS EN PRODUCCIÓN Y CONEXIÓN BACKEND === */
+function closeDialog(dlg) {
+  if (!dlg) return;
+  if (typeof dlg.close === "function") {
+    if (dlg.open) dlg.close();
+  } else {
+    dlg.removeAttribute("open");
+  }
+  if (state.lastFocusedEl && typeof state.lastFocusedEl.focus === "function") {
+    state.lastFocusedEl.focus({ preventScroll: true });
+    state.lastFocusedEl = null;
+  }
+}
+
+/* === 8. PORTAFOLIO DE CASOS REALES Y VISOR MODAL === */
 function renderPortfolio(projects) {
   if (!el.portfolioGrid) return;
   const filtered =
@@ -1052,18 +1125,18 @@ function renderPortfolio(projects) {
   }
 
   el.portfolioGrid.innerHTML = filtered
-    .map((p) => {
+    .map((p, idx) => {
       const realIndex = state.projects.indexOf(p);
       const bullets = (p.aspectos || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
       const count = (p.galeria || []).length;
       return `
-        <article class="project-card">
+        <article class="project-card tilt-3d" data-reveal="up" style="--d:${idx % 2}">
           <div class="project-card__chrome" aria-hidden="true">
             <div class="project-card__dots"><span></span><span></span><span></span></div>
             <span>${escapeHtml(p.nombre)}</span>
           </div>
           <div class="project-card__thumb" data-open-project="${realIndex}" role="button" tabindex="0" aria-label="Ampliar capturas de ${escapeHtml(p.nombre)}">
-            <img src="${escapeHtml(resolveAssetUrl(p.imagenPrincipal))}" alt="Captura real de ${escapeHtml(p.nombre)}" loading="lazy" decoding="async" />
+            <img src="${escapeHtml(resolveAssetUrl(p.imagenPrincipal))}" alt="Captura real del proyecto ${escapeHtml(p.nombre)}" width="1600" height="1000" loading="lazy" decoding="async" />
             <span class="project-card__badge">${count} capturas reales</span>
           </div>
           <div class="project-card__body">
@@ -1073,13 +1146,15 @@ function renderPortfolio(projects) {
             <ul class="project-card__list">${bullets}</ul>
             <div class="project-card__actions">
               <button type="button" class="btn btn--primary btn--sm" data-open-project="${realIndex}">Ver capturas</button>
-              <a class="btn btn--secondary btn--sm" href="${escapeHtml(p.urlPublica)}" target="_blank" rel="noopener noreferrer">Visitar sitio</a>
+              <a class="btn btn--secondary btn--sm" href="${escapeHtml(p.urlPublica)}" target="_blank" rel="noopener noreferrer">Visitar sitio ↗</a>
             </div>
           </div>
         </article>
       `;
     })
     .join("");
+
+  observeRevealNodes(el.portfolioGrid);
 }
 
 function openProjectModal(index) {
@@ -1093,29 +1168,29 @@ function openProjectModal(index) {
   el.modalBtnVisit.href = proj.urlPublica;
 
   const imgs = (proj.galeria && proj.galeria.length ? proj.galeria : [proj.imagenPrincipal]).map(resolveAssetUrl);
-  setModalImage(imgs[0], proj.nombre);
+  setModalImage(imgs[0], `Captura principal de ${proj.nombre}`);
 
   el.modalThumbs.innerHTML = imgs
     .map(
       (src, i) => `
-      <button type="button" class="modal__thumb-btn ${i === 0 ? "is-active" : ""}" data-thumb-src="${escapeHtml(src)}">
-        <img src="${escapeHtml(src)}" alt="${escapeHtml(proj.nombre)} miniatura ${i + 1}" />
+      <button type="button" class="modal__thumb-btn ${i === 0 ? "is-active" : ""}" data-thumb-src="${escapeHtml(src)}" data-thumb-num="${i + 1}">
+        <img src="${escapeHtml(src)}" alt="Miniatura ${i + 1} de ${escapeHtml(proj.nombre)}" width="160" height="100" loading="lazy" decoding="async" />
       </button>
     `
     )
     .join("");
 
-  if (typeof el.modal.showModal === "function") el.modal.showModal();
-  else el.modal.setAttribute("open", "");
+  openDialog(el.modal);
 }
 
 function setModalImage(src, altText) {
   el.modalMainImg.src = src;
-  el.modalMainImg.alt = altText || "Captura de proyecto";
+  el.modalMainImg.alt = altText || "Captura ampliada del proyecto";
 }
 
-/* === FORMULARIO DE SOLICITUD, SUBIDA DE IMÁGENES Y WHATSAPP === */
+/* === 9. FORMULARIO BRIEF, IMÁGENES, FICHA PNG Y WHATSAPP === */
 function getCheckedValues(name) {
+  if (!el.form) return [];
   return Array.from(el.form.querySelectorAll(`input[name="${name}"]:checked`)).map((i) => i.value);
 }
 
@@ -1171,13 +1246,14 @@ function updateNativeShareVisibility() {
 }
 
 function showFeedback(text, kind) {
+  if (!el.feedback) return;
   el.feedback.textContent = text;
   el.feedback.className = `feedback feedback--${kind}`;
   el.feedback.hidden = false;
 }
 
 function clearFeedback() {
-  el.feedback.hidden = true;
+  if (el.feedback) el.feedback.hidden = true;
 }
 
 function renderImages() {
@@ -1197,8 +1273,8 @@ function renderImages() {
       (item, idx) => `
       <li class="img-item" data-img-id="${item.id}">
         <div class="img-item__media">
-          <img src="${item.previewUrl}" alt="${escapeHtml(item.file.name)}" />
-          <button type="button" class="img-item__remove" data-remove-img="${item.id}" aria-label="Quitar imagen">✕</button>
+          <img src="${item.previewUrl}" alt="Imagen de referencia: ${escapeHtml(item.file.name)}" decoding="async" />
+          <button type="button" class="img-item__remove" data-remove-img="${item.id}" aria-label="Quitar ${escapeHtml(item.file.name)}">✕</button>
         </div>
         <div class="img-item__body">
           <span class="img-item__name" title="${escapeHtml(item.file.name)}">${escapeHtml(item.file.name)}</span>
@@ -1209,7 +1285,7 @@ function renderImages() {
             data-note-idx="${idx}"
             value="${escapeHtml(item.note)}"
             aria-label="Nota para ${escapeHtml(item.file.name)}"
-            placeholder="Nota (ej. Mi logo, diseño)"
+            placeholder="Nota (ej. Mi logo, vista)"
           />
         </div>
       </li>
@@ -1263,15 +1339,20 @@ function clearAllImages() {
 
 function validateForm() {
   if (!el.clientName.value.trim()) {
+    el.clientName.setAttribute("aria-invalid", "true");
     showFeedback("Por favor ingresa tu nombre o el nombre de tu empresa.", "error");
     el.clientName.focus();
     return false;
   }
+  el.clientName.removeAttribute("aria-invalid");
+
   if (!el.description.value.trim()) {
+    el.description.setAttribute("aria-invalid", "true");
     showFeedback("Cuéntanos brevemente qué quieres que haga tu página o sistema.", "error");
     el.description.focus();
     return false;
   }
+  el.description.removeAttribute("aria-invalid");
   return true;
 }
 
@@ -1287,7 +1368,7 @@ async function submitRequest() {
   el.btnSubmit.disabled = true;
   const labelNode = el.btnSubmit.querySelector(".btn__label") || el.btnSubmit;
   const originalLabel = labelNode.textContent;
-  labelNode.textContent = "Procesando y guardando...";
+  labelNode.textContent = "Preparando solicitud...";
 
   try {
     if (state.backendOnline) {
@@ -1305,7 +1386,7 @@ async function submitRequest() {
         fd.append("imageNotes", item.note.trim());
       });
 
-      const res = await fetch(apiUrl("/api/solicitudes"), { method: "POST", body: fd });
+      const res = await fetch(apiUrl("api/solicitudes"), { method: "POST", body: fd });
       const data = await res.json();
       if (!res.ok || !data.ok) {
         throw new Error(data.error || "No se pudo guardar la solicitud.");
@@ -1315,7 +1396,7 @@ async function submitRequest() {
       el.savedDetailText.textContent =
         data.imagenes && data.imagenes.length
           ? `Se registraron ${data.imagenes.length} imagen(es) en base de datos. Ya puedes abrir WhatsApp con el enlace directo.`
-          : "Tu solicitud fue guardada en base de datos.";
+          : "Tu solicitud fue guardada correctamente en base de datos.";
       el.savedWaLink.href = data.whatsappUrl;
       el.savedViewLink.href = data.viewUrl;
       el.savedViewLink.hidden = false;
@@ -1329,10 +1410,10 @@ async function submitRequest() {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(msg).catch(() => {});
       }
-      el.savedCode.textContent = "MODO-LOCAL";
+      el.savedCode.textContent = "ENVÍO-DIRECTO";
       el.savedDetailText.textContent = state.images.length
-        ? "Se abrió WhatsApp con tu mensaje. Arrastra tus imágenes al chat o descarga la Ficha PNG abajo."
-        : "Se abrió WhatsApp con tu mensaje listo.";
+        ? "Se abrió WhatsApp con tu mensaje listo. Adjunta tus imágenes en el chat o descarga la Ficha PNG abajo."
+        : "Se abrió WhatsApp con tu mensaje estructurado listo.";
       el.savedWaLink.href = waUrl;
       el.savedViewLink.hidden = true;
       el.savedBox.hidden = false;
@@ -1362,10 +1443,10 @@ async function shareNative() {
       text,
       files,
     });
-    showFeedback("Imágenes y mensaje compartidos.", "ok");
+    showFeedback("Imágenes y mensaje compartidos correctamente.", "ok");
   } catch (err) {
     if (err && err.name !== "AbortError") {
-      showFeedback("No se pudo abrir el menú de compartir directo en este navegador.", "error");
+      showFeedback("No se pudo abrir el menú de compartir nativo en este navegador.", "error");
     }
   }
 }
@@ -1400,89 +1481,103 @@ async function downloadVisualSheet() {
   clearFeedback();
   if (!validateForm()) return;
 
-  const width = 1080;
-  const pad = 56;
-  const loadedImgs = await Promise.all(state.images.map((item) => loadImageElement(item.previewUrl)));
+  try {
+    const width = 1080;
+    const pad = 56;
+    const loadedImgs = await Promise.all(state.images.map((item) => loadImageElement(item.previewUrl)));
 
-  const cols = 2;
-  const thumbW = (width - pad * 2 - 20) / cols;
-  const thumbH = 220;
-  const imgRows = loadedImgs.length ? Math.ceil(loadedImgs.length / cols) : 0;
-  const descLines = wrapTextLines(el.description.value.trim(), 78);
-  const height = Math.max(760, 420 + descLines.length * 28 + imgRows * (thumbH + 56));
+    const cols = 2;
+    const thumbW = (width - pad * 2 - 20) / cols;
+    const thumbH = 220;
+    const imgRows = loadedImgs.length ? Math.ceil(loadedImgs.length / cols) : 0;
+    const descLines = wrapTextLines(el.description.value.trim(), 78);
+    const height = Math.max(760, 420 + descLines.length * 28 + imgRows * (thumbH + 56));
 
-  const canvas = document.createElement("canvas");
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext("2d");
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
 
-  ctx.fillStyle = "#07090e";
-  ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = "#06080e";
+    ctx.fillRect(0, 0, width, height);
 
-  ctx.fillStyle = "#00d2ff";
-  ctx.font = "bold 20px Segoe UI, sans-serif";
-  ctx.fillText("EVM SOFTWARE STUDIO · BRIEF DE PROYECTO", pad, 64);
+    ctx.fillStyle = "#00d2ff";
+    ctx.font = "bold 20px Segoe UI, sans-serif";
+    ctx.fillText("EVM SOFTWARE STUDIO · BRIEF DE PROYECTO", pad, 64);
 
-  ctx.fillStyle = "#f0f4f8";
-  ctx.font = "bold 36px Segoe UI, sans-serif";
-  ctx.fillText(el.clientName.value.trim().slice(0, 40), pad, 114);
+    ctx.fillStyle = "#f2f6fb";
+    ctx.font = "bold 36px Segoe UI, sans-serif";
+    ctx.fillText(el.clientName.value.trim().slice(0, 40), pad, 114);
 
-  const types = getCheckedValues("projectType");
-  ctx.fillStyle = "#a3adc2";
-  ctx.font = "22px Segoe UI, sans-serif";
-  ctx.fillText(`Solución: ${(types.length ? types.join(", ") : "Por definir").slice(0, 68)}`, pad, 156);
+    const types = getCheckedValues("projectType");
+    ctx.fillStyle = "#b3bfd4";
+    ctx.font = "22px Segoe UI, sans-serif";
+    ctx.fillText(`Solución: ${(types.length ? types.join(", ") : "Por definir").slice(0, 68)}`, pad, 156);
 
-  const features = getCheckedValues("features");
-  let y = 194;
-  if (features.length) {
-    ctx.fillStyle = "#8a94a6";
-    ctx.font = "19px Segoe UI, sans-serif";
-    ctx.fillText(`Funciones: ${features.join(" · ").slice(0, 80)}`, pad, y);
-    y += 38;
+    const features = getCheckedValues("features");
+    let y = 194;
+    if (features.length) {
+      ctx.fillStyle = "#8f9cb3";
+      ctx.font = "19px Segoe UI, sans-serif";
+      ctx.fillText(`Funciones: ${features.join(" · ").slice(0, 80)}`, pad, y);
+      y += 38;
+    }
+
+    ctx.fillStyle = "#0e1522";
+    ctx.fillRect(pad, y, width - pad * 2, descLines.length * 28 + 44);
+    ctx.fillStyle = "#f2f6fb";
+    ctx.font = "20px Segoe UI, sans-serif";
+    descLines.forEach((line, idx) => {
+      ctx.fillText(line, pad + 20, y + 36 + idx * 28);
+    });
+    y += descLines.length * 28 + 72;
+
+    loadedImgs.forEach((im, idx) => {
+      const col = idx % cols;
+      const row = Math.floor(idx / cols);
+      const x = pad + col * (thumbW + 20);
+      const ty = y + row * (thumbH + 50);
+
+      ctx.fillStyle = "#0e1522";
+      ctx.fillRect(x, ty, thumbW, thumbH);
+      const scale = Math.min(thumbW / im.width, thumbH / im.height);
+      const dw = im.width * scale;
+      const dh = im.height * scale;
+      ctx.drawImage(im, x + (thumbW - dw) / 2, ty + (thumbH - dh) / 2, dw, dh);
+
+      ctx.fillStyle = "#b3bfd4";
+      ctx.font = "16px Segoe UI, sans-serif";
+      const label = state.images[idx].note.trim() || state.images[idx].file.name;
+      ctx.fillText(`${idx + 1}. ${label.slice(0, 38)}`, x, ty + thumbH + 24);
+    });
+
+    const url = canvas.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ficha_solicitud_evm.png";
+    a.click();
+    showFeedback("Ficha PNG descargada. Puedes adjuntarla directo en WhatsApp.", "ok");
+  } catch {
+    showFeedback("No se pudo generar la ficha PNG con una de las imágenes adjuntas.", "error");
   }
-
-  ctx.fillStyle = "#0f141c";
-  ctx.fillRect(pad, y, width - pad * 2, descLines.length * 28 + 44);
-  ctx.fillStyle = "#f0f4f8";
-  ctx.font = "20px Segoe UI, sans-serif";
-  descLines.forEach((line, idx) => {
-    ctx.fillText(line, pad + 20, y + 36 + idx * 28);
-  });
-  y += descLines.length * 28 + 72;
-
-  loadedImgs.forEach((im, idx) => {
-    const col = idx % cols;
-    const row = Math.floor(idx / cols);
-    const x = pad + col * (thumbW + 20);
-    const ty = y + row * (thumbH + 50);
-
-    ctx.fillStyle = "#0f141c";
-    ctx.fillRect(x, ty, thumbW, thumbH);
-    const scale = Math.min(thumbW / im.width, thumbH / im.height);
-    const dw = im.width * scale;
-    const dh = im.height * scale;
-    ctx.drawImage(im, x + (thumbW - dw) / 2, ty + (thumbH - dh) / 2, dw, dh);
-
-    ctx.fillStyle = "#a3adc2";
-    ctx.font = "16px Segoe UI, sans-serif";
-    const label = state.images[idx].note.trim() || state.images[idx].file.name;
-    ctx.fillText(`${idx + 1}. ${label.slice(0, 38)}`, x, ty + thumbH + 24);
-  });
-
-  const url = canvas.toDataURL("image/png");
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "ficha_solicitud_evm.png";
-  a.click();
-  showFeedback("Ficha PNG descargada. Puedes adjuntarla directo en WhatsApp.", "ok");
 }
 
+/* === 10. CONEXIÓN INTELIGENTE SIN ERRORES 404 EN GITHUB PAGES === */
 async function initBackendConnection() {
   const pillText = el.serverStatusPill && el.serverStatusPill.querySelector(".status-pill__text");
+
+  // En GitHub Pages o protocolo file: operamos directamente en modo estático sin generar 404 en consola
+  if (isPureStaticEnvironment()) {
+    state.backendOnline = false;
+    if (pillText) pillText.textContent = "Listo para enviar a WhatsApp";
+    renderPortfolio(state.projects);
+    return;
+  }
+
   try {
     const [healthRes, projRes] = await Promise.all([
-      fetch(apiUrl("/api/health")),
-      fetch(apiUrl("/api/proyectos")),
+      fetch(apiUrl("api/health")),
+      fetch(apiUrl("api/proyectos")),
     ]);
     if (healthRes.ok) {
       const h = await healthRes.json();
@@ -1493,8 +1588,9 @@ async function initBackendConnection() {
           : "Servidor activo · Java + SQLite";
       }
     } else {
-      throw new Error("offline");
+      state.backendOnline = false;
     }
+
     if (projRes.ok) {
       const pData = await projRes.json();
       if (Array.isArray(pData.proyectos) && pData.proyectos.length) {
@@ -1505,94 +1601,117 @@ async function initBackendConnection() {
     state.backendOnline = false;
     if (pillText) pillText.textContent = "Listo para enviar a WhatsApp";
   }
+
   renderPortfolio(state.projects);
 }
 
+/* === 11. EVENTOS DE INTERFAZ Y FORMULARIO === */
 function bindEvents() {
-  el.form.addEventListener("input", updatePreview);
-  el.form.addEventListener("change", updatePreview);
+  if (el.form) {
+    el.form.addEventListener("input", (e) => {
+      if (e.target && e.target.hasAttribute("aria-invalid") && e.target.value.trim()) {
+        e.target.removeAttribute("aria-invalid");
+      }
+      updatePreview();
+    });
+    el.form.addEventListener("change", updatePreview);
+  }
 
-  el.btnPickImages.addEventListener("click", (e) => {
-    e.stopPropagation();
-    el.imageInput.click();
-  });
+  if (el.btnPickImages && el.imageInput) {
+    el.btnPickImages.addEventListener("click", (e) => {
+      e.stopPropagation();
+      el.imageInput.click();
+    });
+  }
 
-  el.dropzone.addEventListener("click", () => el.imageInput.click());
-
-  el.dropzone.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    el.dropzone.classList.add("is-dragover");
-  });
-  el.dropzone.addEventListener("dragleave", () => el.dropzone.classList.remove("is-dragover"));
-  el.dropzone.addEventListener("drop", (e) => {
-    e.preventDefault();
-    el.dropzone.classList.remove("is-dragover");
-    addFiles(e.dataTransfer.files);
-  });
-
-  el.imageInput.addEventListener("change", () => {
-    addFiles(el.imageInput.files);
-    el.imageInput.value = "";
-  });
+  if (el.dropzone && el.imageInput) {
+    el.dropzone.addEventListener("click", (e) => {
+      if (!e.target.closest("button")) el.imageInput.click();
+    });
+    el.dropzone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      el.dropzone.classList.add("is-dragover");
+    });
+    el.dropzone.addEventListener("dragleave", () => el.dropzone.classList.remove("is-dragover"));
+    el.dropzone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      el.dropzone.classList.remove("is-dragover");
+      addFiles(e.dataTransfer.files);
+    });
+    el.imageInput.addEventListener("change", () => {
+      addFiles(el.imageInput.files);
+      el.imageInput.value = "";
+    });
+  }
 
   document.addEventListener("paste", (e) => {
     if (!e.clipboardData || !e.clipboardData.files || !e.clipboardData.files.length) return;
     addFiles(e.clipboardData.files);
   });
 
-  el.imageGrid.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-remove-img]");
-    if (btn) removeImage(btn.getAttribute("data-remove-img"));
-  });
+  if (el.imageGrid) {
+    el.imageGrid.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-remove-img]");
+      if (btn) removeImage(btn.getAttribute("data-remove-img"));
+    });
+    el.imageGrid.addEventListener("input", (e) => {
+      const inp = e.target.closest("[data-note-idx]");
+      if (!inp) return;
+      const idx = Number(inp.getAttribute("data-note-idx"));
+      if (state.images[idx]) {
+        state.images[idx].note = inp.value;
+        updatePreview();
+      }
+    });
+  }
 
-  el.imageGrid.addEventListener("input", (e) => {
-    const inp = e.target.closest("[data-note-idx]");
-    if (!inp) return;
-    const idx = Number(inp.getAttribute("data-note-idx"));
-    if (state.images[idx]) {
-      state.images[idx].note = inp.value;
-      updatePreview();
-    }
-  });
+  if (el.btnClearImages) el.btnClearImages.addEventListener("click", clearAllImages);
+  if (el.btnSubmit) el.btnSubmit.addEventListener("click", submitRequest);
+  if (el.btnShareNative) el.btnShareNative.addEventListener("click", shareNative);
+  if (el.btnDownloadSheet) el.btnDownloadSheet.addEventListener("click", downloadVisualSheet);
 
-  el.btnClearImages.addEventListener("click", clearAllImages);
-  el.btnSubmit.addEventListener("click", submitRequest);
-  el.btnShareNative.addEventListener("click", shareNative);
-  el.btnDownloadSheet.addEventListener("click", downloadVisualSheet);
+  if (el.btnCopyText) {
+    el.btnCopyText.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(buildPreviewMessage());
+        const prev = el.btnCopyText.textContent;
+        el.btnCopyText.textContent = "Copiado";
+        showToast("Mensaje copiado al portapapeles");
+        setTimeout(() => {
+          el.btnCopyText.textContent = prev;
+        }, 1600);
+      } catch {
+        showFeedback("No se pudo copiar al portapapeles en este navegador.", "error");
+      }
+    });
+  }
 
-  el.btnCopyText.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(buildPreviewMessage());
-      const prev = el.btnCopyText.textContent;
-      el.btnCopyText.textContent = "Copiado";
-      showToast("Mensaje copiado al portapapeles");
-      setTimeout(() => {
-        el.btnCopyText.textContent = prev;
-      }, 1600);
-    } catch {
-      showFeedback("No se pudo copiar al portapapeles en este navegador.", "error");
-    }
-  });
+  if (el.portfolioGrid) {
+    el.portfolioGrid.addEventListener("click", (e) => {
+      const trigger = e.target.closest("[data-open-project]");
+      if (trigger) openProjectModal(Number(trigger.getAttribute("data-open-project")));
+    });
+    el.portfolioGrid.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const trigger = e.target.closest("[data-open-project]");
+      if (trigger) {
+        e.preventDefault();
+        openProjectModal(Number(trigger.getAttribute("data-open-project")));
+      }
+    });
+  }
 
-  el.portfolioGrid.addEventListener("click", (e) => {
-    const trigger = e.target.closest("[data-open-project]");
-    if (trigger) openProjectModal(Number(trigger.getAttribute("data-open-project")));
-  });
-
-  el.portfolioGrid.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter" && e.key !== " ") return;
-    const trigger = e.target.closest("[data-open-project]");
-    if (trigger) {
-      e.preventDefault();
-      openProjectModal(Number(trigger.getAttribute("data-open-project")));
-    }
-  });
-
-  // Cierre accesible para todos los <dialog>
+  // Cierre accesible de todos los modales (<dialog>)
   document.querySelectorAll(".dialog").forEach((dlg) => {
     dlg.addEventListener("click", (e) => {
       if (e.target === dlg || e.target.closest("[data-close-dialog]")) {
         closeDialog(dlg);
+      }
+    });
+    dlg.addEventListener("close", () => {
+      if (state.lastFocusedEl && typeof state.lastFocusedEl.focus === "function") {
+        state.lastFocusedEl.focus({ preventScroll: true });
+        state.lastFocusedEl = null;
       }
     });
   });
@@ -1603,19 +1722,20 @@ function bindEvents() {
       if (thumb) {
         el.modalThumbs.querySelectorAll(".modal__thumb-btn").forEach((b) => b.classList.remove("is-active"));
         thumb.classList.add("is-active");
-        setModalImage(thumb.getAttribute("data-thumb-src"), el.modalTitle.textContent);
+        const num = thumb.getAttribute("data-thumb-num") || "1";
+        setModalImage(thumb.getAttribute("data-thumb-src"), `Captura ${num} de ${el.modalTitle.textContent}`);
       }
     });
   }
 
   if (el.modalBtnSimilar) {
     el.modalBtnSimilar.addEventListener("click", () => {
-      if (state.activeModalProject && !el.description.value.trim()) {
+      if (state.activeModalProject && el.description && !el.description.value.trim()) {
         el.description.value = `Quiero un sistema o página similar a "${state.activeModalProject.nombre}", adaptado a mi negocio con...`;
         updatePreview();
       }
       closeDialog(el.modal);
-      navigateToPage("contacto");
+      scrollToSection("contacto", true);
       showToast("Referencia cargada en tu brief");
     });
   }
@@ -1634,13 +1754,244 @@ function bindEvents() {
   });
 }
 
-/* === BOOTSTRAP === */
-initPageRouter();
+/* === 12. INCLINACIÓN 3D MULTICAPA SIN LAG EN TARJETAS (.tilt-3d) === */
+function initCard3DTilt() {
+  if (REDUCED_MOTION || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  let activeCard = null;
+  let rafPending = false;
+  let nextRx = 0;
+  let nextRy = 0;
+  let nextMx = 50;
+  let nextMy = 50;
+
+  const resetCard = (card) => {
+    if (!card) return;
+    card.classList.remove("is-tilting");
+    card.style.removeProperty("--rx");
+    card.style.removeProperty("--ry");
+  };
+
+  const flushTilt = () => {
+    rafPending = false;
+    if (!activeCard) return;
+    activeCard.style.setProperty("--rx", `${nextRx.toFixed(2)}deg`);
+    activeCard.style.setProperty("--ry", `${nextRy.toFixed(2)}deg`);
+    activeCard.style.setProperty("--mx", `${nextMx.toFixed(1)}%`);
+    activeCard.style.setProperty("--my", `${nextMy.toFixed(1)}%`);
+  };
+
+  document.addEventListener(
+    "pointermove",
+    (e) => {
+      const card = e.target instanceof Element ? e.target.closest(".tilt-3d") : null;
+      if (activeCard && activeCard !== card) {
+        resetCard(activeCard);
+      }
+      activeCard = card;
+      if (!card) return;
+      card.classList.add("is-tilting");
+
+      const r = card.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+      nextRx = (0.5 - py) * 10;
+      nextRy = (px - 0.5) * 12;
+      nextMx = px * 100;
+      nextMy = py * 100;
+
+      if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(flushTilt);
+      }
+    },
+    { passive: true }
+  );
+
+  document.addEventListener("pointerout", (e) => {
+    if (!activeCard) return;
+    if (!e.relatedTarget || !activeCard.contains(e.relatedTarget)) {
+      resetCard(activeCard);
+      activeCard = null;
+    }
+  });
+}
+
+/* === 13. FONDO 3D INTERACTIVO LIGERO EN THREE.JS (DIFERIDO Y APTO PARA MÓVIL) === */
+async function initThreeBackground() {
+  const canvas = el.bg3d;
+  if (!canvas || REDUCED_MOTION || window.location.protocol === "file:") return;
+  if (navigator.connection && navigator.connection.saveData) return;
+
+  try {
+    const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js");
+    const isMobile = window.innerWidth < 768;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: !isMobile,
+      powerPreference: "low-power",
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(48, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = isMobile ? 10.8 : 8.8;
+
+    const group = new THREE.Group();
+    group.position.x = isMobile ? 0 : 2.4;
+    scene.add(group);
+
+    const isConsoleInit = document.documentElement.getAttribute("data-theme") === "console";
+    const outerMat = new THREE.MeshBasicMaterial({
+      color: isConsoleInit ? 0x00b4d8 : 0x0066ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.13,
+    });
+    const innerMat = new THREE.MeshBasicMaterial({
+      color: isConsoleInit ? 0x38f9d7 : 0x00d2ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.22,
+    });
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: isConsoleInit ? 0x38f9d7 : 0x00d2ff,
+      transparent: true,
+      opacity: 0.18,
+    });
+
+    const outerPoly = new THREE.Mesh(new THREE.IcosahedronGeometry(2.85, 1), outerMat);
+    const innerPoly = new THREE.Mesh(new THREE.OctahedronGeometry(1.5, 0), innerMat);
+    const orbitRing = new THREE.Mesh(new THREE.TorusGeometry(3.65, 0.015, 8, isMobile ? 48 : 84), ringMat);
+    orbitRing.rotation.x = Math.PI * 0.36;
+    group.add(outerPoly, innerPoly, orbitRing);
+
+    const count = isMobile ? 60 : 140;
+    const positions = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 19;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 7;
+    }
+    const ptsGeo = new THREE.BufferGeometry();
+    ptsGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    const ptsMat = new THREE.PointsMaterial({
+      color: isConsoleInit ? 0x38f9d7 : 0x00d2ff,
+      size: isMobile ? 0.055 : 0.048,
+      transparent: true,
+      opacity: 0.4,
+    });
+    const cloud = new THREE.Points(ptsGeo, ptsMat);
+    scene.add(cloud);
+
+    state.bg3dSyncTheme = (consoleMode) => {
+      outerMat.color.setHex(consoleMode ? 0x00b4d8 : 0x0066ff);
+      innerMat.color.setHex(consoleMode ? 0x38f9d7 : 0x00d2ff);
+      ringMat.color.setHex(consoleMode ? 0x38f9d7 : 0x00d2ff);
+      ptsMat.color.setHex(consoleMode ? 0x38f9d7 : 0x00d2ff);
+    };
+
+    let targetX = 0;
+    let targetY = 0;
+    let scrollAngle = 0;
+
+    if (!isMobile) {
+      window.addEventListener(
+        "pointermove",
+        (e) => {
+          targetX = (e.clientX / window.innerWidth - 0.5) * 0.45;
+          targetY = (e.clientY / window.innerHeight - 0.5) * 0.32;
+        },
+        { passive: true }
+      );
+    }
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        scrollAngle = (window.scrollY || 0) * 0.0006;
+      },
+      { passive: true }
+    );
+
+    const onResize = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      camera.aspect = w / h;
+      camera.position.z = w < 768 ? 10.8 : 8.8;
+      group.position.x = w < 768 ? 0 : 2.4;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h, false);
+    };
+    window.addEventListener("resize", onResize, { passive: true });
+
+    let rafId = 0;
+    const renderLoop = () => {
+      if (document.hidden) {
+        rafId = 0;
+        return;
+      }
+      outerPoly.rotation.y += 0.0017;
+      outerPoly.rotation.x += 0.0008;
+      innerPoly.rotation.y -= 0.003;
+      innerPoly.rotation.z += 0.0014;
+      orbitRing.rotation.z += 0.0022;
+      cloud.rotation.y = scrollAngle * 0.5 + performance.now() * 0.00004;
+
+      group.position.y += (targetY * -0.9 - group.position.y) * 0.04;
+      group.rotation.y += (targetX + scrollAngle - group.rotation.y) * 0.04;
+
+      renderer.render(scene, camera);
+      rafId = requestAnimationFrame(renderLoop);
+    };
+
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && !rafId) rafId = requestAnimationFrame(renderLoop);
+    });
+
+    renderer.render(scene, camera);
+    canvas.classList.add("is-active");
+    rafId = requestAnimationFrame(renderLoop);
+
+    window.addEventListener(
+      "pagehide",
+      () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        ptsGeo.dispose();
+        outerPoly.geometry.dispose();
+        innerPoly.geometry.dispose();
+        orbitRing.geometry.dispose();
+        outerMat.dispose();
+        innerMat.dispose();
+        ringMat.dispose();
+        ptsMat.dispose();
+        renderer.dispose();
+      },
+      { once: true }
+    );
+  } catch {
+    canvas.hidden = true;
+  }
+}
+
+/* === 14. ARRANQUE DE LA APLICACIÓN === */
 initPreloader();
-initNavigationAndTheme();
-initHeroInteractions();
+initNavigationAndScroll();
+initHeroAndArchitecture();
 initSolutionsCatalog();
 initCommandPalette();
+initCard3DTilt();
 bindEvents();
 updatePreview();
 initBackendConnection();
+
+// Diferir la carga de Three.js para no competir con el renderizado crítico inicial
+if ("requestIdleCallback" in window) {
+  window.requestIdleCallback(() => initThreeBackground(), { timeout: 1200 });
+} else {
+  setTimeout(initThreeBackground, 450);
+}
